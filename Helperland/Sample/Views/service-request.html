@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Service Requests</title>
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
+    <script src="js/sort.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        function myfunction() {
+            var popup = document.getElementById("dialoug");
+            popup.classList.toggle("show");
+        }
+
+        function menuOpen() {
+            var popupLi = document.getElementById("liList");
+            popupLi.classList.toggle("show");
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <div id="home"></div>
+    <div class="header-contain" id="header" style="background: #1FB6FF;">
+        <div class="logo">
+            <h2 class="admin-title">helperland</h2>
+        </div>
+        <div class="toggle" onclick="openMenu()" aria-expanded="false" id="buttonMenu">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </div>
+
+        <div class="navbar" id="mynav" data-visible="false">
+            <ul id="header-nav">
+                <li class="hidden"><a href="#">Service Managment</a></li>
+                <li class="hidden"><a href="#">Role Managment</a></li>
+                <li class="hidden">
+                    <input type="checkbox" id="li-col-4">
+                    <label for="li-col-4">Coupon Code Managment
+                        <i class="fas fa-chevron-right"></i></label>
+
+                    <ul class="display-none">
+                        <li>Coupon Codes</li>
+                        <li>Usage History</li>
+                    </ul>
+                </li>
+                <li class="hidden"><a href="#">Escalation Managment</a></li>
+                <li class="hidden li-active"><a href="#">Service Requests</a></li>
+                <li class="hidden"><a href="#">Service Providers</a></li>
+                <li class="hidden"><a href="#">User Managment</a></li>
+                <li class="hidden">
+                    <input type="checkbox" id="li-col-5">
+                    <label for="li-col-5">Finance Module
+                        <i class="fas fa-chevron-right"></i></label>
+
+                    <ul class="display-none">
+                        <li>All Transactions</li>
+                        <li>Generate Payments</li>
+                        <li>Customer Invoices</li>
+                    </ul>
+                </li>
+                <li class="hidden"><a herf="#">Zip Code Managment</a></li>
+                <li class="hidden"><a herf="#">Rating Managment</a></li>
+                <li class="hidden"><a herf="#">Inquiry Managment</a></li>
+                <li class="hidden"><a herf="#">Newsletter Managment</a></li>
+                <li class="hidden">
+                    <input type="checkbox" id="li-col-6">
+                    <label for="li-col-6">Content Managment
+                        <i class="fas fa-chevron-right"></i></label>
+
+                    <ul class="display-none">
+                        <li>Blog</li>
+                        <li>FAQs</li>
+                    </ul>
+                </li>
+                <!-- <li class="flag">
+                                <a href="#" class="flag-icon"><img src="images/flag.png">
+                                    <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a>
+                            </li> -->
+                <li class="margin-auto"><img src="images/admin-user.png" alt="">
+                    <p class="hidden">Profile</p>
+                </li>
+                <li class="margin-auto">
+                    <p>James Smith</p>
+                </li>
+                <li class="margin-auto"><img src="images/logout.png" alt="">
+                    <p class="hidden">Logout</p>
+                </li>
+            </ul>
+            <li class="media-li"><a href="#"><i class="fa fa-facebook ups-icn" aria-hidden="true"></i></a></li>
+            <li class="media-li"><a href="#"><i class="fa fa-instagram ups-icn" aria-hidden="true"></i></a></li>
+        </div>
+    </div>
+    <section>
+        <div class="container-fluid">
+            <div class="flex">
+                <div class="toggle-li-menu" onclick="menuOpen()">
+                    <h4><i class="fa fa-bars" aria-hidden="true"></i>Menu</h4>
+                </div>
+                <div class="flex-left">
+                    <ul>
+                        <div id="liList">
+                            <li>Service Managment</li>
+                            <li>Role Managment</li>
+                            <li>
+                                <input type="checkbox" id="li-col-1">
+                                <label for="li-col-1">Coupon Code Managment
+                                    <i class="fas fa-chevron-right"></i></label>
+
+                                <ul class="display-none">
+                                    <li>Coupon Codes</li>
+                                    <li>Usage History</li>
+                                </ul>
+                            </li>
+                            <li>Escalation Managment</li>
+                            <li class="li-active">Service Requests</li>
+                            <li>Service Providers</li>
+                            <li>User Managment</li>
+                            <li>
+                                <input type="checkbox" id="li-col-2">
+                                <label for="li-col-2">Finance Module
+                                    <i class="fas fa-chevron-right"></i></label>
+
+                                <ul class="display-none">
+                                    <li>All Transactions</li>
+                                    <li>Generate Payments</li>
+                                    <li>Customer Invoices</li>
+                                </ul>
+                            </li>
+                            <li>Zip Code Managment</li>
+                            <li>Rating Managment</li>
+                            <li>Inquiry Managment</li>
+                            <li>Newsletter Managment</li>
+                            <li>
+                                <input type="checkbox" id="li-col-3">
+                                <label for="li-col-3">Content Managment
+                                    <i class="fas fa-chevron-right"></i></label>
+
+                                <ul class="display-none">
+                                    <li>Blog</li>
+                                    <li>FAQs</li>
+                                </ul>
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+                <div class="flex-right">
+
+                    <div class="container">
+                        <div class="flex-right-container">
+                            <div class="flex-right-head">
+                                <h2>Service Requests</h2>
+                            </div>
+                            <div class="flex-right-search">
+                                <input type="text" placeholder="Service ID">
+                                <input list="names" placeholder="Customer">
+                                <datalist id="names">
+                                    <option value="Lyum Watson">
+                                    <option value="Jhon Smith">
+                                </datalist>
+                                <input list="names" placeholder="Service Provider">
+                                <input list="status" placeholder="Status">
+                                <datalist id="status">
+                                    <option value="New">
+                                    <option value="Pending">
+                                    <option value="Completed">
+                                    <option value="Cancled">
+                                </datalist>
+                                <input placeholder="from date" class="back-date" type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')" id="fromdate">
+                                <input placeholder="to date" class="back-date" type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')" id="todate">
+                                <button>Search</button>
+                                <button id="clear">Clear</button>
+                            </div>
+                            <div class="flex-right-table">
+                                <table class="table" id="Table">
+                                    <tr>
+                                        <th onclick="sortTable(0,1,2)">Service Id <img src="images/sort.png" alt=""></th>
+                                        <th onclick="sortTable(1,1,2)">Service Date <img src="images/sort.png" alt=""></th>
+                                        <th onclick="sortTable(2,1,2)">Customer Details <img src="images/sort.png" alt=""></th>
+                                        <th onclick="sortTable(3,1,2)">Service Provider <img src="images/sort.png" alt=""></th>
+                                        <th onclick="sortTable(4,1,2)">Status <img src="images/sort.png" alt=""></th>
+                                        <th class="action">Actions</th>
+                                    </tr>
+                                    <tr>
+                                        <td>323436</td>
+                                        <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
+                                        <td>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
+                                        <td>
+                                            <div class="tableflex">
+                                                <img class="prof-img" src="images/cap.png">
+                                                <div>
+                                                    David <br>
+                                                    <div class="rating">
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="far fa-star"></i>
+                                                        <label class="number" id="number">4</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="status new" id="status">New</span></td>
+                                        <td class="action"><i class="fas fa-ellipsis-v" id="button"></i>
+                                            <br>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>323434</td>
+                                        <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
+                                        <td>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
+                                        <td>
+                                            <div class="tableflex">
+                                                <img class="prof-img" src="images/cap.png">
+                                                <div>
+                                                    David <br>
+                                                    <div class="rating">
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="far fa-star"></i>
+                                                        <label class="number" id="number">4</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="status new" id="status">New</span></td>
+                                        <td class="action"><i class="fas fa-ellipsis-v" id="button"></i>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>323436</td>
+                                        <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
+                                        <td>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
+                                        <td>
+                                            <div class="tableflex">
+                                                <img class="prof-img" src="images/cap.png">
+                                                <div>
+                                                    David <br>
+                                                    <div class="rating">
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="far fa-star"></i>
+                                                        <label class="number" id="number">4</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="status pending" id="status">Pending</span></td>
+                                        <td class="action"><i class="fas fa-ellipsis-v btn-option" id="button"></i>
+                                            <br>
+                                            <div class="action-options" id="dialoug">
+                                                <ul>
+                                                    <li>Edit & Reschedule</li>
+                                                    <li>Refund</li>
+                                                    <li>Cancel</li>
+                                                    <li>Change SP</li>
+                                                    <li>Escalate</li>
+                                                    <li>History Log</li>
+                                                    <li>Download Invoice</li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>323436</td>
+                                        <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
+                                        <td>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
+                                        <td>
+                                            <div class="tableflex">
+                                                <img class="prof-img" src="images/cap.png">
+                                                <div>
+                                                    David <br>
+                                                    <div class="rating">
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="far fa-star"></i>
+                                                        <label class="number" id="number">4</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="status pending" id="status">Pending</span></td>
+                                        <td class="action"><i class="fas fa-ellipsis-v btn-option" id="button"></i>
+                                            <br>
+                                            <div class="action-options" id="dialoug">
+                                                <ul>
+                                                    <li>Edit & Reschedule</li>
+                                                    <li>Refund</li>
+                                                    <li>Cancel</li>
+                                                    <li>Change SP</li>
+                                                    <li>Escalate</li>
+                                                    <li>History Log</li>
+                                                    <li>Download Invoice</li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>323436</td>
+                                        <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
+                                        <td>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
+                                        <td>
+                                            <div class="tableflex">
+                                                <img class="prof-img" src="images/cap.png">
+                                                <div>
+                                                    David <br>
+                                                    <div class="rating">
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="far fa-star"></i>
+                                                        <label class="number" id="number">4</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="status" id="status">Completed</span></td>
+                                        <td class="action"><i class="fas fa-ellipsis-v btn-option" id="button"></i>
+                                            <br>
+                                            <div class="action-options" id="dialoug">
+                                                <ul>
+                                                    <li>Refund</li>
+                                                    <li>Escalate</li>
+                                                    <li>History Log</li>
+                                                    <li>Download Invoice</li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>323436</td>
+                                        <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
+                                        <td>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
+                                        <td>
+                                            <div class="tableflex">
+                                                <img class="prof-img" src="images/cap.png">
+                                                <div>
+                                                    David <br>
+                                                    <div class="rating">
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="far fa-star"></i>
+                                                        <label class="number" id="number">4</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="status" id="status">Completed</span></td>
+                                        <td class="action"><i class="fas fa-ellipsis-v btn-option" id="button"></i>
+                                            <br>
+                                            <div class="action-options" id="dialoug">
+                                                <ul>
+                                                    <li>Refund</li>
+                                                    <li>Escalate</li>
+                                                    <li>History Log</li>
+                                                    <li>Download Invoice</li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>323436</td>
+                                        <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
+                                        <td>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
+                                        <td>
+                                            <div class="tableflex">
+                                                <img class="prof-img" src="images/cap.png">
+                                                <div>
+                                                    David <br>
+                                                    <div class="rating">
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="far fa-star"></i>
+                                                        <label class="number" id="number">4</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="status cancled" id="status">Cancled</span></td>
+                                        <td class="action"><i class="fas fa-ellipsis-v btn-option" id="button"></i>
+                                            <br>
+                                            <div class="action-options" id="dialoug">
+                                                <ul>
+                                                    <li>Refund</li>
+                                                    <li>Escalate</li>
+                                                    <li>History Log</li>
+                                                    <li>Download Invoice</li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>323436</td>
+                                        <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
+                                        <td>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
+                                        <td>
+                                            <div class="tableflex">
+                                                <img class="prof-img" src="images/cap.png">
+                                                <div>
+                                                    David <br>
+                                                    <div class="rating">
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="far fa-star"></i>
+                                                        <label class="number" id="number">4</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="status" id="status">Completed</span></td>
+                                        <td class="action"><i class="fas fa-ellipsis-v btn-option" id="button"></i>
+                                            <br>
+                                            <div class="action-options" id="dialoug">
+                                                <ul>
+                                                    <li>Refund</li>
+                                                    <li>Escalate</li>
+                                                    <li>History Log</li>
+                                                    <li>Download Invoice</li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>323436</td>
+                                        <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
+                                        <td>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
+                                        <td>
+                                            <div class="tableflex">
+                                                <img class="prof-img" src="images/cap.png">
+                                                <div>
+                                                    David <br>
+                                                    <div class="rating">
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="far fa-star"></i>
+                                                        <label class="number" id="number">4</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="status cancled" id="status">Cancled</span></td>
+                                        <td class="action"><i class="fas fa-ellipsis-v btn-option" id="button"></i>
+                                            <br>
+                                            <div class="action-options" id="dialoug">
+                                                <ul>
+                                                    <li>Refund</li>
+                                                    <li>Escalate</li>
+                                                    <li>History Log</li>
+                                                    <li>Download Invoice</li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>323436</td>
+                                        <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
+                                        <td>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
+                                        <td>
+                                            <div class="tableflex">
+                                                <img class="prof-img" src="images/cap.png">
+                                                <div>
+                                                    David <br>
+                                                    <div class="rating">
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="fas fa-star selected"></i>
+                                                        <i class="far fa-star"></i>
+                                                        <label class="number" id="number">4</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="status" id="status">Completed</span></td>
+                                        <td class="action"><i class="fas fa-ellipsis-v btn-option" id="button"></i>
+                                            <br>
+                                            <div class="action-options" id="dialoug">
+                                                <ul>
+                                                    <li>Refund</li>
+                                                    <li>Escalate</li>
+                                                    <li>History Log</li>
+                                                    <li>Download Invoice</li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8">
+                                            <div class="footer-table">
+                                                <div class="left-side">
+                                                    <h3>Show </h3>
+                                                    <select>
+                                                <option value="5">5</option>
+                                                <option value="10">10</option>
+                                                <option value="15">15</option>
+                                                <option value="20">20</option>
+                                                </select>
+                                                    <h3>entries</h3>
+
+                                                </div>
+                                                <div class="um-right-side">
+                                                    <i class="fas fa-chevron-left"></i>
+                                                    <h3 class="page-active">1</h3>
+                                                    <h3>2</h3>
+                                                    <h3>3</h3>
+                                                    <h3>4</h3>
+                                                    <h3>5</h3>
+                                                    <i class="fas fa-chevron-right"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table class="card">
+                                    <tr class="no-border">
+                                        <td colspan="6">
+                                            <div class="heading-table">
+                                                <h3>Service Requests</h3>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="card-table-tr">
+                                                <h4>323436</h4>
+                                                <hr>
+                                                <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
+                                                <hr>
+                                                <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
+                                                <hr>
+                                                <div class="tableflex">
+                                                    <img class="prof-img" src="images/cap.png">
+                                                    <div>
+                                                        Lyum Watson <br>
+                                                        <div class="rating">
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <label class="number" id="number"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="status new">
+                                                    <h3 id="status">New</h3>
+                                                </div>
+                                                <hr>
+                                                <p class="button-center"><i class="fas fa-ellipsis-v" id="button"></i></p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="card-table-tr">
+                                                <h4>323436</h4>
+                                                <hr>
+                                                <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
+                                                <hr>
+                                                <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
+                                                <hr>
+                                                <div class="tableflex">
+                                                    <img class="prof-img" src="images/cap.png">
+                                                    <div>
+                                                        Lyum Watson <br>
+                                                        <div class="rating">
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <label class="number" id="number"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="status new">
+                                                    <h3 id="status">New</h3>
+                                                </div>
+                                                <hr>
+                                                <p class="button-center"><i class="fas fa-ellipsis-v" id="button"></i></p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="card-table-tr">
+                                                <h4>323436</h4>
+                                                <hr>
+                                                <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
+                                                <hr>
+                                                <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
+                                                <hr>
+                                                <div class="tableflex">
+                                                    <img class="prof-img" src="images/cap.png">
+                                                    <div>
+                                                        Lyum Watson <br>
+                                                        <div class="rating">
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <label class="number" id="number"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="status pending">
+                                                    <h3 id="status">Pending</h3>
+                                                </div>
+                                                <hr>
+                                                <p class="button-center"><i class="fas fa-ellipsis-v btn-option" id="button"></i><br>
+                                                    <div class="action-options" id="dialoug">
+                                                        <ul>
+                                                            <li>Edit & Reschedule</li>
+                                                            <li>Refund</li>
+                                                            <li>Cancel</li>
+                                                            <li>Change SP</li>
+                                                            <li>Escalate</li>
+                                                            <li>History Log</li>
+                                                            <li>Download Invoice</li>
+                                                        </ul>
+                                                    </div>
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="card-table-tr">
+                                                <h4>323436</h4>
+                                                <hr>
+                                                <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
+                                                <hr>
+                                                <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
+                                                <hr>
+                                                <div class="tableflex">
+                                                    <img class="prof-img" src="images/cap.png">
+                                                    <div>
+                                                        Lyum Watson <br>
+                                                        <div class="rating">
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <label class="number" id="number"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="status pending">
+                                                    <h3 id="status">Pending</h3>
+                                                </div>
+                                                <hr>
+                                                <p class="button-center"><i class="fas fa-ellipsis-v btn-option" id="button"></i><br>
+                                                    <div class="action-options" id="dialoug">
+                                                        <ul>
+                                                            <li>Edit & Reschedule</li>
+                                                            <li>Refund</li>
+                                                            <li>Cancel</li>
+                                                            <li>Change SP</li>
+                                                            <li>Escalate</li>
+                                                            <li>History Log</li>
+                                                            <li>Download Invoice</li>
+                                                        </ul>
+                                                    </div>
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="card-table-tr">
+                                                <h4>323436</h4>
+                                                <hr>
+                                                <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
+                                                <hr>
+                                                <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
+                                                <hr>
+                                                <div class="tableflex">
+                                                    <img class="prof-img" src="images/cap.png">
+                                                    <div>
+                                                        Lyum Watson <br>
+                                                        <div class="rating">
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <label class="number" id="number"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="status completed">
+                                                    <h3 id="status">Completed</h3>
+                                                </div>
+                                                <hr>
+                                                <p class="button-center"><i class="fas fa-ellipsis-v btn-option" id="button"></i><br>
+                                                    <div class="action-options" id="dialoug">
+                                                        <ul>
+                                                            <li>Refund</li>
+                                                            <li>Escalate</li>
+                                                            <li>History Log</li>
+                                                            <li>Download Invoice</li>
+                                                        </ul>
+                                                    </div>
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="card-table-tr">
+                                                <h4>323436</h4>
+                                                <hr>
+                                                <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
+                                                <hr>
+                                                <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
+                                                <hr>
+                                                <div class="tableflex">
+                                                    <img class="prof-img" src="images/cap.png">
+                                                    <div>
+                                                        Lyum Watson <br>
+                                                        <div class="rating">
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <label class="number" id="number"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="status">
+                                                    <h3 id="status">Completed</h3>
+                                                </div>
+                                                <hr>
+                                                <p class="button-center"><i class="fas fa-ellipsis-v btn-option" id="button"></i><br>
+                                                    <div class="action-options" id="dialoug">
+                                                        <ul>
+                                                            <li>Refund</li>
+                                                            <li>Escalate</li>
+                                                            <li>History Log</li>
+                                                            <li>Download Invoice</li>
+                                                        </ul>
+                                                    </div>
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="card-table-tr">
+                                                <h4>323436</h4>
+                                                <hr>
+                                                <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
+                                                <hr>
+                                                <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
+                                                <hr>
+                                                <div class="tableflex">
+                                                    <img class="prof-img" src="images/cap.png">
+                                                    <div>
+                                                        Lyum Watson <br>
+                                                        <div class="rating">
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <label class="number" id="number"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="status cancled">
+                                                    <h3 id="status">Cancled</h3>
+                                                </div>
+                                                <hr>
+                                                <p class="button-center"><i class="fas fa-ellipsis-v btn-option" id="button"></i><br>
+                                                    <div class="action-options" id="dialoug">
+                                                        <ul>
+                                                            <li>Refund</li>
+                                                            <li>Escalate</li>
+                                                            <li>History Log</li>
+                                                            <li>Download Invoice</li>
+                                                        </ul>
+                                                    </div>
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="card-table-tr">
+                                                <h4>323436</h4>
+                                                <hr>
+                                                <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
+                                                <hr>
+                                                <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
+                                                <hr>
+                                                <div class="tableflex">
+                                                    <img class="prof-img" src="images/cap.png">
+                                                    <div>
+                                                        Lyum Watson <br>
+                                                        <div class="rating">
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <label class="number" id="number"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="status">
+                                                    <h3 id="status">Completed</h3>
+                                                </div>
+                                                <hr>
+                                                <p class="button-center"><i class="fas fa-ellipsis-v btn-option" id="button"></i><br>
+                                                    <div class="action-options" id="dialoug">
+                                                        <ul>
+                                                            <li>Refund</li>
+                                                            <li>Escalate</li>
+                                                            <li>History Log</li>
+                                                            <li>Download Invoice</li>
+                                                        </ul>
+                                                    </div>
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="card-table-tr">
+                                                <h4>323436</h4>
+                                                <hr>
+                                                <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
+                                                <hr>
+                                                <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
+                                                <hr>
+                                                <div class="tableflex">
+                                                    <img class="prof-img" src="images/cap.png">
+                                                    <div>
+                                                        Lyum Watson <br>
+                                                        <div class="rating">
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <label class="number" id="number"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="status cancled">
+                                                    <h3 id="status">Cancled</h3>
+                                                </div>
+                                                <hr>
+                                                <p class="button-center"><i class="fas fa-ellipsis-v btn-option" id="button"></i><br>
+                                                    <div class="action-options" id="dialoug">
+                                                        <ul>
+                                                            <li>Refund</li>
+                                                            <li>Escalate</li>
+                                                            <li>History Log</li>
+                                                            <li>Download Invoice</li>
+                                                        </ul>
+                                                    </div>
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="card-table-tr">
+                                                <h4>323436</h4>
+                                                <hr>
+                                                <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
+                                                <hr>
+                                                <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
+                                                <hr>
+                                                <div class="tableflex">
+                                                    <img class="prof-img" src="images/cap.png">
+                                                    <div>
+                                                        Lyum Watson <br>
+                                                        <div class="rating">
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="fas fa-star selected"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <label class="number" id="number"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="status">
+                                                    <h3 id="status">Completed</h3>
+                                                </div>
+                                                <hr>
+                                                <p class="button-center"><i class="fas fa-ellipsis-v btn-option" id="button"></i><br>
+                                                    <div class="action-options" id="dialoug">
+                                                        <ul>
+                                                            <li>Refund</li>
+                                                            <li>Escalate</li>
+                                                            <li>History Log</li>
+                                                            <li>Download Invoice</li>
+                                                        </ul>
+                                                    </div>
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5">
+                                            <div class="footer-table">
+                                                <div class="left-side">
+                                                    <h3>Show </h3>
+                                                    <select>
+                                                <option value="5">5</option>
+                                                <option value="10">10</option>
+                                                <option value="15">15</option>
+                                                <option value="20">20</option>
+                                                </select>
+                                                    <h3>entries</h3>
+                                                    <h3>Total Records :</h3><span id="count">55</span>
+                                                </div>
+                                                <div class="right-side">
+                                                    <i class="fas fa-step-backward"></i>
+                                                    <i class="fas fa-chevron-left"></i>
+                                                    <h3 class="page-active">1</h3>
+                                                    <h3>2</h3>
+                                                    <h3>3</h3>
+                                                    <h3>4</h3>
+                                                    <i class="fas fa-chevron-right"></i>
+                                                    <i class="fas fa-step-forward"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <h5>©2018 Helperland. All rights reserved.</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+
+    <script>
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        document.getElementById("defaultOpen").click();
+
+        var navList = document.getElementById("nav-lists");
+
+        function Show() {
+            navList.classList.add("_Menus-show");
+        }
+
+        function Hide() {
+            navList.classList.remove("_Menus-show");
+        }
+    </script>
+
+    <script>
+        // $(document).ready(function() {
+        //     $(".toggle").click(function() {
+        //         $("#mynav").toggle();
+        //     });
+        // });
+
+        window.onscroll = function() {
+            myFunction()
+        };
+
+        var header = document.getElementById("header");
+        var sticky = "150";
+
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+                console.log("if");
+            } else {
+                header.classList.remove("sticky");
+                console.log("ifelse");
+            }
+        }
+
+        function openMenu() {
+            var popupLi = document.querySelector(".navbar");
+            var menuButton = document.querySelector(".toggle");
+            // popupLi.classList.toggle("show-menu");
+            var visibility = popupLi.getAttribute("data-visible");
+            console.log(visibility);
+            if (visibility === "false") {
+                popupLi.setAttribute("data-visible", true);
+                menuButton.setAttribute("aria-expanded", true);
+                var body = document.getElementById('home');
+                body.classList.add("back");
+            } else if (visibility === "true") {
+                popupLi.setAttribute("data-visible", false);
+                menuButton.setAttribute("aria-expanded", false);
+                var body = document.getElementById('home');
+                body.classList.remove("back");
+            }
+        }
+
+
+        const btn_options = document.querySelectorAll('.btn-option');
+        const action_options = document.querySelectorAll('.action-options');
+
+
+
+        const hideShowActionOptions = (e, index) => {
+
+            const style = window.getComputedStyle(action_options[index]);
+            if (style.display === 'none') {
+                action_options[index].classList.replace("action-options", "display-block");
+
+            } else {
+                action_options[index].classList.replace("display-block", "action-options");
+            }
+            e.stopPropagation();
+        }
+
+        btn_options.forEach((btn_option, index) => {
+
+
+            btn_option.addEventListener('click', (e) => hideShowActionOptions(e, index));
+        });
+    </script>
+</body>
+
+</html>
