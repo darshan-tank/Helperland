@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Upcoming Service</title>
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/sort.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="home"></div>
+    <div class="header-contain" id="header" style="background: rgba(39, 39, 39, .7);">
+        <div class="logo">
+            <img src="images/logo.png">
+        </div>
+        <div class="toggle" onclick="openMenu()" aria-expanded="false" id="buttonMenu">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </div>
+
+        <div class="navbar" id="mynav" data-visible="false">
+            <ul id="header-nav">
+                <li class="hidden"><a href="#">Notification</a></li>
+                <li class="hidden"><a href="#">Account</a></li>
+                <li class="hidden"><a href="#">New Service Requests</a></li>
+                <li class="hidden"><a href="#">Upcoming Services</a></li>
+                <li class="hidden"><a href="#">Service Schedule</a></li>
+                <li class="hidden"><a href="#">Service History</a></li>
+                <li class="hidden"><a href="#">My Ratings</a></li>
+                <li class="hidden"><a href="#">Block Customer</a></li>
+                <li>
+                    <hr>
+                </li>
+                <li><a href="#">Prices & Service</a></li>
+                <li><a href="#">Warranty</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Contact</a></li>
+                <a><i class="fa fa-bell"></i><span class="icon-button__badge">2</span></a>
+                <a><i class="far fa-user-circle"></i><i class="fas fa-angle-down"></i></a>
+                <!-- <li class="flag">
+                                <a href="#" class="flag-icon"><img src="images/flag.png">
+                                    <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a>
+                            </li> -->
+
+            </ul>
+            <li class="media-li"><a href="#"><i class="fa fa-facebook ups-icn" aria-hidden="true"></i></a></li>
+            <li class="media-li"><a href="#"><i class="fa fa-instagram ups-icn" aria-hidden="true"></i></a></li>
+        </div>
+    </div>
+
+
+
+    <div class="header-title-background">
+        <h2>Welcome, <b>Sandip!</b></h2>
+    </div>
+
+
+
+    <section>
+        <div class="container m-tb">
+            <div class="flex">
+
+                <div class="left">
+                    <ul class="nav-lists">
+                        <li class="li-item"><a>Dashboard</a></li>
+                        <li class="li-item"><a>New Service Requests</a></li>
+                        <li class="li-item active-li"><a>Upcoming services</a></li>
+                        <li class="li-item"><a>Service Schedule</a></li>
+                        <li class="li-item"><a>Service History</a></li>
+                        <li class="li-item"><a>My Ratings</a></li>
+                        <li class="li-item"><a>Block Customer</a></li>
+                    </ul>
+                </div>
+                <div class="right">
+                    <table class="table" id="Table">
+                        <tr class="no-border">
+                            <td colspan="6">
+                                <div class="heading-table">
+                                    <h3>Upcoming Service</h3>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th onclick="sortTable(0,2,2)">Service ID <img src="images/sort.png" alt=""></th>
+                            <th onclick="sortTable(1,2,2)">Service date <img src="images/sort.png" alt=""></th>
+                            <th colspan="2" onclick="sortTable(2,2,2)">Customer details <img src="images/sort.png" alt=""></th>
+                            <th onclick="sortTable(3,2,2)">Distance <img src="images/sort.png" alt=""></th>
+                            <th class="action">Actions</th>
+                        </tr>
+                        <tr>
+                            <td>323436</td>
+                            <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
+                            <td colspan="2">David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
+                            <td>10 km</td>
+                            <td class="action"><button class="cancel-button">Cancel</button></td>
+                        </tr>
+                        <tr>
+                            <td>323434</td>
+                            <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
+                            <td colspan="2">Aavid Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
+                            <td>10 km</td>
+                            <td class="action"><button class="cancel-button">Cancel</button></td>
+                        </tr>
+                        <tr>
+                            <td>323436</td>
+                            <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
+                            <td colspan="2">David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
+                            <td>10 km</td>
+                            <td class="action"><button class="cancel-button">Cancel</button></td>
+                        </tr>
+                        <tr>
+                            <td>323436</td>
+                            <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
+                            <td colspan="2">David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
+                            <td>10 km</td>
+                            <td class="action"><button class="cancel-button">Cancel</button></td>
+                        </tr>
+                        <tr>
+                            <td>323436</td>
+                            <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
+                            <td colspan="2">David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
+                            <td>10 km</td>
+                            <td class="action"><button class="cancel-button">Cancel</button></td>
+                        </tr>
+                        <tr>
+                            <td>323436</td>
+                            <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
+                            <td colspan="2">David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
+                            <td>10 km</td>
+                            <td class="action"><button class="cancel-button">Cancel</button></td>
+                        </tr>
+                        <tr>
+                            <td>323436</td>
+                            <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
+                            <td colspan="2">David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
+                            <td>10 km</td>
+                            <td class="action"><button class="cancel-button">Cancel</button></td>
+                        </tr>
+                        <tr>
+                            <td>323436</td>
+                            <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
+                            <td colspan="2">David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
+                            <td>11 km</td>
+                            <td class="action"><button class="cancel-button">Cancel</button></td>
+                        </tr>
+                        <tr>
+                            <td>323436</td>
+                            <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
+                            <td colspan="2">David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
+                            <td>10 km</td>
+                            <td class="action"><button class="cancel-button">Cancel</button></td>
+                        </tr>
+                        <tr>
+                            <td>323436</td>
+                            <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
+                            <td colspan="2">David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
+                            <td>10 km</td>
+                            <td class="action"><button class="cancel-button">Cancel</button></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <div class="footer-table">
+                                    <div class="left-side">
+                                        <h3>Show </h3>
+                                        <select>
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    </select>
+                                        <h3>entries</h3>
+                                        <h3>Total Records :</h3><span id="count">55</span>
+                                    </div>
+                                    <div class="right-side">
+                                        <i class="fas fa-step-backward"></i>
+                                        <i class="fas fa-chevron-left"></i>
+                                        <h3 class="page-active">1</h3>
+                                        <h3>2</h3>
+                                        <h3>3</h3>
+                                        <h3>4</h3>
+                                        <i class="fas fa-chevron-right"></i>
+                                        <i class="fas fa-step-forward"></i>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="card">
+                        <tr class="no-border">
+                            <td colspan="6">
+                                <div class="heading-table">
+                                    <h3>Upcoming Service</h3>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="card-table-tr">
+                                    <h4>323436</h4>
+                                    <hr>
+                                    <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
+                                    <hr>
+                                    <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
+                                    <hr>
+                                    <p>10 km</p>
+                                    <hr>
+                                    <p class="button-center"><button class="cancel-button">Cancel</button></p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="card-table-tr">
+                                    <h4>323436</h4>
+                                    <hr>
+                                    <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
+                                    <hr>
+                                    <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
+                                    <hr>
+                                    <p>10 km</p>
+                                    <hr>
+                                    <p class="button-center"><button class="cancel-button">Cancel</button></p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="card-table-tr">
+                                    <h4>323436</h4>
+                                    <hr>
+                                    <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
+                                    <hr>
+                                    <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
+                                    <hr>
+                                    <p>10 km</p>
+                                    <hr>
+                                    <p class="button-center"><button class="cancel-button">Cancel</button></p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="card-table-tr">
+                                    <h4>323436</h4>
+                                    <hr>
+                                    <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
+                                    <hr>
+                                    <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
+                                    <hr>
+                                    <p>10 km</p>
+                                    <hr>
+                                    <p class="button-center"><button class="cancel-button">Cancel</button></p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="card-table-tr">
+                                    <h4>323436</h4>
+                                    <hr>
+                                    <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
+                                    <hr>
+                                    <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
+                                    <hr>
+                                    <p>10 km</p>
+                                    <hr>
+                                    <p class="button-center"><button class="cancel-button">Cancel</button></p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="card-table-tr">
+                                    <h4>323436</h4>
+                                    <hr>
+                                    <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
+                                    <hr>
+                                    <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
+                                    <hr>
+                                    <p>10 km</p>
+                                    <hr>
+                                    <p class="button-center"><button class="cancel-button">Cancel</button></p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="card-table-tr">
+                                    <h4>323436</h4>
+                                    <hr>
+                                    <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
+                                    <hr>
+                                    <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
+                                    <hr>
+                                    <p>10 km</p>
+                                    <hr>
+                                    <p class="button-center"><button class="cancel-button">Cancel</button></p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="card-table-tr">
+                                    <h4>323436</h4>
+                                    <hr>
+                                    <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
+                                    <hr>
+                                    <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
+                                    <hr>
+                                    <p>10 km</p>
+                                    <hr>
+                                    <p class="button-center"><button class="cancel-button">Cancel</button></p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="card-table-tr">
+                                    <h4>323436</h4>
+                                    <hr>
+                                    <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
+                                    <hr>
+                                    <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
+                                    <hr>
+                                    <p>10 km</p>
+                                    <hr>
+                                    <p class="button-center"><button class="cancel-button">Cancel</button></p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="card-table-tr">
+                                    <h4>323436</h4>
+                                    <hr>
+                                    <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
+                                    <hr>
+                                    <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
+                                    <hr>
+                                    <p>10 km</p>
+                                    <hr>
+                                    <p class="button-center"><button class="cancel-button">Cancel</button></p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <div class="footer-table">
+                                    <div class="left-side">
+                                        <h3>Show </h3>
+                                        <select>
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    </select>
+                                        <h3>entries</h3>
+                                        <h3>Total Records :</h3><span id="count">55</span>
+                                    </div>
+                                    <div class="right-side">
+                                        <i class="fas fa-step-backward"></i>
+                                        <i class="fas fa-chevron-left"></i>
+                                        <h3 class="page-active">1</h3>
+                                        <h3>2</h3>
+                                        <h3>3</h3>
+                                        <h3>4</h3>
+                                        <i class="fas fa-chevron-right"></i>
+                                        <i class="fas fa-step-forward"></i>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-one">
+            <div class="container">
+                <div class="footer-before">
+                    <div class="logo">
+                        <img src="images/logo.png">
+                    </div>
+                    <div class="footer-navbar">
+                        <ul id="footer-nav">
+                            <li><a href="#">home</a></li>
+                            <li><a href="#">about</a></li>
+                            <li><a href="#">testimonial</a></li>
+                            <li><a href="#">faq</a></li>
+                            <li><a href="#">insurance policy</a></li>
+                            <li><a href="#">impressum</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-social">
+                        <ul class="socail-media">
+                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <hr style="width:90%;text-align:center;border: 0.5px solid #424242;">
+            <div class="copright">
+                <div class="footer-copyright">
+                    <h6 style="text-align: center;">©2018 Helperland. All rights reserved. Terms and Conditions | Privacy Policy</h6>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+
+    <script>
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        // document.getElementById("defaultOpen").click();
+
+        // var navList = document.getElementById("nav-lists");
+
+        // function Show() {
+        //     navList.classList.add("_Menus-show");
+        // }
+
+        // function Hide() {
+        //     navList.classList.remove("_Menus-show");
+        // }
+    </script>
+
+    <script>
+        // $(document).ready(function() {
+        //     $(".toggle").click(function() {
+        //         $("#mynav").toggle();
+        //     });
+        // });
+
+        window.onscroll = function() {
+            myFunction()
+        };
+
+        var header = document.getElementById("header");
+        var sticky = "150";
+
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+                console.log("if");
+            } else {
+                header.classList.remove("sticky");
+                console.log("ifelse");
+            }
+        }
+
+        function openMenu() {
+            var popupLi = document.querySelector(".navbar");
+            var menuButton = document.querySelector(".toggle");
+            // popupLi.classList.toggle("show-menu");
+            var visibility = popupLi.getAttribute("data-visible");
+            console.log(visibility);
+            if (visibility === "false") {
+                popupLi.setAttribute("data-visible", true);
+                menuButton.setAttribute("aria-expanded", true);
+                var body = document.getElementById('home');
+                body.classList.add("back");
+            } else if (visibility === "true") {
+                popupLi.setAttribute("data-visible", false);
+                menuButton.setAttribute("aria-expanded", false);
+                var body = document.getElementById('home');
+                body.classList.remove("back");
+            }
+        }
+    </script>
+</body>
+
+</html>

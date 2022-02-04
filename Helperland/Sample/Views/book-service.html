@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Book A Service</title>
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
+    <script src="js/checkboxjs.js"></script>
+    <script src="js/popupmodel.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body id="body">
+
+    <div id="home"></div>
+    <div class="header-contain" id="header" style="background: rgba(39, 39, 39, .7);">
+        <div class="logo">
+            <img src="images/logo.png">
+        </div>
+        <div class="toggle" onclick="openMenu()" aria-expanded="false" id="buttonMenu">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </div>
+
+        <div class="navbar" id="mynav" data-visible="false">
+            <ul id="header-nav">
+                <li><a href="#" class="Button">Book now</a></li>
+                <li><a href="prices.html">Prices</a></li>
+                <li><a href="#">Our Guarantee</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="contact-us.html">Contact us</a></li>
+                <li><a href="#" class="Button">Login</a></li>
+                <li><a href="become_a_pro.html" class="Button">Become a helper</a></li>
+                <!-- <li class="flag">
+                                <a href="#" class="flag-icon"><img src="images/flag.png">
+                                    <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a>
+                            </li> -->
+
+            </ul>
+            <li class="media-li"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+            <li class="media-li"><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+        </div>
+    </div>
+
+
+
+    <div class="full-image faq-img">
+        <img src="images/book-service-banner.jpg">
+    </div>
+
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>You will save 20% according to §35a EStG</h2>
+            <p>Our helpers help you with tax savings! Parts of the costs for household tasks recognize the tax office as a tax advantage. Assuming you are a private client, you have received an invoice and have not paid it in cash. You can deduct 20% of
+                the expenses directly from your tax liability, a maximum of 4,000 euros per year.</p>
+        </div>
+
+    </div>
+
+    <div id="myModal1" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close1">&times;</span>
+            <h2>Whar are included</h2>
+            <div class="feature-wrapper">
+                <div class="feature-box">
+                    <h3>Bedroom and livingromm</h3>
+                    <ul>
+                        <li>
+                            <a href="#"><img src="images/green-right.png" alt="">
+                            </a><span>Dust all accessible surfaces</span>
+                        </li>
+                        <li>
+                            <a href="#"><img src="images/green-right.png" alt="">
+                            </a><span>Wipe down all mirrors and glass fixtures</span>
+                        </li>
+                        <li>
+                            <a href="#"><img src="images/green-right.png" alt="">
+                            </a><span>Clean all floor surfaces</span>
+                        </li>
+                        <li>
+                            <a href="#"><img src="images/green-right.png" alt="">
+                            </a><span>Take out garbage and recycling</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="feature-box">
+                    <h3>Bathrooms</h3>
+                    <ul>
+                        <li>
+                            <a href="#"><img src="images/green-right.png" alt="">
+                            </a><span>Wash and sanitize the toilet, shower, tub, sink</span>
+                        </li>
+                        <li>
+                            <a href="#"><img src="images/green-right.png" alt="">
+                            </a><span>Dust all accessible surfaces</span>
+                        </li>
+                        <li>
+                            <a href="#"><img src="images/green-right.png" alt="">
+                            </a><span>Wipe down all mirrors and glass fixtures</span>
+                        </li>
+                        <li>
+                            <a href="#"><img src="images/green-right.png" alt="">
+                            </a><span>Clean all floor surfaces</span>
+                        </li>
+                        <li>
+                            <a href="#"><img src="images/green-right.png" alt="">
+                            </a><span>Take out garbage and recycling</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="feature-box">
+                    <h3>Kitchen</h3>
+                    <ul>
+                        <li>
+                            <a href="#"><img src="images/green-right.png" alt="">
+                            </a><span>Dust all accessible surfaces</span>
+                        </li>
+                        <li>
+                            <a href="#"><img src="images/green-right.png" alt="">
+                            </a><span>Empty sink and load up dishwasher</span>
+                        </li>
+                        <li>
+                            <a href="#"><img src="images/green-right.png" alt="">
+                            </a><span>Wipe down exterior of stove, oven and fridge Clean all floor surfaces</span>
+                        </li>
+                        <li>
+                            <a href="#"><img src="images/green-right.png" alt="">
+                            </a><span>Clean all floor surfaces</span>
+                        </li>
+                        <li>
+                            <a href="#"><img src="images/green-right.png" alt="">
+                            </a><span>Take out garbage and recycling</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <section class="Faq section-padding">
+        <div class="container-fluid">
+            <div class="faq-wrapper">
+                <div class="main-title bs">
+                    <h2>Set up your cleaning service</h2>
+                </div>
+                <div class="bookService">
+
+                    <div class="accordion-main">
+
+                        <div class="tab-bookService">
+
+                            <button class="tablinks" onclick="openTab(event, 'setup')"> <img src="images/setup-service.png" alt="" name="img01"> Setup Service</button>
+                            <button class="tablinks bookService-active" onclick="openTab(event, 'plan')" id="defaultOpen"> <img src="images/schedule.png" alt="" name="img02"> Schedule & Plan</button>
+                            <button class="tablinks" onclick="openTab(event, 'details')"> <img src="images/details.png" alt="" name="img03"> Your Details</button>
+                            <button class="tablinks" onclick="openTab(event, 'payment')"> <img src="images/payment.png" alt="" name="img04"> Make Payment</button>
+                        </div>
+
+                        <div class="faq-accordion">
+
+                            <div class="setup tabcontent" id="setup">
+                                <h3>Enter your Postal Code</h3>
+                                <div class="flex-input">
+                                    <input type="text" name="" id="" placeholder="Postal Code">
+                                    <button>Check Availibility</button>
+                                </div>
+                            </div>
+
+                            <div class="plan tabcontent" id="plan">
+                                <h3>Select number of rooms and bath</h3>
+                                <select name="number-of-bath" id="number-of-bath">
+                                    <option value="1">1 bed</option>
+                                    <option value="2">2 bed</option>
+                                    <option value="3">3 bed</option>
+                                </select>
+                                <select name="number-of-bath" id="number-of-bath">
+                                    <option value="1">1 bathroom</option>
+                                    <option value="2">2 bathroom</option>
+                                    <option value="3">3 bathroom</option>
+                                </select>
+                                <hr>
+                                <div class="flex-box">
+                                    <div>
+                                        <h3>When do you need the cleaner?</h3>
+                                        <div class="input-group-cal">
+                                            <img src="images/calendar.png" alt=""><input type="date" name="" id="">
+                                        </div>
+                                        <select name="number-of-bath" id="number-of-bath">
+                                            <option value="02:00 PM">02:00 PM</option>
+                                            <option value="03:00 PM">03:00 PM</option>
+                                            <option value="04:00 PM">04:00 PM</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <h3>How long do you need your cleaner to stay?</h3>
+                                        <select name="number-of-bath" id="number-of-bath">
+                                            <option value="3.0 Hrs">3.0 Hrs</option>
+                                            <option value="4.0 Hrs">4.0 Hrs</option>
+                                            <option value="5.0 Hrs">5.0 Hrs</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <hr>
+                                <h3>Extra Services</h3>
+                                <div class="service-wrapper-bs">
+
+                                    <div class="box-one">
+                                        <input type="checkbox" id="ch1">
+                                        <label for="ch1" onclick="changePic(0)">
+                                        <div class="circle-image">
+                                            <img src="images/3.png" name="picture0">
+                                        </div>
+                                        <h6>Inside cabinet</h6>
+                                    </label>
+                                    </div>
+                                    <div class="box-one">
+                                        <input type="checkbox" id="ch2">
+                                        <label for="ch2" onclick="changePic(1)">
+                                        <div class="circle-image">
+                                            <img src="images/5.png" name="picture1">
+                                        </div>
+                                        <h6>Inside fridge</h6>
+                                        </label>
+                                    </div>
+                                    <div class="box-one">
+                                        <input type="checkbox" id="ch3">
+                                        <label for="ch3" onclick="changePic(2)">
+                                        <div class="circle-image">
+                                            <img src="images/4.png" name="picture2">
+                                        </div>
+                                        <h6>Inside oven</h6>
+                                        </label>
+                                    </div>
+                                    <div class="box-one">
+                                        <input type="checkbox" id="ch4">
+                                        <label for="ch4" onclick="changePic(3)">
+                                        <div class="circle-image">
+                                            <img src="images/2.png" name="picture3">
+                                        </div>
+                                        <h6>Laundry wash & dry</h6>
+                                        </label>
+                                    </div>
+                                    <div class="box-one">
+                                        <input type="checkbox" id="ch5">
+                                        <label for="ch5" onclick="changePic(4)">
+                                        <div class="circle-image">
+                                            <img src="images/1.png" name="picture4">
+                                        </div>
+                                        <h6>Interior windows</h6>
+                                        </label>
+                                    </div>
+                                </div>
+                                <hr>
+                                <h3>Comments</h3>
+                                <textarea cols="30" rows="5"></textarea>
+                                <input type="checkbox" id="pets"><label for="pets">I have pets at home</label>
+                                <hr>
+                                <div class="button-right">
+                                    <button>Continue</button>
+                                </div>
+                            </div>
+
+                            <div class="detail tabcontent" id="details">
+                                <h3>Enter your contact details, so we can serve you in better way!</h3>
+                                <div class="address-container">
+                                    <div class="flex-display">
+                                        <input type="radio" name="" id="radio1">
+                                        <label for="radio1">
+                                        <div class="right-content">
+                                            <p><b>Address :</b> street 2 40, Troisdorf 53844</p>
+                                            <p><b>Phone Number :</b> 9988556644</p>
+                                        </div>
+                                    </label>
+                                    </div>
+                                </div>
+                                <div class="address-container">
+                                    <div class="flex-display">
+                                        <input type="radio" name="" id="radio1">
+                                        <label for="radio1">
+                                        <div class="right-content">
+                                            <p><b>Address :</b> street 2 40, Troisdorf 53844</p>
+                                            <p><b>Phone Number :</b> 9988556644</p>
+                                        </div>
+                                    </label>
+                                    </div>
+                                </div>
+                                <div class="new-address" id="newaddress">
+                                    <div class="flex-child">
+                                        <label>Street Name</label>
+                                        <input type="text" name="" id="" placeholder="Street Name">
+                                    </div>
+                                    <div class="flex-child">
+                                        <label>House Number</label>
+                                        <input type="text" name="" id="" placeholder="Street Name">
+                                    </div>
+                                    <div class="flex-child">
+                                        <label>Postal Code</label>
+                                        <input type="text" name="" id="" placeholder="Street Name">
+                                    </div>
+                                    <div class="flex-child">
+                                        <label>City</label>
+                                        <select name="" id="">
+                                            <option value="Troisdrof">Troisdrof</option>
+                                        </select>
+                                    </div>
+                                    <div class="flex-child">
+                                        <label>Phone Number</label>
+                                        <div class="number-container">
+                                            <select id="">
+                                                <option value="+49">+49</option>
+                                                <option value="+49">+49</option>
+                                                <option value="+49">+49</option>
+                                            </select>
+                                            <input placeholder="Phone Number">
+                                        </div>
+                                    </div>
+                                    <div class="flex-child-1">
+                                        <button id="submit">Save</button>
+                                        <button id="cancel" onclick="add('removediv')">Cancel</button>
+                                    </div>
+                                </div>
+
+                                <button onclick="add('addbutton')" id="addaddress"><i class="fas fa-plus"></i>Add New Address</button><br>
+                                <input type="checkbox" class="mt-20" id="invoice"><label for="invoice">Send invoice on this address</label>
+                                <div class="invoice-address" id="newaddress">
+                                    <div class="flex-child">
+                                        <label>Street Name</label>
+                                        <input type="text" name="" id="" placeholder="Street Name">
+                                    </div>
+                                    <div class="flex-child">
+                                        <label>House Number</label>
+                                        <input type="text" name="" id="" placeholder="Street Name">
+                                    </div>
+                                    <div class="flex-child">
+                                        <label>Postal Code</label>
+                                        <input type="text" name="" id="" placeholder="Street Name">
+                                    </div>
+                                    <div class="flex-child">
+                                        <label>City</label>
+                                        <select name="" id="">
+                                            <option value="Troisdrof">Troisdrof</option>
+                                        </select>
+                                    </div>
+                                    <div class="flex-child-1">
+                                        <button id="submit">Save</button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="button-right">
+                                    <button>Continue</button>
+                                </div>
+
+                            </div>
+
+                            <div class="payment tabcontent" id="payment">
+                                <h3>Pay securely with Helperland payment gateway!</h3>
+                                <label>Promo code (optional)</label>
+                                <div class="flex-promo">
+                                    <input type="text" name="" id="" placeholder="Promo code (optional)">
+                                    <button>Apply</button>
+                                </div>
+                                <hr>
+                                <p>Payment Card</p>
+                                <hr>
+                                <input type="checkbox" name="" id="check-term">
+                                <label for="check-term">I accepted terms and conditions, the cancellation policy and the privacy policy. I confirm that Helperland starts to execute the contract before the expiry of the withdrawal period and I lose my right of withdrawal as a consumer with full performance of the contract.</label>
+                                <hr>
+                                <div class="button-right">
+                                    <button>Complete Booking</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="right-bs">
+                        <div class="box-shadow">
+                            <div class="heading">
+                                <h3>Payment Summary</h3>
+                            </div>
+                            <div class="content-box">
+                                <p>01/01/2018 @ 4:00 pm</p>
+                                <p>1 bed, 1 bath</p>
+                                <br>
+                                <h3>Duration</h3>
+                                <div class="flex-box">
+                                    <div class="flex-left-text">
+                                        <p>Basic</p>
+                                        <p>Inside Cabinets (extra) </p>
+                                    </div>
+                                    <div class="flex-right-text">
+                                        <p>3 Hrs</p>
+                                        <p>30 Mins</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="flex-box">
+                                    <div class="flex-left-text">
+                                        <p class="bold">Total Service Time</p>
+                                    </div>
+                                    <div class="flex-right-text">
+                                        <p class="bold">3.5 Hrs</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="hr-group">
+                            <div class="content-box">
+                                <div class="flex-box">
+                                    <div class="flex-left-text">
+                                        <p>Per cleaning</p>
+                                        <p>Discount</p>
+                                    </div>
+                                    <div class="flex-right-text">
+                                        <p class="bold">$87</p>
+                                        <p class="bold">-$27</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="hr-group">
+                            <div class="content-box">
+                                <div class="flex-box">
+                                    <div class="flex-left-text">
+                                        <p class="total">Total Payment</p>
+                                        <p>Effective Price</p>
+                                    </div>
+                                    <div class="flex-right-text">
+                                        <p class="bold-total">$63</p>
+                                        <p class="bold">$50.4</p>
+                                    </div>
+                                </div>
+                                <button id="myBtn" onclick="popupFuction()"><span class="red-text"><span class="popup"><span class="red-text">*</span>You will save 20% according to §35a EStG.</span>
+                                </button>
+                            </div>
+                            <button id="myBtn1" onclick="popupFuction()">
+                            <div class="box-gray">
+                                <img src="images/smiley.png" alt=""> See what is always included
+                            </div>
+                            </button>
+                        </div>
+                        <div class="flex-box-1">
+                            <div class="boxheader">
+                                <h2>Questions?</h2>
+                            </div>
+                            <div class="questions">
+                                <button class="bookservice-accordion"><span>What is included?</span></button>
+                                <div class="panel">
+                                    <p>Bedroom, Living Room & Common Areas,Bathrooms,Kitchen,Extras
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="questions">
+                                <button class="bookservice-accordion"><span>Which Helperland professional will come to my place?</span></button>
+                                <div class="panel">
+                                    <p>Helperland has a vast network of experienced, top-rated cleaners. Based on the time and date of your request, we work to assign the best professional available.Like working with a specific pro? Add them to your Pro
+                                        Team from the mobile app and they'll be requested first for all future bookings.You will receive an email with details about your professional prior to your appointment.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="questions">
+                                <button class="bookservice-accordion"><span>Can i skip or reschedule bookings?</span></button>
+                                <div class="panel">
+                                    <p>You can reschedule any booking for free at least 24 hours in advance of the scheduled start time. If you need to skip a booking within the minimum commitment, we’ll credit the value of the booking to your account. You
+                                        can use this credit on future cleanings and other Helperland services.
+                                    </p>
+                                </div>
+                            </div>
+                            <a href="faq.html">For more help</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="newsletter center-news">
+                <div class="newsletter-form center-news">
+                    <h3>GET OUR NEWSLETTER</h3>
+                    <div class="form">
+                        <form>
+                            <input type="email" name="email" placeholder="Email">
+                            <input type="submit" value="Submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-one">
+            <div class="container">
+                <div class="footer-before">
+                    <div class="logo">
+                        <img src="images/logo.png">
+                    </div>
+                    <div class="footer-navbar">
+                        <ul id="footer-nav">
+                            <li><a href="homepage.html">home</a></li>
+                            <li><a href="about.html">about</a></li>
+                            <li><a href="#">testimonial</a></li>
+                            <li><a href="#">faq</a></li>
+                            <li><a href="#">insurance policy</a></li>
+                            <li><a href="#">impressum</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-social">
+                        <ul class="socail-media">
+                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <hr style="width:90%;text-align:center;border: 0.5px solid #424242;">
+            <div class="copright">
+                <div class="footer-copyright">
+                    <h6 style="text-align: center;">©2018 Helperland. All rights reserved. Terms and Conditions | Privacy Policy</h6>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+    <script>
+        var acc = document.getElementsByClassName("bookservice-accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("bookService-active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+
+    <script>
+        function openTab(evt, cityName) {
+
+
+            if (cityName === "setup") {
+                console.log("function called");
+                changePic(5);
+            } else if (cityName === "plan") {
+                changePic(6);
+            } else if (cityName === "details") {
+                changePic(7);
+            } else {
+                changePic(8);
+            }
+
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" bookService-active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " bookService-active";
+        }
+        document.getElementById("defaultOpen").click();
+    </script>
+
+    <script>
+        // $(document).ready(function() {
+        //     $(".toggle").click(function() {
+        //         $("#mynav").toggle();
+        //     });
+        // });
+
+        window.onscroll = function() {
+            myFunction()
+        };
+
+        var header = document.getElementById("header");
+        var sticky = "150";
+
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+                console.log("if");
+            } else {
+                header.classList.remove("sticky");
+                console.log("ifelse");
+            }
+        }
+
+        function openMenu() {
+            var popupLi = document.querySelector(".navbar");
+            var menuButton = document.querySelector(".toggle");
+            // popupLi.classList.toggle("show-menu");
+            var visibility = popupLi.getAttribute("data-visible");
+            console.log(visibility);
+            if (visibility === "false") {
+                popupLi.setAttribute("data-visible", true);
+                menuButton.setAttribute("aria-expanded", true);
+                var body = document.getElementById('home');
+                body.classList.add("back");
+            } else if (visibility === "true") {
+                popupLi.setAttribute("data-visible", false);
+                menuButton.setAttribute("aria-expanded", false);
+                var body = document.getElementById('home');
+                body.classList.remove("back");
+            }
+        }
+    </script>
+
+</body>
+
+</html>

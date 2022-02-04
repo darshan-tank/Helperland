@@ -1,0 +1,256 @@
+﻿@model Sample.Models.User
+
+<div id="home"></div>
+<div class="header-back-bcmpro">
+    <div id="home"></div>
+    <header class="header">
+        <div class="container-fluid">
+            <div class="header-contain" id="header">
+                <a class="logo" asp-controller="index">
+                    <img src="images/logo.png">
+                </a>
+                <div class="toggle" onclick="openMenu()" aria-expanded="false" id="buttonMenu">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </div>
+
+                <div class="navbar" id="mynav" data-visible="false">
+                    <ul id="header-nav">
+                        <li><a href="#" class="Button">Book a Cleaner</a></li>
+                        <li><a asp-controller="price">Prices</a></li>
+                        <li><a href="#">Our Guarantee</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a asp-controller="contact">Contact us</a></li>
+                        <li><a asp-controller="index" asp-action="login" class="Button">Login</a></li>
+                        <li><a asp-controller="spsignup" class="Button">Become a helper</a></li>
+                        <!-- <li class="flag">
+                            <a href="#" class="flag-icon"><img src="images/flag.png">
+                                <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a>
+                        </li> -->
+
+                    </ul>
+                    <li class="media-li"><a href="#"><i class="fa fa-facebook bcmpro-icn" aria-hidden="true"></i></a></li>
+                    <li class="media-li"><a href="#"><i class="fa fa-instagram bcmpro-icn" aria-hidden="true"></i></a></li>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="header-banner">
+        <div class="container">
+            <div class="main-banner">
+                <div class="bap-card">
+                    <h2>Register Now!</h2>
+
+                    <div class="contact-form">
+                        <div class="login-form-bap">
+                            <form asp-action="create">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <input type="hidden" asp-for="UserTypeId" value="2">
+                                <input type="text" asp-for="FirstName" id="fname" class="form-inline" placeholder="First name">
+                                <input type="text" asp-for="LastName" id="lname" class="form-inline" placeholder="Last name">
+                                <input type="hidden" asp-for="CreatedDate" value="@DateTime.Now" />
+                                <input type="hidden" asp-for="ModifiedDate" value="@DateTime.Now" />
+                                <input type="hidden" value="0" />
+                                <input asp-for="Email" class="form-control" placeholder="Email" />
+
+                                <select name="code" class="code-bap">
+                                    <option value="volvo">+49</option>
+                                    <option value="saab">+99</option>
+                                    <option value="mercedes">+14</option>
+                                </select>
+                                <input asp-for="Mobile" value="" class="bap-call" pattern="[0-9]{10}" placeholder="Number" />
+
+                                <input type="hidden" asp-for="DateOfBirth">
+
+                                <input type="password" asp-for="Password" id="pwd" class="form-inline" placeholder="Password">
+                                <input type="password" id="cpwd" class="form-inline" placeholder="Confirm Password">
+
+                                <div>
+                                    <input type="checkbox" class="checkbox" value="Bike">
+                                    <label for="vehicle1"> Send me newsletters from Helperland</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="checkbox" value="Bike" onchange="document.getElementById('disable').disabled = !this.checked;">
+                                    <label for="vehicle1"> I accept <span>terms and conditions</span> & <span>privacy policy</span></label>
+                                </div>
+                                <div class="g-recaptcha m-2" data-sitekey="6LeBjPQdAAAAAIc_QrsPqPZsrpBnY94sIl9prpm
+                                    "></div>
+
+                                <button type="submit" class="submit-button" id="disable" disabled>
+                                    Get Started
+                                    <i class="fas fa-long-arrow-alt-right"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="page-down">
+                    <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<section class="consectetur">
+    <div class="flexcontainer">
+        <div class="flexleftItem">
+
+        </div>
+        <div class="flexmiddleContent-bap">
+            <h2 class="page-title">How it works</h2>
+            <div class="card-bap">
+                <div class="left-text-bap">
+                    <h3 class="sub-title">Register yourself</h3>
+                    <p>
+                        Provide your basic information to register yourself as a service provider.
+                    </p>
+                    <a>Read more <img src="images/shape-2.png"></a>
+                </div>
+
+                <div class="right-image-bap">
+                    <img src="images/group-23.png">
+                </div>
+            </div>
+            <div class="card-bap reverse">
+                <div class="left-text-bap left-padding">
+                    <h3 class="sub-title">Register yourself</h3>
+                    <p>
+                        Provide your basic information to register yourself as a service provider.
+                    </p>
+                    <a>Read more <img src="images/shape-2.png"></a>
+                </div>
+
+                <div class="right-image-bap">
+                    <img src="images/group-29.png">
+                </div>
+            </div>
+            <div class="card-bap">
+                <div class="left-text-bap">
+                    <h3 class="sub-title">Register yourself</h3>
+                    <p>
+                        Provide your basic information to register yourself as a service provider.
+                    </p>
+                    <a>Read more <img src="images/shape-2.png"></a>
+                </div>
+
+                <div class="right-image-bap">
+                    <img src="images/group-30.png">
+                </div>
+            </div>
+            <div class="newsletter top-padding-25">
+                <div class="page-up">
+                </div>
+                <div class="newsletter-form">
+                    <h3>GET OUR NEWSLETTER</h3>
+                    <div class="form">
+                        <form>
+                            <input type="email" name="email" placeholder="Email">
+                            <input type="submit" value="Submit">
+                        </form>
+                    </div>
+                </div>
+                <div class="conatc-btn">
+                </div>
+            </div>
+        </div>
+        <div class="flexrightItem">
+
+        </div>
+    </div>
+
+</section>
+
+
+
+<footer class="footer">
+    <div class="footer-one">
+        <div class="container">
+            <div class="footer-before">
+                <div class="logo">
+                    <img src="images/logo.png">
+                </div>
+                <div class="footer-navbar">
+                    <ul id="footer-nav">
+                        <li><a href="homepage.html">home</a></li>
+                        <li><a href="about.html">about</a></li>
+                        <li><a href="#">testimonial</a></li>
+                        <li><a href="faq.html">faq</a></li>
+                        <li><a href="#">insurance policy</a></li>
+                        <li><a href="#">impressum</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <ul class="socail-media">
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <hr style="width:90%;text-align:center;border: 0.5px solid #424242;">
+        <div class="copright">
+            <div class="footer-copyright">
+                <h6 style="text-align: center;">©2018 Helperland. All rights reserved. Terms and Conditions | Privacy Policy</h6>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".toggle").click(function () {
+            $("#mynav").toggle();
+        });
+    });
+</script>
+
+<script>
+    // $(document).ready(function() {
+    //     $(".toggle").click(function() {
+    //         $("#mynav").toggle();
+    //     });
+    // });
+
+    window.onscroll = function () {
+        myFunction()
+    };
+
+    var header = document.getElementById("header");
+    var sticky = "150";
+
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+            console.log("if");
+        } else {
+            header.classList.remove("sticky");
+            console.log("ifelse");
+        }
+    }
+
+    function openMenu() {
+        var popupLi = document.querySelector(".navbar");
+        var menuButton = document.querySelector(".toggle");
+        // popupLi.classList.toggle("show-menu");
+        var visibility = popupLi.getAttribute("data-visible");
+        console.log(visibility);
+        if (visibility === "false") {
+            popupLi.setAttribute("data-visible", true);
+            menuButton.setAttribute("aria-expanded", true);
+            var body = document.getElementById('home');
+            body.classList.add("back");
+        } else if (visibility === "true") {
+            popupLi.setAttribute("data-visible", false);
+            menuButton.setAttribute("aria-expanded", false);
+            var body = document.getElementById('home');
+            body.classList.remove("back");
+        }
+    }
+</script>
