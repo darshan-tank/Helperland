@@ -3,7 +3,19 @@
 }
 
 @using Microsoft.AspNetCore.Http;
-
+<script>
+    function closePopupMessage() {
+        var container = document.getElementById("popupMessage");
+        container.style.display = "none!important";
+    }
+    function openMsg(msg) {
+        console.log("Function Called");
+        var container = document.getElementById("popupMessage");
+        container.style.display = "flex!important";
+        var text = document.getElementById("msgPopup");
+        text.innerHTML = msg;
+    }
+</script>
 <div class="header-back">
     <div id="home"></div>
     <header class="header">
@@ -18,19 +30,24 @@
 
                 <div class="navbar" id="mynav" data-visible="false">
                     <ul id="header-nav">
-                        <li><a href="#" class="Button">Book a Cleaner</a></li>
+                        <li><a asp-controller="bookservice" class="Button">Book a Cleaner</a></li>
                         <li><a asp-controller="price">Prices</a></li>
                         <li><a href="#">Our Guarantee</a></li>
                         <li><a href="#">Blog</a></li>
                         <li><a asp-controller="contact">Contact us</a></li>
                         @if (@Context.Session.GetString("UserEmail") == null)
                         {
+
                             <li><a asp-action="Login" class="Button">Login</a></li>
                             <li><a asp-controller="spsignup" class="Button">Become a helper</a></li>
                         }
                         else
                         {
-                    <li><a asp-action="logout" class="Button">Logout</a></li>
+                            <script>
+                                window.onload = function () {
+                                    showMsg("Login Succesfull");
+                                };</script>
+                            <li><a asp-action="logout" class="Button">Logout</a></li>
                         }
 
                         <!-- <li class="flag">

@@ -5,11 +5,16 @@ button[disabled] {
     cursor:not-allowed;
 }
 
+.text-danger-error{
+    padding:0px 10px;
+    color:red!important;
+}
+
 article,
 aside,
 details,
 figcaption,
-figure,
+figure, plan
 footer,
 header,
 hgroup,
@@ -343,6 +348,13 @@ hr {
 
 
 /*heade start*/
+
+#postalError {
+    margin: auto 0px;
+    padding: 10px;
+    color: red !important;
+    font-weight: 600;
+}
 
 .navbar .media-li {
     display: none;
@@ -2587,7 +2599,7 @@ tr {
     border-color: #1D7A8C;
 }
 
-.tab-bookService button.bookService-active::before {
+.tab-bookService button.arrow-dwn::before {
     content: '';
     width: 0;
     height: 0;
@@ -2772,7 +2784,7 @@ button.bookservice-accordion {
     float: left;
 }
 
-.bookservice-accordion.bookService-active:before {
+.bookservice-accordion#defaultOpen:before {
     content: "\f107";
 }
 

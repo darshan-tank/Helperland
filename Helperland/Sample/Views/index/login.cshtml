@@ -16,7 +16,7 @@
 
                 <div class="navbar" id="mynav" data-visible="false">
                     <ul id="header-nav">
-                        <li><a href="#" class="Button">Book a Cleaner</a></li>
+                        <li><a asp-controller="bookservice" class="Button">Book a Cleaner</a></li>
                         <li><a asp-controller="price">Prices</a></li>
                         <li><a href="#">Our Guarantee</a></li>
                         <li><a href="#">Blog</a></li>
@@ -41,12 +41,19 @@
         <div class="modal-content" style="width: 30%;">
             <a asp-controller="index" asp-action=""><span class="close">&times;</span></a>
             <h2 style="margin-bottom: 15px;">Login to your account</h2>
-            <form asp-action="LoginPost">
+            <form asp-action="Login">
                 <div class="flex-login" id="flex-login">
-                    <input type="text" asp-for="Email" placeholder="Email">
+                    @if(@ViewBag.Message != "")
+                        {
+                            <span class="text-danger-error">@ViewBag.Message</span>
+                            
+                        }
+                    <input type="email" asp-for="Email" placeholder="Email">
+                    <span asp-validation-for="Email" class="text-danger-error"></span>
                     <input type="password" asp-for="Password" placeholder="Password">
+                    <span asp-validation-for="Password" class="text-danger-error"></span>
                     <div><input type="checkbox" name="Remember me" id="">Remember me</div>
-                    <input type="submit" value="Login1" class="submit-button">
+                    <input type="submit" value="Login" class="submit-button">
                     <a asp-controller="index" asp-action="forget">Forget Password?</a>
                     <div>Don't have an account?<a asp-controller="index" asp-action="registration">Create an account</a></div>
                 </div>

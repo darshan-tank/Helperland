@@ -40,11 +40,14 @@
         <!-- Mosdal content -->
         <div class="modal-content" style="width: 30%;">
             <a asp-controller="index" asp-action=""><span class="close">&times;</span></a>
-            <h2 style="margin-bottom: 15px;">Login to your account</h2>
+            <h2 style="margin-bottom: 15px;">
+                Forgot Password
+            </h2>
             <form asp-action="ForgetPost">
                 <div class="flex-login" id="flex-login">
                     <input type="text" asp-for="Email" placeholder="Email">
-                    <input type="submit" value="Login" class="submit-button">
+                    <span asp-validation-for="Email" class="text-danger-error"></span>
+                    <input type="submit" value="Send" class="submit-button">
                     <a asp-controller="index" asp-action="login">Login now</a>
                 </div>
             </form>

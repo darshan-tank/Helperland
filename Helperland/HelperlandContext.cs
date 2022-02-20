@@ -129,12 +129,6 @@ namespace Sample.Data
 
             modelBuilder.Entity<ServiceRequestExtra>(entity =>
             {
-                entity.HasOne(d => d.ServiceExtra)
-                    .WithMany(p => p.ServiceRequestExtras)
-                    .HasForeignKey(d => d.ServiceExtraId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ServiceRequestExtra_ServiceExtraId");
-
                 entity.HasOne(d => d.ServiceRequest)
                     .WithMany(p => p.ServiceRequestExtras)
                     .HasForeignKey(d => d.ServiceRequestId)

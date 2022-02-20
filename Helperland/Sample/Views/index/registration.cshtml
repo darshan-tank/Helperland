@@ -11,7 +11,7 @@
 
     <div class="navbar" id="mynav" data-visible="false">
         <ul id="header-nav">
-            <li><a href="#" class="Button">Book a Cleaner</a></li>
+            <li><a asp-controller="bookservice" class="Button">Book a Cleaner</a></li>
             <li><a href="prices.html">Prices</a></li>
             <li><a href="#">Our Guarantee</a></li>
             <li><a href="#">Blog</a></li>
@@ -39,18 +39,27 @@
         <div class="contact-form">
             <h3 class="sub-title"></h3>
             <div class="login-form">
-                <form asp-action="RegistrationPost">
+                <form asp-action="Registration">
+                    @if (@ViewBag.Message != "")
+                    {
+                        <span class="text-danger-error">@ViewBag.Message</span>
+
+                    }
                     <div class="first-field">
+
                         <input type="hidden" asp-for="UserTypeId" value="3">
-                        <input type="text" id="fname" asp-for="FirstName" class="form-inline" placeholder="First name">
-                        <input type="text" id="lname" asp-for="LastName" class="form-inline" placeholder="Last name">
+                        <input type="text" id="fname" asp-for="FirstName" class="form-inline" placeholder="First name" required>
+                        <span asp-validation-for="FirstName" class="text-danger-error"></span>
+                        <input type="text" id="lname" asp-for="LastName" class="form-inline" placeholder="Last name" required>
+                        <span asp-validation-for="LastName" class="text-danger-error"></span>
                         <input type="hidden" asp-for="CreatedDate" value="@DateTime.Now" />
                         <input type="hidden" asp-for="ModifiedDate" value="@DateTime.Now" />
                         <input type="hidden" value="0" />
                     </div>
                     <div class="second-field">
                         <div class="input-wrapper">
-                            <input type="email" asp-for="Email" class="email" placeholder="Email address">
+                            <input type="email" asp-for="Email" class="email" placeholder="Email address" required>
+                            <span asp-validation-for="Email" class="text-danger-error"></span>
                         </div>
                         <div class="input-wrapper">
                             <select name="code" class="code">
@@ -58,13 +67,16 @@
                                 <option value="saab">+99</option>
                                 <option value="mercedes">+14</option>
                             </select>
-                            <input type="text" asp-for="Mobile" value="" pattern="[0-9]{10}" class="call" placeholder="Mobile number">
+                            <input type="text" asp-for="Mobile" value="" pattern="[0-9]{10}" class="call" placeholder="Mobile number" style="width:74%;margin-left:0px;" required>
+                            <span asp-validation-for="Mobile" class="text-danger-error"></span>
                             <input type="hidden" asp-for="DateOfBirth">
                         </div>
                     </div>
                     <div class="first-field">
-                        <input type="password" asp-for="Password" id="pwd" class="form-inline" placeholder="Password">
-                        <input type="password" id="cpwd" class="form-inline" placeholder="Confirm Password">
+                        <input type="password" asp-for="Password" id="pwd" class="form-inline" placeholder="Password" required>
+                        <span asp-validation-for="Password" class="text-danger-error"></span>
+                        <input type="password" asp-for="cPassword" id="cpwd" class="form-inline" placeholder="Confirm Password" required>
+                        <span asp-validation-for="cPassword" class="text-danger-error"></span>
                     </div>
                     <div>
                         <input type="checkbox" class="checkbox" value="Bike">
@@ -74,7 +86,7 @@
                         <input type="checkbox" class="checkbox" value="Bike" onchange="document.getElementById('disable').disabled = !this.checked;">
                         <label for="vehicle1"> I accept <span>terms and conditions</span> & <span>privacy policy</span></label>
                     </div>
-                    <input type="submit" value="Submit" class="submit-button" id="disable">
+                    <input type="submit" value="Submit" class="submit-button" id="disable" disabled>
                     <label>Already registered?<a asp-action="Login">Login now</a></label>
                 </form>
             </div>

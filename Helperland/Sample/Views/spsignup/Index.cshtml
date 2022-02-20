@@ -1,5 +1,18 @@
 ﻿@model Sample.Models.User
 
+<script>
+    console.log(@ViewData["Message"] +"n");
+</script>
+
+@{ var message = ViewData["Message"] as String;}
+
+@if (!String.IsNullOrEmpty(message))
+{
+    <script>
+    window.onload = function() {
+        showMsg(@ViewBag.Message);
+    };</script>
+}
 <div id="home"></div>
 <div class="header-back-bcmpro">
     <div id="home"></div>
@@ -15,7 +28,7 @@
 
                 <div class="navbar" id="mynav" data-visible="false">
                     <ul id="header-nav">
-                        <li><a href="#" class="Button">Book a Cleaner</a></li>
+                        <li><a asp-controller="bookservice" class="Button">Book a Cleaner</a></li>
                         <li><a asp-controller="price">Prices</a></li>
                         <li><a href="#">Our Guarantee</a></li>
                         <li><a href="#">Blog</a></li>
@@ -43,27 +56,33 @@
 
                     <div class="contact-form">
                         <div class="login-form-bap">
-                            <form asp-action="create">
+                            <form asp-action="Index">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <input type="hidden" asp-for="UserTypeId" value="2">
-                                <input type="text" asp-for="FirstName" id="fname" class="form-inline" placeholder="First name">
-                                <input type="text" asp-for="LastName" id="lname" class="form-inline" placeholder="Last name">
+                                <input type="text" asp-for="FirstName" id="fname" class="form-inline" placeholder="First name" required>
+                                <span asp-validation-for="FirstName" class="text-danger-error"></span>
+                                <input type="text" asp-for="LastName" id="lname" class="form-inline" placeholder="Last name" required>
+                                <span asp-validation-for="LastName" class="text-danger-error"></span>
                                 <input type="hidden" asp-for="CreatedDate" value="@DateTime.Now" />
                                 <input type="hidden" asp-for="ModifiedDate" value="@DateTime.Now" />
                                 <input type="hidden" value="0" />
-                                <input asp-for="Email" class="form-control" placeholder="Email" />
+                                <input type="email" asp-for="Email" class="form-control" placeholder="Email" required />
+                                <span asp-validation-for="Email" class="text-danger-error"></span>
 
                                 <select name="code" class="code-bap">
                                     <option value="volvo">+49</option>
                                     <option value="saab">+99</option>
                                     <option value="mercedes">+14</option>
                                 </select>
-                                <input asp-for="Mobile" value="" class="bap-call" pattern="[0-9]{10}" placeholder="Number" />
+                                <input asp-for="Mobile" value="" class="bap-call" pattern="[0-9]{10}" placeholder="Number" required />
+                                <span asp-validation-for="Mobile" class="text-danger-error"></span>
 
                                 <input type="hidden" asp-for="DateOfBirth">
 
-                                <input type="password" asp-for="Password" id="pwd" class="form-inline" placeholder="Password">
-                                <input type="password" id="cpwd" class="form-inline" placeholder="Confirm Password">
+                                <input type="password" asp-for="Password" id="pwd" class="form-inline" placeholder="Password" required>
+                                <span asp-validation-for="Password" class="text-danger-error"></span>
+                                <input type="password" asp-for="cPassword" id="cpwd" class="form-inline" placeholder="Confirm Password" required>
+                                <span asp-validation-for="cPassword" class="text-danger-error"></span>
 
                                 <div>
                                     <input type="checkbox" class="checkbox" value="Bike">

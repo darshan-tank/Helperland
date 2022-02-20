@@ -12,9 +12,64 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="text/javascript" language="JavaScript">
+        function showMsg(msg) {
+            Toastify({
+                text: msg,
+                duration: 3000,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "right", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                }// Callback after click
+            }).showToast();
+        }
+    </script>
+    <style>
+        #popupMessage {
+            position: absolute;
+            top: 0;
+            width: 70%;
+            display: none;
+            flex-direction: column;
+            padding: 6%;
+            background: white;
+            margin: 15%;
+            border-radius: 15px;
+            align-items: center;
+        }
+
+        #closePopup {
+            width: 30%;
+            padding: 12px;
+            background: #73c4fac2;
+            border-radius: 20px;
+            color: #005cff;
+            font-size: 20px;
+            font-weight: 600;
+            margin: 15px;
+        }
+
+        #msgPopup {
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+
 </head>
 <body>
-@RenderBody()
+    <div id="popupMessage">
+        <p id="msgPopup"></p>
+        <button onclick="closePopupMessage()" id="closePopup">Ok</button>
+    </div>
+    
+    @RenderBody()
+
 </body>
 </html>

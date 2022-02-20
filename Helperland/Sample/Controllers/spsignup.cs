@@ -19,15 +19,26 @@ namespace Sample.Controllers
 
         public IActionResult Index()
         {
+            
             User newSP = new User();
             return View(newSP);
         }
         [HttpPost]
-        public IActionResult create(User newSP)
+        public IActionResult Index(User newSP)
         {
+            
             _dbcontext.Users.Add(newSP);
-            _dbcontext.SaveChanges();
-            return RedirectToAction("index");
+            var saveChange = _dbcontext.SaveChanges();
+            if(saveChange > 0)
+            {
+                ViewData["message"] = "Registration Successfull";
+                return View();
+            } else
+            {
+                ViewData["message"] = "Something went Wrong";
+                return View();
+            }
+            
         }
 
     }

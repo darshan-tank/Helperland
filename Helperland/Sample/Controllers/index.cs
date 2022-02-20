@@ -39,7 +39,7 @@ namespace Sample.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult LoginPost(User newSP)
+        public IActionResult Login(User newSP)
         {
             int count = _dbcontext.Users.Count(t=>(t.Email == newSP.Email) && (t.Password == newSP.Password));
             if(count >= 1)
@@ -48,8 +48,8 @@ namespace Sample.Controllers
                 return RedirectToAction("index");
             } else
             {
-                
-                return RedirectToAction("index");
+                ViewBag.Message = "Email or Password is incorrect";
+                return View();
             }
             
         }
@@ -58,7 +58,7 @@ namespace Sample.Controllers
         {
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("Helperland", "exm23391@gmail.com"));
-            message.To.Add(new MailboxAddress("Helperland", "darshntank@gmail.com"));
+            message.To.Add(new MailboxAddress("Helperland", newSP.Email));
             message.Subject = "Regarding Forget Password for "+newSP.Email;
             message.Body = new TextPart("plain")
             {
@@ -78,32 +78,70 @@ namespace Sample.Controllers
 
             return RedirectToAction("index");
         }
+
         public IActionResult ForgetPassword()
         {
+            if(Request.Cookies["ForgetEmail"] == null)
+            {
+                return RedirectToAction("Login");
+            }
             return View();
         }
         [HttpPost]
-        public IActionResult ForgetPasswordPost(User newSP)
+        public IActionResult ForgetPassword(User newSP)
         {
+
             string cookieValueFromReq = Request.Cookies["ForgetEmail"];
             User u = _dbcontext.Users.Where(x => x.Email == cookieValueFromReq).FirstOrDefault();
-            u.Password = newSP.Password;
-            _dbcontext.Attach(u);
-            _dbcontext.Entry(u).Property(r => r.Password).IsModified = true;
-            _dbcontext.SaveChanges();
-            Response.Cookies.Delete("ForgetEmail");
-            return RedirectToAction("Login");
+            if(newSP.Password == newSP.cPassword)
+            {
+                u.Password = newSP.Password;
+                _dbcontext.Attach(u);
+                _dbcontext.Entry(u).Property(r => r.Password).IsModified = true;
+                var changes = _dbcontext.SaveChanges();
+                if(changes >= 1)
+                {
+                    Response.Cookies.Delete("ForgetEmail");
+                    return RedirectToAction("Login");
+                } else
+                {
+                    ViewBag.Message = "Something went wrong";
+                    return View();
+                }
+                
+            } else
+            {
+                return View();
+            }
+            
         }
         public IActionResult Registration()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult RegistrationPost(User newSP)
+        public IActionResult Registration(User newSP)
         {
-            _dbcontext.Users.Add(newSP);
-            _dbcontext.SaveChanges();
-            return RedirectToAction("index");
+            if (newSP.Password == newSP.cPassword)
+            {
+                _dbcontext.Users.Add(newSP);
+                var changes = _dbcontext.SaveChanges();
+                if (changes >= 1)
+                {
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    ViewBag.Message = "Something went wrong";
+                    return View();
+                }
+
+            }
+            else
+            {
+                return View();
+            }
+            
         }
     }
 }

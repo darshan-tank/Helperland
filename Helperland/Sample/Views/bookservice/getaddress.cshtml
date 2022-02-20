@@ -1,0 +1,18 @@
+﻿@{
+    Layout = null;
+}
+@model List<UserAddress>
+@foreach (var add in Model)
+{
+<div class="address-container">
+    <div class="flex-display">
+        <input type="radio" name="add" id="@add.AddressId" value="@add.AddressId">
+        <label for="@add.AddressId">
+            <div class="right-content">
+                <p><b>Address :</b> @add.AddressLine1 , @add.AddressLine2 , @add.City , @add.State</p>
+                <p><b>Phone Number :</b>@add.Mobile</p>
+            </div>
+        </label>
+    </div>
+</div>
+}

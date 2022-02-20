@@ -7,9 +7,9 @@ function changePic(x) {
             var startingchar = stringsrc.substr(stringsrc.length - 5);
             console.log(startingchar);
             if (startingchar === "3.png") {
-                document.picture0.src = "images/3-green.png";
+                document.picture0.src = "/images/3-green.png";
             } else {
-                document.picture0.src = "images/3.png";
+                document.picture0.src = "/images/3.png";
             }
             break;
         case 1:
@@ -17,9 +17,9 @@ function changePic(x) {
             var startingchar = stringsrc.substr(stringsrc.length - 5);
             console.log(startingchar);
             if (startingchar === "5.png") {
-                document.picture1.src = "images/5-green.png";
+                document.picture1.src = "/images/5-green.png";
             } else {
-                document.picture1.src = "images/5.png";
+                document.picture1.src = "/images/5.png";
             }
             break;
         case 2:
@@ -27,9 +27,9 @@ function changePic(x) {
             var startingchar = stringsrc.substr(stringsrc.length - 5);
             console.log(startingchar);
             if (startingchar === "4.png") {
-                document.picture2.src = "images/4-green.png";
+                document.picture2.src = "/images/4-green.png";
             } else {
-                document.picture2.src = "images/4.png";
+                document.picture2.src = "/images/4.png";
             }
             break;
         case 3:
@@ -37,9 +37,9 @@ function changePic(x) {
             var startingchar = stringsrc.substr(stringsrc.length - 5);
             console.log(startingchar);
             if (startingchar === "2.png") {
-                document.picture3.src = "images/2-green.png";
+                document.picture3.src = "/images/2-green.png";
             } else {
-                document.picture3.src = "images/2.png";
+                document.picture3.src = "/images/2.png";
             }
             break;
         case 4:
@@ -47,9 +47,9 @@ function changePic(x) {
             var startingchar = stringsrc.substr(stringsrc.length - 5);
             console.log(startingchar);
             if (startingchar === "1.png") {
-                document.picture4.src = "images/1-green.png";
+                document.picture4.src = "/images/1-green.png";
             } else {
-                document.picture4.src = "images/1.png";
+                document.picture4.src = "/images/1.png";
             }
             break;
         case 5:
@@ -58,9 +58,9 @@ function changePic(x) {
             var startingchar = stringsrc.substr(stringsrc.length - 17);
             console.log(startingchar);
             if (startingchar === "setup-service.png") {
-                document.img01.src = "images/setup-service-white.png";
+                document.img01.src = "/images/setup-service-white.png";
             } else {
-                document.img01.src = "images/setup-service.png";
+                document.img01.src = "/images/setup-service.png";
             }
             break;
         case 6:
@@ -69,9 +69,9 @@ function changePic(x) {
             var startingchar = stringsrc.substr(stringsrc.length - 12);
             console.log(startingchar);
             if (startingchar === "schedule.png") {
-                document.img02.src = "images/schedule-white.png";
+                document.img02.src = "/images/schedule-white.png";
             } else {
-                document.img02.src = "images/schedule.png";
+                document.img02.src = "/images/schedule.png";
             }
             break;
         case 7:
@@ -80,9 +80,9 @@ function changePic(x) {
             var startingchar = stringsrc.substr(stringsrc.length - 11);
             console.log(startingchar);
             if (startingchar === "details.png") {
-                document.img03.src = "images/details-white.png";
+                document.img03.src = "/images/details-white.png";
             } else {
-                document.img03.src = "images/details.png";
+                document.img03.src = "/images/details.png";
             }
             break;
         case 8:
@@ -91,9 +91,9 @@ function changePic(x) {
             var startingchar = stringsrc.substr(stringsrc.length - 11);
             console.log(startingchar);
             if (startingchar === "payment.png") {
-                document.img04.src = "images/payment-white.png";
+                document.img04.src = "/images/payment-white.png";
             } else {
-                document.img04.src = "images/payment.png";
+                document.img04.src = "/images/payment.png";
             }
             break;
     }
