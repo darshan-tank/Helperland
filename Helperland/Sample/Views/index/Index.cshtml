@@ -3,6 +3,12 @@
 }
 
 @using Microsoft.AspNetCore.Http;
+@if (!String.IsNullOrEmpty(@ViewBag.Message))
+{
+    <script>
+       showMsg("@ViewBag.Message");
+    </script>
+}
 <script>
     function closePopupMessage() {
         var container = document.getElementById("popupMessage");
@@ -43,10 +49,6 @@
                         }
                         else
                         {
-                            <script>
-                                window.onload = function () {
-                                    showMsg("Login Succesfull");
-                                };</script>
                             <li><a asp-action="logout" class="Button">Logout</a></li>
                         }
 
@@ -378,15 +380,15 @@
     <div class="footer-one">
         <div class="container">
             <div class="footer-before">
-                <div class="logo">
+                <a class="logo" asp-controller="index">
                     <img src="images/logo.png">
-                </div>
+                </a>
                 <div class="footer-navbar">
                     <ul id="footer-nav">
-                        <li><a href="#">home</a></li>
-                        <li><a href="about.html">about</a></li>
+                        <li><a asp-controller="index">home</a></li>
+                        <li><a asp-controller="about">about</a></li>
                         <li><a href="#">testimonial</a></li>
-                        <li><a href="faq.html">faq</a></li>
+                        <li><a asp-controller="faq">faq</a></li>
                         <li><a href="#">insurance policy</a></li>
                         <li><a href="#">impressum</a></li>
                     </ul>

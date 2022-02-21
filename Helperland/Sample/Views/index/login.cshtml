@@ -2,6 +2,12 @@
     ViewData["Title"] = "HomePage login";
 }
 @model Sample.Models.User
+@if (!String.IsNullOrEmpty(@ViewBag.Message))
+{
+    <script>
+       showMsg("@ViewBag.Message");
+    </script>
+}
 <div class="header-back">
     <div id="home"></div>
     <header class="header">
@@ -43,11 +49,7 @@
             <h2 style="margin-bottom: 15px;">Login to your account</h2>
             <form asp-action="Login">
                 <div class="flex-login" id="flex-login">
-                    @if(@ViewBag.Message != "")
-                        {
-                            <span class="text-danger-error">@ViewBag.Message</span>
-                            
-                        }
+                    
                     <input type="email" asp-for="Email" placeholder="Email">
                     <span asp-validation-for="Email" class="text-danger-error"></span>
                     <input type="password" asp-for="Password" placeholder="Password">
@@ -381,15 +383,15 @@
     <div class="footer-one">
         <div class="container">
             <div class="footer-before">
-                <div class="logo">
-                    <img src="~/images/logo.png">
-                </div>
+                <a class="logo" asp-controller="index">
+                    <img src="images/logo.png">
+                </a>
                 <div class="footer-navbar">
                     <ul id="footer-nav">
-                        <li><a href="#">home</a></li>
-                        <li><a href="about.html">about</a></li>
+                        <li><a asp-controller="index">home</a></li>
+                        <li><a asp-controller="about">about</a></li>
                         <li><a href="#">testimonial</a></li>
-                        <li><a href="faq.html">faq</a></li>
+                        <li><a asp-controller="faq">faq</a></li>
                         <li><a href="#">insurance policy</a></li>
                         <li><a href="#">impressum</a></li>
                     </ul>
@@ -418,46 +420,46 @@
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    // $(document).ready(function() {
-    //     $(".toggle").click(function() {
-    //         $("#mynav").toggle();
-    //     });
-    // });
+    <script>
+            // $(document).ready(function() {
+                                                                                                                                                //     $(".toggle").click(function() {
+                                                                                                                                                //         $("#mynav").toggle();
+                                                                                                                                                //     });
+                                                                                                                                                // });
 
-    window.onscroll = function () {
-        myFunction()
-    };
+                                                                                                                                                window.onscroll = function () {
+                                                                                                                                                    myFunction()
+                                                                                                                                                };
 
-    var header = document.getElementById("header");
-    var sticky = "150";
+                                                                                                                                            var header = document.getElementById("header");
+                                                                                                                                            var sticky = "150";
 
-    function myFunction() {
-        if (window.pageYOffset > sticky) {
-            header.classList.add("sticky");
-            console.log("if");
-        } else {
-            header.classList.remove("sticky");
-            console.log("ifelse");
-        }
-    }
+                                                                                                                                            function myFunction() {
+                if (window.pageYOffset > sticky) {
+                                                                                                                                                header.classList.add("sticky");
+                                                                                                                                            console.log("if");
+                } else {
+                                                                                                                                                header.classList.remove("sticky");
+                                                                                                                                            console.log("ifelse");
+                }
+            }
 
-    function openMenu() {
-        var popupLi = document.querySelector(".navbar");
-        var menuButton = document.querySelector(".toggle");
-        // popupLi.classList.toggle("show-menu");
-        var visibility = popupLi.getAttribute("data-visible");
-        console.log(visibility);
-        if (visibility === "false") {
-            popupLi.setAttribute("data-visible", true);
-            menuButton.setAttribute("aria-expanded", true);
-            var body = document.getElementById('home');
-            body.classList.add("back");
-        } else if (visibility === "true") {
-            popupLi.setAttribute("data-visible", false);
-            menuButton.setAttribute("aria-expanded", false);
-            var body = document.getElementById('home');
-            body.classList.remove("back");
-        }
-    }
-</script>
+                                                                                                                                            function openMenu() {
+                var popupLi = document.querySelector(".navbar");
+                                                                                                                                            var menuButton = document.querySelector(".toggle");
+                                                                                                                                            // popupLi.classList.toggle("show-menu");
+                                                                                                                                            var visibility = popupLi.getAttribute("data-visible");
+                                                                                                                                            console.log(visibility);
+                                                                                                                                            if (visibility === "false") {
+                                                                                                                                                popupLi.setAttribute("data-visible", true);
+                                                                                                                                            menuButton.setAttribute("aria-expanded", true);
+                                                                                                                                            var body = document.getElementById('home');
+                                                                                                                                            body.classList.add("back");
+                } else if (visibility === "true") {
+                                                                                                                                                popupLi.setAttribute("data-visible", false);
+                                                                                                                                            menuButton.setAttribute("aria-expanded", false);
+                                                                                                                                            var body = document.getElementById('home');
+                                                                                                                                            body.classList.remove("back");
+                }
+            }
+    </script>

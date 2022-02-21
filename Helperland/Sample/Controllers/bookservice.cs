@@ -82,11 +82,11 @@ namespace Sample.Controllers
             var SaveStatus = _dbcontext.SaveChanges();
             if (SaveStatus == 1)
             {
-                return Json(new { Status = "success" });
+                return Json(new { Status = "success",Message = "Address Added." });
             }
             else
             {
-                return Json(new { Status = "fail" });
+                return Json(new { Status = "fail", Message = "Something went wrong." });
             }
         }
         [HttpPost]
@@ -173,10 +173,10 @@ namespace Sample.Controllers
 
             if(saveChange1 >= 1 && saveChange2 >= 1)
             {
-                return Json(new { Status = "success" });
+                return Json(new { Status = "success"});
             } else
             {
-                return Json(new { Status = "fail" });
+                return Json(new { Status = "fail"});
             }
         }
         public IActionResult getaddress()

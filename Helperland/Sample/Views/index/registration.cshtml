@@ -1,10 +1,15 @@
 ﻿@model Sample.Models.User
-
+@if (!String.IsNullOrEmpty(@ViewBag.Message))
+{
+    <script>
+        showMsg("@ViewBag.Message");
+    </script>
+}
 <div id="home"></div>
 <div class="header-contain" id="header" style="background: rgba(39, 39, 39, .7);">
-    <div class="logo">
+    <a class="logo" asp-controller="index">
         <img src="~/images/logo.png">
-    </div>
+    </a>
     <div class="toggle" onclick="openMenu()" aria-expanded="false" id="buttonMenu">
         <i class="fa fa-bars" aria-hidden="true"></i>
     </div>
@@ -12,12 +17,12 @@
     <div class="navbar" id="mynav" data-visible="false">
         <ul id="header-nav">
             <li><a asp-controller="bookservice" class="Button">Book a Cleaner</a></li>
-            <li><a href="prices.html">Prices</a></li>
+            <li><a asp-controller="price">Prices</a></li>
             <li><a href="#">Our Guarantee</a></li>
             <li><a href="#">Blog</a></li>
-            <li><a href="#">Contact us</a></li>
-            <li><a href="#" class="Button">Login</a></li>
-            <li><a href="become_a_pro.html" class="Button">Become a helper</a></li>
+            <li><a asp-controller="contact">Contact us</a></li>
+            <li><a asp-action="login" class="Button">Login</a></li>
+            <li><a asp-controller="spsignup" class="Button">Become a helper</a></li>
             <!-- <li class="flag">
                             <a href="#" class="flag-icon"><img src="images/flag.png">
                                 <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a>
@@ -40,11 +45,7 @@
             <h3 class="sub-title"></h3>
             <div class="login-form">
                 <form asp-action="Registration">
-                    @if (@ViewBag.Message != "")
-                    {
-                        <span class="text-danger-error">@ViewBag.Message</span>
-
-                    }
+                    
                     <div class="first-field">
 
                         <input type="hidden" asp-for="UserTypeId" value="3">
@@ -98,15 +99,15 @@
     <div class="footer-one">
         <div class="container">
             <div class="footer-before">
-                <div class="logo">
+                <a class="logo" asp-controller="index">
                     <img src="~/images/logo.png">
-                </div>
+                </a>
                 <div class="footer-navbar">
                     <ul id="footer-nav">
-                        <li><a href="homepage.html">home</a></li>
-                        <li><a href="about.html">about</a></li>
+                        <li><a asp-controller="index">home</a></li>
+                        <li><a asp-controller="about">about</a></li>
                         <li><a href="#">testimonial</a></li>
-                        <li><a href="faq.html">faq</a></li>
+                        <li><a asp-controller="faq">faq</a></li>
                         <li><a href="#">insurance policy</a></li>
                         <li><a href="#">impressum</a></li>
                     </ul>

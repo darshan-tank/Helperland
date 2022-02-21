@@ -23,6 +23,12 @@ namespace Sample.Controllers
         }
         public IActionResult Index()
         {
+            var t = Convert.ToString(TempData["Message"]);
+
+            if (t != null)
+            {
+                ViewBag.Message = t;
+            }
             return View();
         }
         public IActionResult Login()
@@ -45,10 +51,11 @@ namespace Sample.Controllers
             if(count >= 1)
             {
                 HttpContext.Session.SetString("UserEmail", newSP.Email);
+                TempData["Message"] = "Login successfull.";
                 return RedirectToAction("index");
             } else
             {
-                ViewBag.Message = "Email or Password is incorrect";
+                ViewBag.Message = "Email or password are incorrect";
                 return View();
             }
             
@@ -56,27 +63,36 @@ namespace Sample.Controllers
         [HttpPost]
         public IActionResult ForgetPost(User newSP)
         {
-            var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("Helperland", "exm23391@gmail.com"));
-            message.To.Add(new MailboxAddress("Helperland", newSP.Email));
-            message.Subject = "Regarding Forget Password for "+newSP.Email;
-            message.Body = new TextPart("plain")
-            {
-                Text = "Link is valid for only 15 minutes http://localhost:63687/index/ForgetPassword"
-            };
+            int count = _dbcontext.Users.Count(t => t.Email == newSP.Email);
 
-            using (var client = new SmtpClient())
+            if(count >= 1)
             {
-                client.Connect("smtp.gmail.com",587,false);
-                client.Authenticate("exm23391@gmail.com", "visualstudio");
-                client.Send(message);
-                CookieOptions option = new CookieOptions();
-                option.Expires = DateTime.Now.AddMinutes(15);
-                Response.Cookies.Append("ForgetEmail", newSP.Email, option);
-                client.Disconnect(true);
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress("Helperland", "exm23391@gmail.com"));
+                message.To.Add(new MailboxAddress("Helperland", newSP.Email));
+                message.Subject = "Regarding Forget Password for " + newSP.Email;
+                message.Body = new TextPart("plain")
+                {
+                    Text = "Link is valid for only 15 minutes http://localhost:63687/index/ForgetPassword"
+                };
+
+                using (var client = new SmtpClient())
+                {
+                    client.Connect("smtp.gmail.com", 587, false);
+                    client.Authenticate("exm23391@gmail.com", "visualstudio");
+                    client.Send(message);
+                    CookieOptions option = new CookieOptions();
+                    option.Expires = DateTime.Now.AddMinutes(15);
+                    Response.Cookies.Append("ForgetEmail", newSP.Email, option);
+                    client.Disconnect(true);
+                }
+                TempData["Message"] = "Reset password link has been sent to you registered mail.";
+                return RedirectToAction("index");
+            } else
+            {
+                TempData["Message"] = "Email not exist.";
+                return RedirectToAction("index");
             }
-
-            return RedirectToAction("index");
         }
 
         public IActionResult ForgetPassword()
@@ -122,26 +138,34 @@ namespace Sample.Controllers
         [HttpPost]
         public IActionResult Registration(User newSP)
         {
-            if (newSP.Password == newSP.cPassword)
+            int count = _dbcontext.Users.Count(t => (t.Email == newSP.Email) && (t.UserTypeId == newSP.UserTypeId));
+            if(count >= 1)
             {
-                _dbcontext.Users.Add(newSP);
-                var changes = _dbcontext.SaveChanges();
-                if (changes >= 1)
+                ViewBag.Message = "Email already exist.";
+                return View();
+            } else
+            {
+                if (newSP.Password == newSP.cPassword)
                 {
-                    return RedirectToAction("Login");
+                    _dbcontext.Users.Add(newSP);
+                    var changes = _dbcontext.SaveChanges();
+                    if (changes >= 1)
+                    {
+                        ViewBag.Message = "Registration successfull.";
+                        return View();
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Something went wrong";
+                        return View();
+                    }
+
                 }
                 else
                 {
-                    ViewBag.Message = "Something went wrong";
                     return View();
                 }
-
             }
-            else
-            {
-                return View();
-            }
-            
         }
     }
 }

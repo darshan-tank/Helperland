@@ -1,5 +1,4 @@
 window.addEventListener('load', (event) => {
-    console.log("function start");
     opensetuptab();
     popupFuction();
 
@@ -201,8 +200,6 @@ function bookingDone() {
     var subtotal = document.getElementById('totalPayment').innerText;
     var discount = document.getElementById('discount').innerText;
     var totalAmount = document.getElementById('effectivePrice').innerText;
-    console.log("subtotal= " + subtotal + "\ndiscount = " + discount + "\ntotalamount =" + totalAmount);
-    console.log(extra);
 
     var formData = new FormData();
     formData.append("postal", postal);
@@ -228,13 +225,39 @@ function bookingDone() {
         dataType: "json"
     }).done(function (response) {
         if (response.status == "success") {
-            showMsg("Request Added");
-            window.location.href = '/bookservice';
+            Toastify({
+                text: "Service Added.",
+                duration: 5990,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "right", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                }// Callback after click
+            }).showToast();
+            setTimeout(function () {
+                window.location.href = "/bookservice";
+            }, 6000);
+            
         } else {
-            alert("Something went wrong");
-            window.location.href = '/bookservice';
+            Toastify({
+                text: "Something went wrong.",
+                duration: 5990,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "right", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                }// Callback after click
+            }).showToast();
+            setTimeout(function () {
+                window.location.href = "/bookservice";
+            }, 6000);
         }
     });
+
 }
 
 function opendetails(email) {
@@ -285,8 +308,6 @@ function openpayment() {
 }
 
 function opensetuptab() {
-    console.log("function setup");
-    console.log(plantab);
     plantab.disabled = "true";
     detailstab.disabled = "true";
     paymenttab.disabled = "true";
@@ -351,11 +372,11 @@ function saveAddress() {
         dataType: "json"
     }).done(function (response) {
         if (response.status == "success") {
-            alert("Address Added");
+            showMsg(response.Message);
             $("#address-container-id").html("Loading Address view...").load('/bookservice/getaddress');
             $("#newaddress").hide();
         } else {
-            alert("Someting went wrong");
+            showMsg(response.Message);
         }
     });
 }

@@ -26,19 +26,40 @@ namespace Sample.Controllers
         [HttpPost]
         public IActionResult Index(User newSP)
         {
-            
-            _dbcontext.Users.Add(newSP);
-            var saveChange = _dbcontext.SaveChanges();
-            if(saveChange > 0)
+            int count = _dbcontext.Users.Count(t => (t.Email == newSP.Email) && (t.UserTypeId == newSP.UserTypeId));
+            if (count >= 1)
             {
-                ViewData["message"] = "Registration Successfull";
-                return View();
-            } else
-            {
-                ViewData["message"] = "Something went Wrong";
+                System.Diagnostics.Debug.WriteLine("Exist");
+                ViewBag.Message = "Email already exist.";
                 return View();
             }
-            
+            else
+            {
+                if (newSP.Password == newSP.cPassword)
+                {
+                    System.Diagnostics.Debug.WriteLine("same");
+                    _dbcontext.Users.Add(newSP);
+                    var changes = _dbcontext.SaveChanges();
+                    if (changes >= 1)
+                    {
+                        System.Diagnostics.Debug.WriteLine("done");
+                        ViewBag.Message = "Registration successfull.";
+                        return View();
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("not done");
+                        ViewBag.Message = "Something went wrong";
+                        return View();
+                    }
+
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("not match");
+                    return View();
+                }
+            }
         }
 
     }

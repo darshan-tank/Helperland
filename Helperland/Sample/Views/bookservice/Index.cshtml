@@ -2,22 +2,22 @@
 @model Sample.Models.User
 <div id="home"></div>
 <div class="header-contain" id="header" style="background: rgba(39, 39, 39, .7);">
-    <div class="logo">
+    <a class="logo" asp-controller="index">
         <img src="images/logo.png">
-    </div>
+    </a>
     <div class="toggle" onclick="openMenu()" aria-expanded="false" id="buttonMenu">
         <i class="fa fa-bars" aria-hidden="true"></i>
     </div>
 
     <div class="navbar" id="mynav" data-visible="false">
         <ul id="header-nav">
-            <li><a href="#" class="Button">Book now</a></li>
-            <li><a href="prices.html">Prices</a></li>
+            <li><a asp-controller="bookservice" class="Button">Book now</a></li>
+            <li><a asp-controller="price">Prices</a></li>
             <li><a href="#">Our Guarantee</a></li>
             <li><a href="#">Blog</a></li>
-            <li><a href="contact-us.html">Contact us</a></li>
-            <li><a href="#" class="Button">Login</a></li>
-            <li><a href="become_a_pro.html" class="Button">Become a helper</a></li>
+            <li><a asp-controller="contact">Contact us</a></li>
+            <li><a asp-controller="index" asp-action="Login" class="Button">Login</a></li>
+            <li><a asp-controller="bookservice" class="Button">Become a helper</a></li>
             <!-- <li class="flag">
                             <a href="#" class="flag-icon"><img src="images/flag.png">
                                 <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a>
@@ -361,19 +361,19 @@
                             <div class="invoice-address" id="newaddress">
                                 <div class="flex-child">
                                     <label>Street Name</label>
-                                    <input type="text" name="" id="" placeholder="Street Name">
+                                    <input type="text" name="" placeholder="Street Name">
                                 </div>
                                 <div class="flex-child">
                                     <label>House Number</label>
-                                    <input type="text" name="" id="" placeholder="Street Name">
+                                    <input type="text" name="" placeholder="Street Name">
                                 </div>
                                 <div class="flex-child">
                                     <label>Postal Code</label>
-                                    <input type="text" name="" id="" placeholder="Street Name">
+                                    <input type="text" name="" placeholder="Street Name">
                                 </div>
                                 <div class="flex-child">
                                     <label>City</label>
-                                    <select name="" id="">
+                                    <select name="">
                                         <option value="Troisdrof">Troisdrof</option>
                                     </select>
                                 </div>
@@ -392,7 +392,7 @@
                             <h3>Pay securely with Helperland payment gateway!</h3>
                             <label>Promo code (optional)</label>
                             <div class="flex-promo">
-                                <input type="text" name="" id="" placeholder="Promo code (optional)">
+                                <input type="text" name="" placeholder="Promo code (optional)">
                                 <button>Apply</button>
                             </div>
                             <hr>
@@ -539,15 +539,15 @@
     <div class="footer-one">
         <div class="container">
             <div class="footer-before">
-                <div class="logo">
+                <a class="logo" asp-controller="index">
                     <img src="images/logo.png">
-                </div>
+                </a>
                 <div class="footer-navbar">
                     <ul id="footer-nav">
-                        <li><a href="homepage.html">home</a></li>
-                        <li><a href="about.html">about</a></li>
+                        <li><a asp-controller="index">home</a></li>
+                        <li><a asp-controller="about">about</a></li>
                         <li><a href="#">testimonial</a></li>
-                        <li><a href="#">faq</a></li>
+                        <li><a asp-controller="faq">faq</a></li>
                         <li><a href="#">insurance policy</a></li>
                         <li><a href="#">impressum</a></li>
                     </ul>

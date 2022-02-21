@@ -328,3 +328,5 @@ F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Sample.dll
 F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Sample.pdb
 F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Sample.genruntimeconfig.cache
 F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Sample.csproj.AssemblyReference.cache
+F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\about\Index.cshtml.g.cs
+F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\faq\index.cshtml.g.cs
