@@ -308,11 +308,8 @@ F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy
 F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\index\forget.cshtml.g.cs
 F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\index\ForgetPassword.cshtml.g.cs
 F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\index\Index.cshtml.g.cs
-F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\index\Index1.cshtml.g.cs
 F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\index\login.cshtml.g.cs
-F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\index\price.cshtml.g.cs
 F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\index\registration.cshtml.g.cs
-F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\index\success.cshtml.g.cs
 F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\price\Index.cshtml.g.cs
 F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs

@@ -33,6 +33,12 @@ namespace Sample.Controllers
         }
         public IActionResult Login()
         {
+            var t = Convert.ToString(TempData["Message"]);
+
+            if (t != null)
+            {
+                ViewBag.Message = t;
+            }
             return View();
         }
         public IActionResult logout()
@@ -118,6 +124,7 @@ namespace Sample.Controllers
                 if(changes >= 1)
                 {
                     Response.Cookies.Delete("ForgetEmail");
+                    TempData["Message"] = "Password changed.";
                     return RedirectToAction("Login");
                 } else
                 {
