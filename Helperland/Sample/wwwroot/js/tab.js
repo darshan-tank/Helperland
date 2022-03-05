@@ -113,6 +113,7 @@ function login() {
     } else if (password == "") {
         document.getElementById("passworderror").innerHTML = "Required";
     } else {
+        showLoader();
         $.ajax({
             type: 'POST',
             url: '/bookservice/loginservice',
@@ -122,12 +123,15 @@ function login() {
         }).done(function (response) {
             console.log(response+"11");
             if (response.status == "success") {
+                hideLoader();
                 var email = response.email;
                 modal2.style.display = "none";
                 opendetails(email);
             } else if (response.status == "fail") {
+                hideLoader();
                 $("#formerror").html("Email or Password are incorrect");
             } else if (response.status == "wrong") {
+                hideLoader();
                 $("#formerror").html("Only customers can access this part of the system");
             }
         });
@@ -135,7 +139,7 @@ function login() {
 }
 
 function openplan() {
-
+    showLoader();
     var formData = new FormData();
     formData.append("code", $("#postalID").val());
     var postalValue = document.getElementById("postalID").value;
@@ -152,6 +156,7 @@ function openplan() {
         dataType: "json"
     }).done(function (response) {
         if (response.status == "success") {
+            hideLoader();
             service.style.display = "none";
             plan.style.display = "block";
             plantab.classList.add("arrow-dwn");
@@ -159,6 +164,7 @@ function openplan() {
             servicetab.classList.remove("arrow-dwn");
             document.img02.src = "images/schedule-white.png";
         } else {
+            hideLoader();
             $("#postalError").html("No Service provider are available");
         }
     });
@@ -167,7 +173,7 @@ function openplan() {
 }
 
 function bookingDone() {
-
+    showLoader();
     var postal = document.getElementById("postalID").value;
     var noOfBed = $('select#number-of-bed option:selected').val();
     var noOfBath = $('select#number-of-bath option:selected').val();
@@ -197,6 +203,7 @@ function bookingDone() {
     var comments = $('#comments').val();
     var pets = $("input[name='pets']").is(':checked');
     var address = $('input[name="add"]:checked').val();
+    var favPro = $('input[name="radioForFav"]:checked').val();
     var subtotal = document.getElementById('totalPayment').innerText;
     var discount = document.getElementById('discount').innerText;
     var totalAmount = document.getElementById('effectivePrice').innerText;
@@ -215,6 +222,8 @@ function bookingDone() {
     formData.append("subtotal", subtotal);
     formData.append("discount", discount);
     formData.append("totalAmount", totalAmount);
+    formData.append("status", 1);
+    formData.append("FavPro", favPro);
 
     $.ajax({
         type: 'POST',
@@ -225,33 +234,17 @@ function bookingDone() {
         dataType: "json"
     }).done(function (response) {
         if (response.status == "success") {
-            Toastify({
-                text: "Service Added.",
-                duration: 5990,
-                close: true,
-                gravity: "top", // `top` or `bottom`
-                position: "right", // `left`, `center` or `right`
-                stopOnFocus: true, // Prevents dismissing of toast on hover
-                style: {
-                    background: "linear-gradient(to right, #00b09b, #96c93d)",
-                }// Callback after click
-            }).showToast();
+            hideLoader();
+            showMsg("Service Added.");
+            
             setTimeout(function () {
                 window.location.href = "/bookservice";
             }, 6000);
             
         } else {
-            Toastify({
-                text: "Something went wrong.",
-                duration: 5990,
-                close: true,
-                gravity: "top", // `top` or `bottom`
-                position: "right", // `left`, `center` or `right`
-                stopOnFocus: true, // Prevents dismissing of toast on hover
-                style: {
-                    background: "linear-gradient(to right, #00b09b, #96c93d)",
-                }// Callback after click
-            }).showToast();
+            hideLoader();
+            showMsg("Something went wrong.");
+            
             setTimeout(function () {
                 window.location.href = "/bookservice";
             }, 6000);
@@ -287,6 +280,7 @@ function opendetails(email) {
         
 
         $("#address-container-id").html("Loading Address...").load('/bookservice/getaddress');
+        $("#FavoriteProContainer").html("Loading Favorite Providers...").load('/bookservice/getFavPros');
     }
 }
 
@@ -356,6 +350,7 @@ function opendetailstab() {
 }
 
 function saveAddress() {
+    showLoader();
     var formData = new FormData();
     formData.append("add1", $("#add1").val());
     formData.append("add2", $("#add2").val());
@@ -372,11 +367,13 @@ function saveAddress() {
         dataType: "json"
     }).done(function (response) {
         if (response.status == "success") {
-            showMsg(response.Message);
+            hideLoader();
+            showMsg("Address Added.");
             $("#address-container-id").html("Loading Address view...").load('/bookservice/getaddress');
             $("#newaddress").hide();
         } else {
-            showMsg(response.Message);
+            hideLoader();
+            showMsg("Something went wrong.");
         }
     });
 }

@@ -90,5 +90,9 @@ namespace Sample.Models
         public virtual ICollection<ServiceRequest> ServiceRequestUsers { get; set; }
         [InverseProperty(nameof(UserAddress.User))]
         public virtual ICollection<UserAddress> UserAddresses { get; set; }
+        [NotMapped]
+        public virtual double Ratings { get; set; }
+        [NotMapped]
+        public virtual int totalCleanings { get; set; }
     }
 }

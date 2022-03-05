@@ -6,6 +6,7 @@
 @if (!String.IsNullOrEmpty(@ViewBag.Message))
 {
     <script>
+        hideLoader();
        showMsg("@ViewBag.Message");
     </script>
 }
@@ -49,22 +50,52 @@
                         }
                         else
                         {
-                            <li><a asp-action="logout" class="Button">Logout</a></li>
+                            <a><i class="fa fa-bell"></i><span class="icon-button__badge">2</span></a>
+                            <a onclick="openM()"><i class="far fa-user-circle"></i><i class="fas fa-angle-down"></i></a>
                         }
 
-                        <!-- <li class="flag">
-        <a href="#" class="flag-icon"><img src="images/flag.png">
-            <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a>
-    </li> -->
+                                <!-- <li class="flag">
+                <a href="#" class="flag-icon"><img src="images/flag.png">
+                    <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a>
+            </li> -->
 
-                    </ul>
+                        </ul>
                     <li class="media-li"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                     <li class="media-li"><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                 </div>
             </div>
         </div>
     </header>
-
+    <div class="openMenu" id="openMenu">
+        <ul>
+            <li>
+                <p>Welcome,</p>
+                <p><span>@Context.Session.GetString("UserFirstName") @Context.Session.GetString("UserLastName")</span></p>
+            </li>
+            <hr>
+            <li>
+                @if (@Context.Session.GetString("UserType") == "2")
+                {
+                    <a asp-controller="spDashboard">My Dashboard</a>
+                }
+                @if (@Context.Session.GetString("UserType") == "3")
+                {
+                    <a asp-controller="customerDashboard">My Dashboard</a>
+                }
+            </li>
+            <li>
+                @if (@Context.Session.GetString("UserType") == "2")
+                {
+                <a asp-controller="spDashboard" asp-action="setting">My Settings</a>
+                }
+                @if (@Context.Session.GetString("UserType") == "3")
+                {
+                <a asp-controller="customerDashboard" asp-action="setting">My Settings</a>
+                }
+            </li>
+            <li><a asp-action="logout">Logout</a></li>
+        </ul>
+    </div>
     <section class="header-banner">
         <div class="container">
             <div class="main-banner">
@@ -89,7 +120,7 @@
                     </ul>
                 </div>
                 <div class="banner-btn">
-                    <a href="#">Let's Book a Cleaner</a>
+                    <a asp-controller="bookservice">Let's Book a Cleaner</a>
                 </div>
 
                 <div class="images-sec">
@@ -429,7 +460,7 @@
     };
 
     var header = document.getElementById("header");
-    var sticky = "150";
+    var sticky = "60";
     var buttontop = document.getElementById("backtotop");
 
     function myFunction() {

@@ -1,0 +1,130 @@
+﻿@model IEnumerable<Sample.Models.FavoriteAndBlocked>
+
+<div class="flex-container-fav">
+
+    @foreach (var items in Model)
+    {
+    <script>
+        $("#PreRated").starRating({
+            starSize: 25,
+            initialRating: @items.TargetUser.Ratings,
+            hoverColor: '#ffd800',
+            ratedColors: ['ffd800', 'ffd800', 'ffd800', 'ffd800', 'ffd800'],
+            readOnly: true
+        });
+
+        var formDataforName = new FormData();
+        formDataforName.append("providerID", @items.TargetUserId);
+        formDataforName.append("customerID", @items.UserId);
+
+        $.ajax({
+            type: 'POST',
+            url: '/customerDashboard/CheckBlock',
+            data: formDataforName,
+            processData: false,
+            contentType: false,
+            dataType: "json"
+        }).done(function (response) {
+            if (response.status == "success") {
+                var buttonblock = document.getElementById("blockButton");
+                var buttonunblock = document.getElementById("unblockButton");
+                buttonblock.style.display = "none";
+                buttonunblock.style.display = "block";
+            } else {
+                var buttonblock = document.getElementById("blockButton");
+                var buttonunblock = document.getElementById("unblockButton");
+                buttonblock.style.display = "block";
+                buttonunblock.style.display = "none";
+            }
+        });
+
+        function removeFromFav() {
+            showLoader();
+            var formDataforRemove = new FormData();
+            formDataforRemove.append("providerID", @items.TargetUserId);
+            formDataforRemove.append("customerID", @items.UserId);
+
+            $.ajax({
+                type: 'POST',
+                url: '/customerDashboard/removeFav',
+                data: formDataforRemove,
+                processData: false,
+                contentType: false,
+                dataType: "json"
+            }).done(function (response) {
+                if (response.status == "success") {
+                    hideLoader();
+                    showMsg("Removed from favorite.");
+                    $("#right-container").html("Loading...").load('/customerDashboard/FavoritePro');
+                } else {
+                    hideLoader();
+                    showMsg("Something went wrong.");
+                }
+            });
+        }
+
+        function blockProvider() {
+            showLoader();
+            var formDataforRemove = new FormData();
+            formDataforRemove.append("providerID", @items.TargetUserId);
+            formDataforRemove.append("customerID", @items.UserId);
+
+            $.ajax({
+                type: 'POST',
+                url: '/customerDashboard/BlockPro',
+                data: formDataforRemove,
+                processData: false,
+                contentType: false,
+                dataType: "json"
+            }).done(function (response) {
+                if (response.status == "success") {
+                    hideLoader();
+                    showMsg("User has been blocked.");
+                    document.getElementById("blockButton").style.display = "none";
+                    document.getElementById("unblockButton").style.display = "block";
+                } else {
+                    hideLoader();
+                    showMsg("Something went wrong.");
+                }
+            });
+        }
+
+        function unblockProvider() {
+            showLoader();
+            var formDataforRemove = new FormData();
+            formDataforRemove.append("providerID", @items.TargetUserId);
+            formDataforRemove.append("customerID", @items.UserId);
+
+            $.ajax({
+                type: 'POST',
+                url: '/customerDashboard/UnblockPro',
+                data: formDataforRemove,
+                processData: false,
+                contentType: false,
+                dataType: "json"
+            }).done(function (response) {
+                if (response.status == "success") {
+                    hideLoader();
+                    showMsg("User has been unblocked.");
+                    document.getElementById("blockButton").style.display = "block";
+                    document.getElementById("unblockButton").style.display = "none";
+                } else {
+                    hideLoader();
+                    showMsg("Something went wrong.");
+                }
+            });
+        }
+
+    </script>
+        <div class="flex-card-fav">
+            <img src="~/images/avatar.png" alt="">
+            <span>@items.TargetUser.FirstName  @items.TargetUser.LastName</span>
+            <div class="my-rating" id="PreRated"></div><span id="ratingDisplay">@items.TargetUser.Ratings</span>
+            <div style="display:flex;">
+                <button id="RemoveButton" onclick="removeFromFav()">Remove</button>
+                <button id="blockButton" onclick="blockProvider()">Block</button>
+                <button id="unblockButton" onclick="unblockProvider()">Unblock</button>
+            </div>
+        </div>
+    }
+</div>

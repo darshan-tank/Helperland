@@ -1,0 +1,297 @@
+﻿@model IEnumerable<Sample.Models.ServiceRequest>
+    <script src="~/js/serviceHistory.js"></script>
+<div class="ToastBack-card Reschedule" id="reschedule">
+    <div class="card-table-tr-toast">
+        <div class="headerButton">
+            <h4>Reschedule Service</h4>
+            <button class="span-center" onclick="closeRescchedule()">x</button>
+        </div>
+        <hr>
+        <span id="Error"></span>
+        <div class="flex-box">
+            <div>
+                <div class="input-group-cal">
+                    <img src="images/calendar.png" alt=""><input type="date" name="" id="datePick">
+                </div>
+                <select name="number-of-bath" id="timeService">
+                    <option value="02:00 PM">02:00 PM</option>
+                    <option value="03:00 PM">03:00 PM</option>
+                    <option value="04:00 PM">04:00 PM</option>
+                </select>
+            </div>
+        </div>
+        <p class="button-center"><button class="cancel-button" onclick="reschedulePost()">Ok</button></p>
+    </div>
+</div>
+<div class="ToastBack-card Reschedule" id="cancelToast">
+    <div class="card-table-tr-toast">
+        <div class="headerButton">
+            <h4>Cancel Service Request</h4>
+            <button class="span-center" onclick="closeCancel()">x</button>
+        </div>
+        <hr>
+        <div class="flex-box">
+            <div>
+                <h3>Why you want to cancel the service request?</h3>
+                <textarea cols="30" rows="5" id="reason"></textarea>
+            </div>
+        </div>
+        <p class="button-center"><button class="cancel-button" onclick="cancelPost()">Ok</button></p>
+    </div>
+</div>
+
+<div class="ToastBack-card Reschedule" id="rate">
+    <div class="card-table-tr-toast">
+        <div class="headerButton">
+            <div>
+                <span id="ServiceProviderName">Sandip Patel</span>
+                <div class="flex-toast">
+                    <div class="my-rating"></div><span id="ratingDisplay">0</span>
+                </div>
+            </div>
+            <button class="span-center" onclick="closeRate()">x</button>
+        </div><br>
+        <h3>Rate your service provider</h3>
+        <hr>
+        <div>
+            <div class="rate">
+                On time arrival :
+                <div class=".my-rating" id="r1"></div>
+            </div><br>
+            <div class="rate">
+                Friendly :
+                <div class=".my-rating" id="r2"></div>
+            </div><br>
+            <div class="rate">
+                Quality of service :
+                <div class=".my-rating" id="r3"></div>
+            </div>
+            <br>
+            <p>Feedback on service provider</p>
+            <textarea cols="30" rows="5" id="feedback"></textarea>
+        </div>
+        <p class="button-center" id="favoriteButton"><button class="cancel-button" onclick="favorite('favorite')">Add to Favorite</button></p>
+        <p class="button-center" id="unfavoriteButton"><button class="cancel-button" onclick="favorite('unfavorite')">Remove From Favorite</button></p>
+        <p class="button-center"><button class="cancel-button" id="submitRatings" onclick="submitRating()">Submit</button></p>
+
+    </div>
+</div>
+
+<table class="table" id="Table">
+
+    <tr>
+        <td colspan="5">
+            <div class="heading-table">
+                <h2>Service History</h2>
+                @*<button class="submit-button" onclick="openBookServicePage()">Add New Service Request</button>*@
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th onclick="sortTable(0,2,2)">Service Details <img src="images/sort.png" alt=""></th>
+        <th onclick="sortTable(1,2,2)">Service Provider <img src="images/sort.png" alt=""></th>
+        <th onclick="sortTable(2,2,2)">Payment <img src="images/sort.png" alt=""></th>
+        <th onclick="sortTable(3,2,2)">Status <img src="images/sort.png" alt=""></th>
+        <th class="action">Rate sp</th>
+    </tr>
+    @foreach (var items in Model)
+    {
+        <tr>
+            <td>
+                @{
+                    var date = items.ServiceStartDate;
+                    var time = date.ToString("hh:mm tt");
+                    var d = date.ToString("dd/MM/yyyy");
+                }
+                <img class="img-table" src="images/calendar.png"> @d <br> @time
+            </td>
+            <td>
+                @*<div class="tableflex">
+                        <img class="prof-img" src="images/cap.png">
+                        <div>
+                            David <br>
+                            <div class="rating">
+                                <i class="fas fa-star selected"></i>
+                                <i class="fas fa-star selected"></i>
+                                <i class="fas fa-star selected"></i>
+                                <i class="fas fa-star selected"></i>
+                                <i class="far fa-star"></i>
+                                <label class="number" id="number"></label>
+                            </div>
+                        </div>
+                    </div>*@
+                @if (items.ServiceProviderId != null)
+                {
+                    <div class="tableflex">
+                        <img class="prof-img" src="images/cap.png">
+                        <div>
+                            @items.ServiceProvider.FirstName @items.ServiceProvider.LastName<br>
+                        <div class="rating">
+                            <div class="my-rating" id="@items.ServiceRequestId"></div><span id="ratingDisplay">@items.ServiceProvider.Ratings</span>
+                             @if (items.ServiceProviderId != null)
+                             {
+                             <script>
+
+                                $("#@items.ServiceRequestId").starRating({
+                                            starSize: 25,
+                                        initialRating: @items.ServiceProvider.Ratings,
+                                        hoverColor: '#ffd800',
+                                        ratedColors:['ffd800', 'ffd800', 'ffd800', 'ffd800', 'ffd800'],
+                                        readOnly: true
+                                    });
+                             </script>
+                             }
+                        </div>
+                        </div>
+                    </div>
+                }
+            </td>
+            <td class="money">
+                <i class="fas fa-dollar-sign"></i><b>@items.TotalCost</b>
+            </td>
+            @if (items.Status == 2)
+            {
+                <td>
+                    <div class="status cancled">
+                        <h3 id="status">Cancled</h3>
+                    </div>
+                </td>
+            }
+            @if (items.ServiceProviderId == null)
+            {
+                <td class="action"><button class="rate-button" disabled>Rate SP</button></td>
+            }
+            else
+            {
+                <td class="action"><button class="rate-button" onclick="rateSP('@items.ServiceProviderId', '@items.UserId', '@items.ServiceRequestId')">Rate SP</button></td>
+            }
+
+        </tr>
+        
+    }
+    <tr>
+        <td colspan="5">
+            <div class="footer-table">
+                <div class="left-side">
+                    <h3>Show </h3>
+                    <select>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+                    <h3>entries</h3>
+                    <h3>Total Records :</h3><span id="count">55</span>
+                </div>
+                <div class="right-side">
+                    <i class="fas fa-step-backward"></i>
+                    <i class="fas fa-chevron-left"></i>
+                    <h3 class="page-active">1</h3>
+                    <h3>2</h3>
+                    <h3>3</h3>
+                    <h3>4</h3>
+                    <i class="fas fa-chevron-right"></i>
+                    <i class="fas fa-step-forward"></i>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<table class="card">
+    <tr class="no-border">
+        <td colspan="6">
+            <div class="heading-table">
+                <h2>Current Service Requests</h2>
+                <button class="submit-button" onclick="openBookServicePage()">Add New Service Request</button>
+            </div>
+        </td>
+    </tr>
+    @foreach (var items in Model)
+    {
+<tr>
+    <td>
+        @{
+            var date = items.ServiceStartDate;
+            var time = date.ToString("hh:mm tt");
+            var d = date.ToString("dd/MM/yyyy");
+        }
+        <div class="card-table-tr">
+            <p><img class="img-table" src="images/calendar2.png"> @d <img class="img-table" src="images/layer-14.png"> @time</p>
+            <hr>
+            <div class="tableflex">
+                @if (items.ServiceProviderId != null)
+                {
+                    var idString = items.ServiceRequestId + "Mobile";
+                    <img class="prof-img" src="images/cap.png">
+                    <div>
+                        @items.ServiceProvider.FirstName @items.ServiceProvider.LastName <br>
+                        <div class="rating">
+                            <div class="my-rating" id="@idString"></div><span id="ratingDisplay">@items.ServiceProvider.Ratings</span>
+                        </div>
+                    </div>
+                    @if (items.ServiceProviderId != null)
+                    {
+                        <script>
+
+                            $("#@idString").starRating({
+                                            starSize: 25,
+                                        initialRating: @items.ServiceProvider.Ratings,
+                                        hoverColor: '#ffd800',
+                                        ratedColors:['ffd800', 'ffd800', 'ffd800', 'ffd800', 'ffd800'],
+                                        readOnly: true
+                                    });
+                        </script>
+                    }
+                }
+            </div>
+            <hr>
+            <i class="fas fa-dollar-sign"></i><b>@items.TotalCost</b>
+            <hr>
+            @if (items.Status == 2)
+            {
+                <div class="status cancled">
+                    <h3 id="status">Cancled</h3>
+                </div>
+            }
+            <hr>
+            @if (items.ServiceProviderId == null)
+            {
+                <button class="rate-button" disabled>Rate SP</button>
+            }
+            else
+            {
+                <button class="rate-button" onclick="rateSP('@items.ServiceProviderId', '@items.UserId', '@items.ServiceRequestId')">Rate SP</button>
+            }
+            </div>
+            </td>
+        </tr>
+    }
+    <tr>
+        <td colspan="5">
+            <div class="footer-table">
+                <div class="left-side">
+                    <h3>Show </h3>
+                    <select>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+                    <h3>entries</h3>
+                    <h3>Total Records :</h3><span id="count">55</span>
+                </div>
+                <div class="right-side">
+                    <i class="fas fa-step-backward"></i>
+                    <i class="fas fa-chevron-left"></i>
+                    <h3 class="page-active">1</h3>
+                    <h3>2</h3>
+                    <h3>3</h3>
+                    <h3>4</h3>
+                    <i class="fas fa-chevron-right"></i>
+                    <i class="fas fa-step-forward"></i>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>

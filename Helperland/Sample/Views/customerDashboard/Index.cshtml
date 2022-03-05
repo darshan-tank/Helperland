@@ -1,0 +1,220 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+<script src="~/js/customerJS.js"></script>
+<script src="~/js/sort.js"></script>
+
+<div id="home"></div>
+<div class="header-contain" id="header" style="background: rgba(39, 39, 39, .7);">
+    <a class="logo" asp-controller="index">
+        <img src="images/logo.png">
+    </a>
+    <div class="toggle" onclick="openMenu()" aria-expanded="false" id="buttonMenu">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+
+    <div class="navbar" id="mynav" data-visible="false">
+        <ul id="header-nav">
+            <li class="hidden"><a name="menuLi" id="notificationMenuLI">Notification</a></li>
+            <li class="hidden"><a name="menuLi" id="accountMenuLI">Account</a></li>
+            <li class="hidden"><a name="menuLi" onclick="openDashboard()" id="dashboardMenuLI">Dashboard</a></li>
+            <li class="hidden"><a name="menuLi" onclick="openFavoritePro()" id="favoriteProsMenuLI">Favorite Pros</a></li>
+            <li class="hidden"><a name="menuLi" id="serviceScheduleMenuLI">Service Schedule</a></li>
+            <li class="hidden"><a name="menuLi" onclick="openServiceHistory()" id="serviceHistoryMenuLI">Service History</a></li>
+            <li class="hidden"><a name="menuLi" id="invoiceMenuLI">Invoice</a></li>
+            <li class="hidden"><a asp-controller="index" asp-action="logout">Logout</a></li>
+            <li>
+                <hr>
+            </li>
+            <li><a asp-controller="price">Prices & Service</a></li>
+            <li><a href="#">Warranty</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a asp-controller="contact">Contact</a></li>
+            <a><i class="fa fa-bell"></i><span class="icon-button__badge">2</span></a>
+            <a onclick="openM()"><i class="far fa-user-circle"></i><i class="fas fa-angle-down"></i></a>
+            <!-- <li class="flag">
+                            <a href="#" class="flag-icon"><img src="images/flag.png">
+                                <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a>
+                        </li> -->
+
+        </ul>
+        <li class="media-li"><a href="#"><i class="fa fa-facebook ups-icn" aria-hidden="true"></i></a></li>
+        <li class="media-li"><a href="#"><i class="fa fa-instagram ups-icn" aria-hidden="true"></i></a></li>
+    </div>
+</div>
+
+<div class="header-title-background">
+    <h2>Welcome, <b>@Context.Session.GetString("UserFirstName") @Context.Session.GetString("UserLastName")!</b></h2>
+</div>
+
+<div class="openMenu" id="openMenu">
+    <ul>
+        <li>
+            <p>Welcome,</p>
+            <p><span>@Context.Session.GetString("UserFirstName") @Context.Session.GetString("UserLastName")</span></p>
+        </li>
+        <hr>
+        <li>
+            @if (@Context.Session.GetString("UserType") == "2")
+            {
+                <a asp-controller="spDashboard">My Dashboard</a>
+            }
+            @if (@Context.Session.GetString("UserType") == "3")
+            {
+                <a asp-controller="customerDashboard">My Dashboard</a>
+            }
+        </li>
+        <li>
+            @if (@Context.Session.GetString("UserType") == "2")
+            {
+                <a asp-controller="spDashboard" asp-action="setting">My Settings</a>
+            }
+                @if (@Context.Session.GetString("UserType") == "3")
+                {
+                    <a asp-controller="customerDashboard" asp-action="setting">My Settings</a>
+                }
+            </li>
+        <li><a asp-controller="index" asp-action="logout">Logout</a></li>
+    </ul>
+</div>
+
+<section>
+    <div class="container m-tb">
+        <div class="flex">
+
+            <div class="left">
+                <ul class="nav-lists">
+                    <li class="li-item" id="dashboardLI"><a onclick="openDashboard()">Dashboard</a></li>
+                    <li class="li-item active-li" id="ServiceHistoryLI"><a onclick="openServiceHistory()">Service History</a></li>
+                    <li class="li-item" id="ServiceScheduleLI"><a onclick="openServiceSchedule()">Service Schedule</a></li>
+                    <li class="li-item" id="FavoriteProsLI"><a onclick="openFavoritePro()">Favorite Pros</a></li>
+                    <li class="li-item" id="InvoicesLI"><a>Invoices</a></li>
+                    <li class="li-item" id="NotificationsLI"><a>Notifications</a></li>
+                </ul>
+            </div>
+            <div class="right table-scroll" id="right-container">
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-one">
+        <div class="container">
+            <div class="footer-before">
+                <div class="logo">
+                    <img src="images/logo.png">
+                </div>
+                <div class="footer-navbar">
+                    <ul id="footer-nav">
+                        <li><a asp-controller="index">home</a></li>
+                        <li><a asp-controller="about">about</a></li>
+                        <li><a href="#">testimonial</a></li>
+                        <li><a asp-controller="faq">faq</a></li>
+                        <li><a href="#">insurance policy</a></li>
+                        <li><a href="#">impressum</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <ul class="socail-media">
+                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <hr style="width:90%;text-align:center;border: 0.5px solid #424242;">
+        <div class="copright">
+            <div class="footer-copyright">
+                <h6 style="text-align: center;">©2018 Helperland. All rights reserved. Terms and Conditions | Privacy Policy</h6>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+    }
+</script>
+
+<script>
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+    @*document.getElementById("defaultOpen").click();*@
+
+    var navList = document.getElementById("nav-lists");
+
+    function Show() {
+        navList.classList.add("_Menus-show");
+    }
+
+    function Hide() {
+        navList.classList.remove("_Menus-show");
+    }
+</script>
+
+<script>
+    // $(document).ready(function() {
+    //     $(".toggle").click(function() {
+    //         $("#mynav").toggle();
+    //     });
+    // });
+
+    window.onscroll = function () {
+        myFunction()
+    };
+
+    var header = document.getElementById("header");
+    var sticky = "60";
+
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    }
+
+    function openMenu() {
+        var popupLi = document.querySelector(".navbar");
+        var menuButton = document.querySelector(".toggle");
+        // popupLi.classList.toggle("show-menu");
+        var visibility = popupLi.getAttribute("data-visible");
+        if (visibility === "false") {
+            popupLi.setAttribute("data-visible", true);
+            menuButton.setAttribute("aria-expanded", true);
+            var body = document.getElementById('home');
+            body.classList.add("back");
+        } else if (visibility === "true") {
+            popupLi.setAttribute("data-visible", false);
+            menuButton.setAttribute("aria-expanded", false);
+            var body = document.getElementById('home');
+            body.classList.remove("back");
+        }
+    }
+</script>

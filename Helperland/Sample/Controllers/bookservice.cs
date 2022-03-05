@@ -27,8 +27,8 @@ namespace Sample.Controllers
         [HttpPost]
         public JsonResult code(string code)
         {
-            string name = string.Format("{0}", code); ;
-            if (code == "555666")
+            int zipcode = _dbcontext.Zipcodes.Count(x => x.ZipcodeValue == code);
+            if (zipcode >= 1)
             {
                 return Json(new { Status = "success" });
             } else
@@ -46,7 +46,14 @@ namespace Sample.Controllers
                 int count1 = _dbcontext.Users.Count(t => (t.Email == newSP.Email) && (t.Password == newSP.Password) && (t.UserTypeId == 3));
                 if (count1 >= 1)
                 {
+                    User newUser = _dbcontext.Users.Where(t => (t.Email == newSP.Email) && (t.Password == newSP.Password)).FirstOrDefault();
+                    String fname = newUser.FirstName;
+                    String lname = newUser.LastName;
+                    HttpContext.Session.SetString("UserFirstName", fname);
+                    HttpContext.Session.SetString("UserLastName", lname);
+                    HttpContext.Session.SetString("UserType", newUser.UserTypeId.ToString());
                     HttpContext.Session.SetString("UserEmail", newSP.Email);
+                    HttpContext.Session.SetString("UserID", newSP.UserId.ToString());
                     return Json(new { Status = "success", email = newSP.Email });
                 } else
                 {
@@ -90,7 +97,7 @@ namespace Sample.Controllers
             }
         }
         [HttpPost]
-        public JsonResult completeBook(String postal,String noOfBed,String noOfBath,DateTime date,String totalHrs,String extraHrs,List<String> extra,String comments,String pets,int address,String subtotal,String discount,String totalAmount)
+        public JsonResult completeBook(String postal,String noOfBed,String noOfBath,DateTime date,String totalHrs,String extraHrs,List<String> extra,String comments,String pets,int address,String subtotal,String discount,String totalAmount,int status,String FavPro)
         {
             String postalData = postal;
             String noOfBedData = noOfBed;
@@ -110,6 +117,7 @@ namespace Sample.Controllers
             {
                 petBit = true;
             }
+            
             String email = HttpContext.Session.GetString("UserEmail");
             User newUser = _dbcontext.Users.Where(x => x.Email == email).FirstOrDefault();
             int userID = newUser.UserId;
@@ -124,6 +132,10 @@ namespace Sample.Controllers
             UserAddress userAdd = _dbcontext.UserAddresses.Where(x => x.AddressId == addressData).FirstOrDefault();
 
             sr.ZipCode = userAdd.PostalCode;
+            if (FavPro != null && FavPro != "undefined")
+            {
+                sr.ServiceProviderId = int.Parse(FavPro);
+            }
             sr.ServiceHourlyRate = 2034;
             sr.ServiceHours = totalHrsData;
             sr.ExtraHours = extraHrsData;
@@ -132,10 +144,13 @@ namespace Sample.Controllers
             sr.TotalCost = totalAmountData;
             sr.Comments = commentsData;
             sr.HasPets = petBit;
+            sr.Status = status;
             sr.CreatedDate = DateTime.Now;
             sr.ModifiedDate = DateTime.Now;
             _dbcontext.ServiceRequests.Add(sr);
             var saveChange1 = _dbcontext.SaveChanges();
+
+            int Id = sr.ServiceRequestId;
 
             var ServiceID = _dbcontext.ServiceRequests.OrderByDescending(p => p.ServiceId).FirstOrDefault().ServiceRequestId;
             
@@ -143,7 +158,7 @@ namespace Sample.Controllers
             
 
             ServiceRequestAddress srAddress = new ServiceRequestAddress();
-            srAddress.ServiceRequestId = (id + 1);
+            srAddress.ServiceRequestId = (Id);
             srAddress.AddressLine1 = userAdd.AddressLine1;
             srAddress.AddressLine2 = userAdd.AddressLine2;
             srAddress.City = userAdd.City;
@@ -156,19 +171,24 @@ namespace Sample.Controllers
             var saveChange2 = _dbcontext.SaveChanges();
 
 
-            string[] strTemp = extraData[0].Split(new char[] { ',', }, StringSplitOptions.RemoveEmptyEntries);
-            System.Diagnostics.Debug.WriteLine(strTemp.Length);
+            
 
-            for(var i = 0; i < strTemp.Length; i++)
+            if(extraData.Count > 1)
             {
-                ExtraService serviceExtraIDObj = _dbcontext.ExtraServices.Where(x => x.ServiceExtraName == strTemp[i]).FirstOrDefault();
-                var ServiceExtraID = serviceExtraIDObj.ServiceExtraId;
-                System.Diagnostics.Debug.WriteLine(ServiceExtraID);
-                ServiceRequestExtra srExtra = new ServiceRequestExtra();
-                srExtra.ServiceRequestId = (id + 1);
-                srExtra.ServiceExtraId = ServiceExtraID;
-                _dbcontext.ServiceRequestExtras.Add(srExtra);
-                _dbcontext.SaveChanges();
+                string[] strTemp = extraData[0].Split(new char[] { ',', }, StringSplitOptions.RemoveEmptyEntries);
+                System.Diagnostics.Debug.WriteLine(strTemp.Length);
+
+                for (var i = 0; i < strTemp.Length; i++)
+                {
+                    ExtraService serviceExtraIDObj = _dbcontext.ExtraServices.Where(x => x.ServiceExtraName == strTemp[i]).FirstOrDefault();
+                    var ServiceExtraID = serviceExtraIDObj.ServiceExtraId;
+                    System.Diagnostics.Debug.WriteLine(ServiceExtraID);
+                    ServiceRequestExtra srExtra = new ServiceRequestExtra();
+                    srExtra.ServiceRequestId = (Id);
+                    srExtra.ServiceExtraId = ServiceExtraID;
+                    _dbcontext.ServiceRequestExtras.Add(srExtra);
+                    _dbcontext.SaveChanges();
+                }
             }
 
             if(saveChange1 >= 1 && saveChange2 >= 1)
@@ -188,6 +208,20 @@ namespace Sample.Controllers
             System.Diagnostics.Debug.WriteLine(address);
             return View(address);
             
+        }
+        public IActionResult getFavPros()
+        {
+            System.Threading.Thread.Sleep(2000);
+            String email = HttpContext.Session.GetString("UserEmail");
+            User newUser = _dbcontext.Users.Where(x => x.Email == email).FirstOrDefault();
+            List<FavoriteAndBlocked> FandB = _dbcontext.FavoriteAndBlockeds.Where(x => x.UserId == newUser.UserId).ToList();
+            for (var i = 0; i < FandB.Count; i++)
+            {
+                FandB[i].User = _dbcontext.Users.Where(x => x.UserId == FandB[i].UserId).FirstOrDefault();
+                FandB[i].TargetUser = _dbcontext.Users.Where(x => x.UserId == FandB[i].TargetUserId).FirstOrDefault();
+            }
+            return View(FandB);
+
         }
     }
 }

@@ -1,0 +1,11 @@
+﻿@model List<FavoriteAndBlocked>
+@foreach (var FandB in Model)
+{
+    <div class="fav-pro-card">
+        <input type="radio" name="radioForFav" id="@FandB.TargetUserId" value="@FandB.TargetUserId">
+
+        <img src="images/avatar.png" alt="" class="fav-pro-img">
+        <p>@FandB.TargetUser.FirstName  @FandB.TargetUser.LastName</p>
+        <label for="@FandB.TargetUserId" class="radioLabel">Select</label>
+    </div>
+}

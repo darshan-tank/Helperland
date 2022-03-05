@@ -16,12 +16,21 @@
             <li><a href="#">Our Guarantee</a></li>
             <li><a href="#">Blog</a></li>
             <li><a asp-controller="contact">Contact us</a></li>
-            <li><a asp-controller="index" asp-action="Login" class="Button">Login</a></li>
-            <li><a asp-controller="bookservice" class="Button">Become a helper</a></li>
+            @if (@Context.Session.GetString("UserEmail") == null)
+            {
+
+                <li><a asp-controller="index" asp-action="Login" class="Button">Login</a></li>
+                <li><a asp-controller="spsignup" class="Button">Become a helper</a></li>
+            }
+            else
+            {
+                <a><i class="fa fa-bell"></i><span class="icon-button__badge">2</span></a>
+                <a onclick="openM()"><i class="far fa-user-circle"></i><i class="fas fa-angle-down"></i></a>
+            }
             <!-- <li class="flag">
-                            <a href="#" class="flag-icon"><img src="images/flag.png">
-                                <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a>
-                        </li> -->
+                    <a href="#" class="flag-icon"><img src="images/flag.png">
+                        <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a>
+                </li> -->
 
         </ul>
         <li class="media-li"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -29,7 +38,27 @@
     </div>
 </div>
 
-
+<div class="openMenu" id="openMenu">
+    <ul>
+        <li>
+            <p>Welcome,</p>
+            <p><span>@Context.Session.GetString("UserFirstName") @Context.Session.GetString("UserLastName")</span></p>
+        </li>
+        <hr>
+        <li>
+            @if (@Context.Session.GetString("UserType") == "2")
+            {
+                <a asp-controller="spDashboard">My Dashboard</a>
+            }
+            @if (@Context.Session.GetString("UserType") == "3")
+            {
+                <a asp-controller="customerDashboard">My Dashboard</a>
+            }
+        </li>
+        <li>My Settings</li>
+        <li><a asp-controller="index" asp-action="logout">Logout</a></li>
+    </ul>
+</div>
 
 <div class="full-image faq-img">
     <img src="images/book-service-banner.jpg">
@@ -216,9 +245,9 @@
                                         <img src="images/calendar.png" alt=""><input type="date" name="" id="datePick">
                                     </div>
                                     <select name="number-of-bath" id="startTime">
-                                        <option value="02">02:00 PM</option>
-                                        <option value="03">03:00 PM</option>
-                                        <option value="04">04:00 PM</option>
+                                        <option value="02:00 pm">02:00 PM</option>
+                                        <option value="03:00 pm">03:00 PM</option>
+                                        <option value="04:00 pm">04:00 PM</option>
                                     </select>
                                 </div>
                                 <div>
@@ -319,7 +348,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="new-address" id="newaddress">
                                 <div class="flex-child">
                                     <label>Street Name</label>
@@ -382,6 +411,35 @@
                                 </div>
                             </div>
                             <hr>
+                            <div class="fav-pro-container">
+                                <h3>Your Favorite Service Providers</h3>
+                                <hr>
+                                <p>You can choose your favorite service providers from the below list</p>
+                                <div class="fav-pro-card-container" id="FavoriteProContainer">
+                                    <div class="fav-pro-card">
+                                        <input type="radio" name="radioForFav" id="radio00">
+
+                                        <img src="images/avatar.png" alt="" class="fav-pro-img">
+                                        <p>Sandeep Patel</p>
+                                        <label for="radio00" class="radioLabel">Select</label>
+                                    </div>
+                                    <div class="fav-pro-card">
+                                        <input type="radio" name="radioForFav" id="radio11">
+
+                                        <img src="images/avatar.png" alt="" class="fav-pro-img">
+                                        <p>Sandeep Patel</p>
+                                        <label for="radio11" class="radioLabel">Select</label>
+                                    </div>
+                                    <div class="fav-pro-card">
+                                        <input type="radio" name="radioForFav" id="radio22">
+
+                                        <img src="images/avatar.png" alt="" class="fav-pro-img">
+                                        <p>Sandeep Patel</p>
+                                        <label for="radio22" class="radioLabel">Select</label>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
                             <div class="button-right">
                                 <button onclick="openpayment()">Continue</button>
                             </div>

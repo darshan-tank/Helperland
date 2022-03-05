@@ -44,6 +44,7 @@ namespace Sample.Controllers
         public IActionResult logout()
         {
             HttpContext.Session.Remove("UserEmail");
+            TempData["Message"] = "You have successfully logged out.";
             return RedirectToAction("index");
         }
         public IActionResult forget()
@@ -53,10 +54,18 @@ namespace Sample.Controllers
         [HttpPost]
         public IActionResult Login(User newSP)
         {
+            ViewBag.calljavascriptfunction = "showLoader();";
             int count = _dbcontext.Users.Count(t=>(t.Email == newSP.Email) && (t.Password == newSP.Password));
             if(count >= 1)
             {
+                User newUser = _dbcontext.Users.Where(t => (t.Email == newSP.Email) && (t.Password == newSP.Password)).FirstOrDefault();
+                String fname = newUser.FirstName;
+                String lname = newUser.LastName;
+                HttpContext.Session.SetString("UserFirstName", fname);
+                HttpContext.Session.SetString("UserLastName", lname);
+                HttpContext.Session.SetString("UserType", newUser.UserTypeId.ToString());
                 HttpContext.Session.SetString("UserEmail", newSP.Email);
+                HttpContext.Session.SetString("UserID", newUser.UserId.ToString());
                 TempData["Message"] = "Login successfull.";
                 return RedirectToAction("index");
             } else

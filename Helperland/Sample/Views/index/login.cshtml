@@ -55,7 +55,7 @@
                     <input type="password" asp-for="Password" placeholder="Password">
                     <span asp-validation-for="Password" class="text-danger-error"></span>
                     <div><input type="checkbox" name="Remember me" id="">Remember me</div>
-                    <input type="submit" value="Login" class="submit-button">
+                    <input type="submit" value="Login" class="submit-button" onclick="showLoader()">
                     <a asp-controller="index" asp-action="forget">Forget Password?</a>
                     <div>Don't have an account?<a asp-controller="index" asp-action="registration">Create an account</a></div>
                 </div>

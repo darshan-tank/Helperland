@@ -5,6 +5,161 @@ button[disabled] {
     cursor:not-allowed;
 }
 
+.headerButton {
+    display: flex;
+    justify-content: space-between;
+}
+
+.span-center {
+    margin: auto 10px;
+    font-size: 30px;
+    background: none;
+}
+
+#favoriteButton,
+#unfavoriteButton {
+    display:none;
+}
+
+.card-table-tr-toast .flex-box{
+    justify-content:center!important;
+}
+
+.active-li-menu {
+    color: #1d7a8c !important;
+}
+
+.flex-toast{
+    display:flex;
+}
+
+.flex-toast #ratingDisplay{
+    margin:5px 10px;
+}
+
+.card-table-tr-toast {
+    border: 1px solid #E1E1E1;
+    border-radius: 4px;
+    width: 30%;
+    padding: 17px;
+    background: white;
+    height: fit-content;
+}
+
+    .card-table-tr-toast h4 {
+        font-size: 20px;
+        font-family: roboto-bold !important;
+        /* font-weight: 600; */
+    }
+
+    .card-table-tr-toast h4,
+    p {
+        padding: 7px;
+    }
+
+    .card-table-tr-toast .button-center {
+        text-align: center;
+    }
+
+.ToastBack-card {
+    width: 100%;
+    height: 100%;
+    z-index: 999999;
+    background: #0000009e;
+    position: fixed;
+    top:0;
+    left:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 50%);
+    display: none;
+}
+
+.ToastBack {
+    width: 100%;
+    height: 100%;
+    z-index: 999999;
+    background: #0000009e;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 50%);
+}
+
+.ToastContainer {
+    margin: auto;
+    background: white;
+    padding: 50px 25px 25px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 50%);
+}
+
+    .ToastContainer span {
+        background: #67b644;
+        padding: 25px;
+        border-radius: 50%;
+        margin: 0px 0px 30px 0px;
+        width: fit-content;
+    }
+
+    .ToastContainer button {
+        margin: 25px 0px 0px 0px;
+        background: #1d7a8c !important;
+        padding: 10px 20px;
+        color: white;
+        border-radius: 40px;
+        cursor:pointer;
+    }
+
+.openMenu {
+    width: 12%;
+    display: none;
+    background: white;
+    color: black;
+    position: absolute;
+    right: 1em;
+    top: 5em;
+    padding: 10px 0px;
+    box-shadow: 0px -5px 20px grey;
+}
+
+    .openMenu::before {
+        content: '';
+        border-bottom: 10px solid #ffffff;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        position: relative;
+        top: -37px;
+        right: -80%;
+    }
+
+    .openMenu ul {
+        margin-top: -15px;
+    }
+
+        .openMenu ul li:first-child {
+            padding: 1px 5px;
+        }
+
+            .openMenu ul li:first-child span {
+                font-weight: 900;
+            }
+
+        .openMenu ul li {
+            padding: 10px;
+        }
+
+            .openMenu ul li p {
+                padding: 2px 7px;
+            }
+
+
 .text-danger-error{
     padding:0px 10px;
     color:red!important;
@@ -3010,7 +3165,7 @@ p {
 
 .flex-child input,
 select {
-    padding: 15px 0px;
+    padding: 15px 15px;
     margin-top: 5px;
     border: 1px solid #e1e1e1;
     border-radius: 5px;
@@ -3130,3 +3285,272 @@ input#invoice:checked~.invoice-address {
 
 
 /* Book Service End */
+
+/*Calender start*/
+
+.wrapper {
+    background-color: #dfe6e9;
+    height: 100vh;
+    display: flex;
+}
+
+.calendar {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.2);
+}
+
+.month {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 30px;
+    text-align: center;
+    background-color: #22a7f4;
+    color: #fff;
+}
+
+.weekdays {
+    background-color: #3998cf;
+    color: #fff;
+    padding: 7px 0;
+    display: flex;
+}
+
+.days {
+    font-weight: 300;
+    padding: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    height: 75%;
+}
+
+    .weekdays div,
+    .days div {
+        text-align: center;
+        width: 14.28%;
+    }
+
+    .days div {
+        padding: 10px 0;
+        margin-bottom: 10px;
+        transition: all 0.4s;
+    }
+
+.prev_date {
+    color: #999;
+}
+
+.today {
+    background-color: #22a7f4;
+    color: #fff;
+}
+
+.days div:hover {
+    cursor: pointer;
+    background-color: #dfe6e9
+}
+
+.prev,
+.next {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 23px;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: all 0.4s;
+}
+
+    .prev:hover,
+    .next:hover {
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+
+#month {
+    font-size: 30px;
+    font-weight: 500;
+}
+
+/*Calender end*/
+
+/*Favorite Provider CSS*/
+
+.flex-container-fav {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-card-fav {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e3e3e3;
+    align-items: center;
+    width: 22%;
+    padding: 5px 20px;
+    margin: 10px;
+}
+
+    .flex-card-fav img,
+    .flex-card-fav span,
+    .flex-card-fav div {
+        margin: 5px 0px;
+    }
+
+    .flex-card-fav img {
+        width: 100px;
+    }
+
+    .flex-card-fav div button {
+        padding: 10px;
+        margin: 10px;
+        background: #FF6B6B;
+        border-radius: 25px;
+        color: white;
+    }
+
+/*Favorite Provider css Ends*/
+
+/*Setting Css Starts*/
+.flex-tab {
+    width: 100%;
+    /* padding-bottom: 10px; */
+    display: flex;
+}
+
+    .flex-tab .tab-button {
+        padding: 15px 30px;
+        border-bottom: 3px solid #d9d9d9;
+        width: 100%;
+        text-align: center;
+        font-weight: 600;
+    }
+
+        .flex-tab .tab-button:hover {
+            border-bottom: 3px solid #1D7A8C !important;
+            cursor: pointer;
+            color: #1D7A8C;
+        }
+
+.tb-active {
+    border-bottom: 3px solid #1D7A8C !important;
+    color: #1D7A8C;
+}
+
+.flex-tab-form-container {
+    display: flex;
+    width: 100%;
+    margin: 20px 0px;
+    flex-wrap: wrap;
+}
+
+.container-form-input {
+    display: flex;
+    flex-direction: column;
+    width: 32%;
+    margin-right: 10px;
+}
+
+    .container-form-input input {
+        margin: 10px 0px;
+        border: 1px solid #cfcfcf;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .container-form-input .input-wrapper {
+        width: 100%;
+    }
+
+        .container-form-input .input-wrapper .code {
+            margin: 0px;
+        }
+
+        .container-form-input .input-wrapper input {
+            width: 75%!important;
+        }
+
+.form-tab {
+    flex-direction: column;
+}
+
+.container-form-input select#language {
+    margin: 0;
+    margin-top: 15px;
+    padding: 10px;
+}
+
+.display-none{
+    display:none!important;
+}
+
+.flex-direction {
+    flex-direction: column;
+}
+
+.submit-button-form {
+    padding: 10px 21px;
+    background: #1D7A8C;
+    color: white;
+    border-radius: 25px;
+    width: 10%;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.display-right {
+    position: absolute;
+    right: 0;
+}
+
+.addressBlock {
+    display: block;
+}
+
+    .addressBlock .flex-child {
+        display: flex;
+        flex-direction: column;
+    }
+
+.fav-pro-img {
+    width: 50px;
+}
+
+.fav-pro-card-container {
+    display: flex;
+}
+
+.fav-pro-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+    .fav-pro-card .radioLabel {
+        padding: 10px;
+        margin: 5px;
+        border: 1px solid #bdbdbd;
+        background: white;
+        border-radius: 10px;
+    }
+
+input[name="radioForFav"] {
+    opacity: 0;
+    position: absolute;
+}
+
+    input[name="radioForFav"]:checked ~ label {
+        padding: 10px;
+        margin: 5px;
+        border: 1px solid #bdbdbd;
+        background: #1D7A8C;
+        border-radius: 10px;
+        color: white;
+    }

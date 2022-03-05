@@ -9,7 +9,6 @@ function sortTable(n, start, end) {
 
         switching = false;
         rows = table.rows;
-
         for (i = start; i < (rows.length - end); i++) {
 
             console.log(rows.length - end);

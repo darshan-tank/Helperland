@@ -7,7 +7,7 @@
 }
 <div id="home"></div>
 <div class="header-contain" id="header" style="background: rgba(39, 39, 39, .7);">
-    <a class="logo" asp-controller="index">
+    <a class="logo" asp-controller="index" asp-action="index">
         <img src="~/images/logo.png">
     </a>
     <div class="toggle" onclick="openMenu()" aria-expanded="false" id="buttonMenu">
@@ -17,12 +17,12 @@
     <div class="navbar" id="mynav" data-visible="false">
         <ul id="header-nav">
             <li><a asp-controller="bookservice" class="Button">Book a Cleaner</a></li>
-            <li><a asp-controller="price">Prices</a></li>
+            <li><a asp-controller="price" asp-action="index">Prices</a></li>
             <li><a href="#">Our Guarantee</a></li>
             <li><a href="#">Blog</a></li>
-            <li><a asp-controller="contact">Contact us</a></li>
+            <li><a asp-controller="contact" asp-action="index">Contact us</a></li>
             <li><a asp-action="login" class="Button">Login</a></li>
-            <li><a asp-controller="spsignup" class="Button">Become a helper</a></li>
+            <li><a asp-controller="spsignup" asp-action="index" class="Button">Become a helper</a></li>
             <!-- <li class="flag">
                             <a href="#" class="flag-icon"><img src="images/flag.png">
                                 <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a>
@@ -99,15 +99,15 @@
     <div class="footer-one">
         <div class="container">
             <div class="footer-before">
-                <a class="logo" asp-controller="index">
+                <a class="logo" asp-controller="index" asp-action="index">
                     <img src="~/images/logo.png">
                 </a>
                 <div class="footer-navbar">
                     <ul id="footer-nav">
-                        <li><a asp-controller="index">home</a></li>
-                        <li><a asp-controller="about">about</a></li>
+                        <li><a asp-controller="index" asp-action="index">home</a></li>
+                        <li><a asp-controller="about" asp-action="index">about</a></li>
                         <li><a href="#">testimonial</a></li>
-                        <li><a asp-controller="faq">faq</a></li>
+                        <li><a asp-controller="faq" asp-action="index">faq</a></li>
                         <li><a href="#">insurance policy</a></li>
                         <li><a href="#">impressum</a></li>
                     </ul>

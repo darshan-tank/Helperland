@@ -7,30 +7,63 @@
     <link rel="stylesheet" type="text/css" href="~/css/style.css">
     <link rel="stylesheet" type="text/css" href="~/css/responsive.css">
 
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    @*//for Rating plugin*@
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <link href="~/css/rating.css" rel="stylesheet" />
+    <script src="~/js/rating.js"></script>
+    <link href="~/css/main.css" rel="stylesheet" />
+    <script src="~/js/main.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    <link href="~/css/loader.css" rel="stylesheet" />
+
     <script type="text/javascript" language="JavaScript">
         function showMsg(msg) {
-            Toastify({
-                text: msg,
-                duration: 6000,
-                close: true,
-                gravity: "top", // `top` or `bottom`
-                position: "right", // `left`, `center` or `right`
-                stopOnFocus: true, // Prevents dismissing of toast on hover
-                style: {
-                    background: "linear-gradient(to right, #00b09b, #96c93d)",
-                }// Callback after click
-            }).showToast();
+            var back = document.getElementById("ToastBack");
+            console.log(back);
+            back.style.display = "flex";
+            var message = document.getElementById("ToastMessage");
+            message.innerHTML = msg;
+        }
+
+        function openM() {
+            var menu = document.getElementById("openMenu");
+            if (menu.style.display == "none") {
+                menu.style.display = "block";
+            } else {
+                menu.style.display = "none";
+            }
+        }
+
+        function closeToast() {
+            console.log("called");
+            var back = document.getElementById("ToastBack");
+            back.style.display = "none";
         }
     </script>
+
+    <script>
+        function showLoader() {
+            console.log("function called");
+            document.getElementById("loader_rounder").style.display = "flex";
+        }
+        function hideLoader() {
+            document.getElementById("loader_rounder").style.display = "none";
+        }
+    </script>
+
     <style>
         #popupMessage {
             position: absolute;
@@ -62,14 +95,25 @@
         }
     </style>
 
+
 </head>
 <body>
-    <div id="popupMessage">
-        <p id="msgPopup"></p>
-        <button onclick="closePopupMessage()" id="closePopup">Ok</button>
-    </div>
-    
-    @RenderBody()
 
+    <div class="loader-container" id="loader_rounder">
+        <div class="lds-dual-ring"></div>
+    </div>
+
+    <div class="ToastBack" id="ToastBack">
+        <div class="ToastContainer">
+            <span>
+                <img src="~/images/correct-white-medium.png" alt="">
+            </span>
+            <h3 id="ToastMessage">Login Successful</h3>
+            <button onclick="closeToast()">Ok</button>
+        </div>
+    </div>
+
+    @RenderBody()
+    @RenderSection("Scripts", false)
 </body>
 </html>
