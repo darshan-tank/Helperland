@@ -1,25 +1,17 @@
-﻿@model IEnumerable<Sample.Models.FavoriteAndBlocked>
+﻿@model IEnumerable<Sample.Models.ServiceRequest>
 
 <div class="flex-container-fav">
-
     @foreach (var items in Model)
     {
-    <script>
-        $("#PreRated").starRating({
-            starSize: 25,
-            initialRating: @items.TargetUser.Ratings,
-            hoverColor: '#ffd800',
-            ratedColors: ['ffd800', 'ffd800', 'ffd800', 'ffd800', 'ffd800'],
-            readOnly: true
-        });
+        <script>
 
-        var formDataforName = new FormData();
-        formDataforName.append("providerID", @items.TargetUserId);
+            var formDataforName = new FormData();
+            formDataforName.append("providerID", @items.ServiceProviderId);
         formDataforName.append("customerID", @items.UserId);
 
         $.ajax({
             type: 'POST',
-            url: '/customerDashboard/CheckBlock',
+            url: '/spDashboard/CheckBlock',
             data: formDataforName,
             processData: false,
             contentType: false,
@@ -38,21 +30,18 @@
             }
         });
 
-    </script>
+        </script>
         <div class="flex-card-fav">
             <img src="~/images/avatar.png" alt="">
-            <span>@items.TargetUser.FirstName  @items.TargetUser.LastName</span>
-            <div class="my-rating" id="PreRated"></div><span id="ratingDisplay">@items.TargetUser.Ratings</span>
+            <span>@items.User.FirstName  @items.User.LastName</span>
             <div style="display:flex;">
-                <button id="RemoveButton" onclick="removeFromFav('@items.TargetUserId','@items.UserId')">Remove</button>
-                <button id="blockButton" onclick="blockProvider('@items.TargetUserId','@items.UserId')">Block</button>
-                <button id="unblockButton" onclick="unblockProvider('@items.TargetUserId','@items.UserId')">Unblock</button>
+                <button id="blockButton" onclick="blockProvider('@items.ServiceProviderId','@items.UserId')">Block</button>
+                <button id="unblockButton" onclick="unblockProvider('@items.ServiceProviderId','@items.UserId')">Unblock</button>
             </div>
         </div>
     }
-
-<script>
-        function removeFromFav(ProID,CustID) {
+    <script>
+        function blockProvider(ProID, CustID) {
             showLoader();
             var formDataforRemove = new FormData();
             formDataforRemove.append("providerID", ProID);
@@ -60,32 +49,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/customerDashboard/removeFav',
-                data: formDataforRemove,
-                processData: false,
-                contentType: false,
-                dataType: "json"
-            }).done(function (response) {
-                if (response.status == "success") {
-                    hideLoader();
-                    showMsg("Removed from favorite.");
-                    $("#right-container").html("Loading...").load('/customerDashboard/FavoritePro');
-                } else {
-                    hideLoader();
-                    showMsg("Something went wrong.");
-                }
-            });
-        }
-
-    function blockProvider(ProID, CustID) {
-            showLoader();
-            var formDataforRemove = new FormData();
-            formDataforRemove.append("providerID", ProID);
-            formDataforRemove.append("customerID", CustID);
-
-            $.ajax({
-                type: 'POST',
-                url: '/customerDashboard/BlockPro',
+                url: '/spDashboard/BlockPro',
                 data: formDataforRemove,
                 processData: false,
                 contentType: false,
@@ -103,7 +67,7 @@
             });
         }
 
-    function unblockProvider(ProID, CustID) {
+        function unblockProvider(ProID, CustID) {
             showLoader();
             var formDataforRemove = new FormData();
             formDataforRemove.append("providerID", ProID);
@@ -111,7 +75,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/customerDashboard/UnblockPro',
+                url: '/spDashboard/UnblockPro',
                 data: formDataforRemove,
                 processData: false,
                 contentType: false,
@@ -128,5 +92,5 @@
                 }
             });
         }
-</script>
+    </script>
 </div>

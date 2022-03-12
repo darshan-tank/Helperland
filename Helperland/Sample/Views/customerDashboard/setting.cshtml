@@ -83,7 +83,7 @@
 
 <div id="home"></div>
 <div class="header-contain" id="header" style="background: rgba(39, 39, 39, .7);">
-    <a class="logo" asp-controller="index">
+    <a class="logo" asp-controller="index" asp-action="index">
         <img src="~/images/logo.png">
     </a>
     <div class="toggle" onclick="openMenu()" aria-expanded="false" id="buttonMenu">
@@ -93,11 +93,11 @@
     <div class="navbar" id="mynav" data-visible="false">
         <ul id="header-nav">
             <li class="hidden"><a name="menuLi" id="notificationMenuLI">Notification</a></li>
-            <li class="hidden"><a name="menuLi" id="accountMenuLI">Account</a></li>
-            <li class="hidden"><a name="menuLi" onclick="openDashboard()" id="dashboardMenuLI">Dashboard</a></li>
-            <li class="hidden"><a name="menuLi" onclick="openFavoritePro()" id="favoriteProsMenuLI">Favorite Pros</a></li>
-            <li class="hidden"><a name="menuLi" id="serviceScheduleMenuLI">Service Schedule</a></li>
-            <li class="hidden"><a name="menuLi" onclick="openServiceHistory()" id="serviceHistoryMenuLI">Service History</a></li>
+            <li class="hidden"><a name="menuLi" id="accountMenuLI" asp-action="setting">Account</a></li>
+            <li class="hidden"><a name="menuLi" asp-controller="customerDashboard" asp-action="index" id="dashboardMenuLI">Dashboard</a></li>
+            <li class="hidden"><a name="menuLi" asp-controller="customerDashboard" asp-action="index" id="favoriteProsMenuLI">Favorite Pros</a></li>
+            <li class="hidden"><a name="menuLi" id="serviceScheduleMenuLI" asp-controller="customerDashboard" asp-action="index">Service Schedule</a></li>
+            <li class="hidden"><a name="menuLi" asp-controller="customerDashboard" asp-action="index" id="serviceHistoryMenuLI">Service History</a></li>
             <li class="hidden"><a name="menuLi" id="invoiceMenuLI">Invoice</a></li>
             <li class="hidden"><a asp-controller="index" asp-action="logout">Logout</a></li>
             <li>
@@ -241,12 +241,12 @@
 
                     <div class="left">
                         <ul class="nav-lists">
-                            <li class="li-item" id="dashboardLI"><a onclick="openDashboard()">Dashboard</a></li>
-                            <li class="li-item active-li" id="ServiceHistoryLI"><a onclick="openServiceHistory()">Service History</a></li>
-                            <li class="li-item" id="ServiceScheduleLI"><a onclick="openServiceSchedule()">Service Schedule</a></li>
-                            <li class="li-item" id="FavoriteProsLI"><a onclick="openFavoritePro()">Favorite Pros</a></li>
-                            <li class="li-item" id="InvoicesLI"><a>Invoices</a></li>
-                            <li class="li-item" id="NotificationsLI"><a>Notifications</a></li>
+                            <li class="li-item" id="dashboardLI"><a asp-controller="customerDashboard" asp-action="index">Dashboard</a></li>
+                            <li class="li-item active-li" id="ServiceHistoryLI"><a asp-controller="customerDashboard" asp-action="index">Service History</a></li>
+                            <li class="li-item" id="ServiceScheduleLI"><a asp-controller="customerDashboard" asp-action="index">Service Schedule</a></li>
+                            <li class="li-item" id="FavoriteProsLI"><a asp-controller="customerDashboard" asp-action="index">Favorite Pros</a></li>
+                            <li class="li-item" id="InvoicesLI"><a asp-controller="customerDashboard" asp-action="index">Invoices</a></li>
+                            <li class="li-item" id="NotificationsLI"><a asp-controller="customerDashboard" asp-action="index"> Notifications</a></li>
                         </ul>
                     </div>
                     <div class="right table-scroll" id="right-container">
@@ -337,15 +337,15 @@
             <div class="footer-one">
                 <div class="container">
                     <div class="footer-before">
-                        <div class="logo">
+                        <a class="logo" asp-controller="index" asp-action="index">
                             <img src="~/images/logo.png">
-                        </div>
+                        </a>
                         <div class="footer-navbar">
                             <ul id="footer-nav">
-                                <li><a asp-controller="index">home</a></li>
-                                <li><a asp-controller="about">about</a></li>
+                                <li><a asp-controller="index" asp-action="index">home</a></li>
+                                <li><a asp-controller="about" asp-action="index">about</a></li>
                                 <li><a href="#">testimonial</a></li>
-                                <li><a asp-controller="faq">faq</a></li>
+                                <li><a asp-controller="faq" asp-action="index">faq</a></li>
                                 <li><a href="#">insurance policy</a></li>
                                 <li><a href="#">impressum</a></li>
                             </ul>

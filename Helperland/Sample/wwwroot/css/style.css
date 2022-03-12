@@ -1,4 +1,26 @@
 /* Common CSS start */
+::-webkit-scrollbar {
+    width: 0; /* Remove scrollbar space */
+    background: transparent; /* Optional: just make scrollbar invisible */
+}
+input[type='checkbox']:checked {
+    accent-color: #1d798c;
+}
+
+#containerService{
+    align-items:flex-start!important;
+}
+
+#containerService hr {
+    width:100%;
+}
+
+.toast-header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+}
 
 button:disabled,
 button[disabled] {
@@ -87,6 +109,8 @@ button[disabled] {
     display: none;
     justify-content: center;
     box-shadow: 0 5px 15px rgb(0 0 0 / 50%);
+    overflow-x: scroll;
+    padding:20px;
 }
 
 .ToastContainer {
@@ -3554,3 +3578,70 @@ input[name="radioForFav"] {
         border-radius: 10px;
         color: white;
     }
+
+    /*ServiceProvider Module*/
+tr.TR-Dashboard.True{
+    display: none !important;
+}
+
+.flex-container-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-item {
+    margin: auto 0px;
+}
+
+.myRatingTR{
+    border: 1px solid white!important;
+}
+
+.flex-container-rating {
+    border: 1px solid #E1E1E1;
+    padding: 15px;
+}
+
+#unblockButton {
+    display: none;
+}
+
+.flex-dir-row {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.w-100 {
+    width: 100%;
+    margin: 20px 0px;
+}
+
+.hide-Radio input[type=radio] {
+    display: none;
+}
+
+    .hide-Radio input[type=radio]:checked + label img {
+        border: 3px solid #1D7A8C;
+        border-radius: 50%;
+    }
+
+.basic-details-flex {
+    margin: 20px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+    .basic-details-flex label {
+        margin: auto 0px;
+        border-bottom: 2px solid #d7d7d7;
+        padding: 10px 0px;
+        width: 89%;
+    }
+
+.submit-button-form {
+    padding: 10px 21px;
+    background: #1D7A8C;
+    color: white;
+    border-radius: 25px;
+    width: 10%;
+}

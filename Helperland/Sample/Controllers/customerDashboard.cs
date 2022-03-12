@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Sample.Models;
 using Sample.Data;
+using MimeKit;
+using MailKit.Net.Smtp;
 
 namespace Sample.Controllers
 {
@@ -35,7 +37,7 @@ namespace Sample.Controllers
             var email = HttpContext.Session.GetString("UserEmail");
 
             User user = _dbcontext.Users.Where(x => x.Email == email).FirstOrDefault();
-            List<ServiceRequest> sr = _dbcontext.ServiceRequests.Where(x => (x.Status == 2) && (x.UserId == user.UserId)).ToList();
+            List<ServiceRequest> sr = _dbcontext.ServiceRequests.Where(x => ((x.Status == 2) || (x.Status == 3)) && (x.UserId == user.UserId)).ToList();
                 for (var i = 0; i < sr.Count; i++)
             {
                 sr[i].ServiceProvider = _dbcontext.Users.Where(x => x.UserId == sr[i].ServiceProviderId).FirstOrDefault();
@@ -62,19 +64,21 @@ namespace Sample.Controllers
         }
         public IActionResult setting()
         {
-            var id = int.Parse(HttpContext.Session.GetString("UserID"));
-            User currentUser = _dbcontext.Users.Where(x=>x.UserId == id).FirstOrDefault();
+            var email = HttpContext.Session.GetString("UserEmail");
+
+            User user = _dbcontext.Users.Where(x => x.Email == email).FirstOrDefault();
+            var ids = user.UserId;
+            User currentUser = _dbcontext.Users.Where(x=>x.UserId == ids).FirstOrDefault();
             return View(currentUser);
         }
         public IActionResult CurrentService()
         {
-            
             var id = HttpContext.Session.GetString("UserID");
 
             var email = HttpContext.Session.GetString("UserEmail");
                 
             User user = _dbcontext.Users.Where(x => x.Email == email).FirstOrDefault();
-            List <ServiceRequest> sr = _dbcontext.ServiceRequests.Where(x => (x.Status == 1) && (x.UserId == user.UserId)).ToList();
+            List <ServiceRequest> sr = _dbcontext.ServiceRequests.Where(x => (x.Status == 1 || x.Status == 4) && (x.UserId == user.UserId)).ToList();
             for (var i = 0; i < sr.Count; i++)
             {
                 sr[i].ServiceProvider = _dbcontext.Users.Where(x => x.UserId == sr[i].ServiceProviderId).FirstOrDefault();
@@ -101,8 +105,7 @@ namespace Sample.Controllers
         }
         public IActionResult ServiceSchedule()
         {
-            List<ServiceRequest> sr = _dbcontext.ServiceRequests.Where(x => x.Status == 1).ToList();
-            return View(sr);
+            return View();
         }
         public IActionResult FavoritePro()
         {
@@ -147,7 +150,7 @@ namespace Sample.Controllers
         {
             var email = HttpContext.Session.GetString("UserEmail");
             User user = _dbcontext.Users.Where(x => x.Email == email).FirstOrDefault();
-            var sr = _dbcontext.ServiceRequests.Where(x => (x.Status == 1) && (x.UserId == user.UserId)).ToList();
+            var sr = _dbcontext.ServiceRequests.Where(x => (x.Status == 1 || x.Status == 4) && (x.UserId == user.UserId)).ToList();
             return Json(new { data = sr, user = user });
         }
         public JsonResult getAddresses(int id)
@@ -162,17 +165,75 @@ namespace Sample.Controllers
             var ids = id;
             DateTime dateData = date;
             ServiceRequest sr = _dbcontext.ServiceRequests.Where(x => x.ServiceRequestId == ids).FirstOrDefault();
-            sr.ServiceStartDate = dateData;
-            sr.ModifiedDate = DateTime.Now;
-            _dbcontext.Entry(sr).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            var changes = _dbcontext.SaveChanges();
-            if (changes >= 1)
+            if(sr.ServiceProviderId == null)
             {
-                return Json(new { Status = "success"});
-            }
-            else
+                sr.ServiceStartDate = dateData;
+                sr.ModifiedDate = DateTime.Now;
+                _dbcontext.Entry(sr).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+                var changes = _dbcontext.SaveChanges();
+                if (changes >= 1)
+                {
+                    return Json(new { Status = "success" });
+                }
+                else
+                {
+                    return Json(new { Status = "fail" });
+                }
+            } else
             {
-                return Json(new { Status = "success"});
+                List<ServiceRequest> srList = _dbcontext.ServiceRequests.Where(x => (x.ServiceProviderId == sr.ServiceProviderId) && (x.Status == 4)).ToList();
+                var conflict = false;
+                DateTime date1 = date;
+                var startTime = date.ToString("hh:mm tt");
+                DateTime endDate = date1.AddHours(sr.ServiceHours);
+                var extra = sr.ExtraHours ?? 0.0;
+                endDate = endDate.AddHours(extra);
+                endDate = endDate.AddHours(1);
+                var endTime = endDate.ToString("hh:mm tt");
+                for (var i = 0; i < srList.Count; i++)
+                {
+                    if(date1 <= srList[i].ServiceStartDate && srList[i].ServiceStartDate <= endDate)
+                    {
+                        conflict = true;
+                    }
+                }
+                if (conflict)
+                {
+                    return Json(new { Status = "Conflict",datePOST = date.ToString("dd/MM/yyyy"), startTimePOST = startTime, endTimePOST = endTime });
+                } else
+                {
+                    sr.ServiceStartDate = dateData;
+                    sr.ModifiedDate = DateTime.Now;
+                    _dbcontext.Entry(sr).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+                    var changes = _dbcontext.SaveChanges();
+                    if (changes >= 1)
+                    {
+                        User TempSP = _dbcontext.Users.Where(x => x.UserId == sr.ServiceProviderId).FirstOrDefault(); 
+                        var message = new MimeMessage();
+                        message.From.Add(new MailboxAddress("Helperland", "exm23391@gmail.com"));
+                        message.To.Add(new MailboxAddress("Helperland", TempSP.Email));
+                        message.Subject = "Regarding Service : "+sr.ServiceRequestId+" Rechedule";
+                        message.Body = new TextPart("plain")
+                        {
+                            Text= "Service Request : "+ sr.ServiceRequestId + " has been rescheduled by customer. New date and time are "+ date.ToString("dd/MM/yyyy") + " - " + date.ToString("hh:mm tt") + "."
+                    };
+
+                        using (var client = new SmtpClient())
+                        {
+                            client.Connect("smtp.gmail.com", 587, false);
+                            client.Authenticate("exm23391@gmail.com", "darshan@1122");
+                            client.Send(message);
+                            client.Disconnect(true);
+                        }
+                        return Json(new { Status = "success" });
+                    }
+                    else
+                    {
+                        return Json(new { Status = "fail" });
+                    }
+                }
             }
         }
         [HttpPost]
@@ -181,17 +242,51 @@ namespace Sample.Controllers
             var ids = id;
             String comments = message;
             ServiceRequest sr = _dbcontext.ServiceRequests.Where(x => x.ServiceRequestId == ids).FirstOrDefault();
-            sr.Comments = comments;
-            sr.Status = 2;
-            _dbcontext.Entry(sr).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            var changes = _dbcontext.SaveChanges();
-            if (changes >= 1)
+            if(sr.ServiceProviderId == null)
             {
-                return Json(new { Status = "success" });
-            }
-            else
+                sr.Comments = comments;
+                sr.Status = 2;
+                _dbcontext.Entry(sr).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                var changes = _dbcontext.SaveChanges();
+                if (changes >= 1)
+                {
+                    return Json(new { Status = "success" });
+                }
+                else
+                {
+                    return Json(new { Status = "success" });
+                }
+            } else
             {
-                return Json(new { Status = "success" });
+                sr.Comments = comments;
+                sr.Status = 2;
+                _dbcontext.Entry(sr).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                var changes = _dbcontext.SaveChanges();
+                if (changes >= 1)
+                {
+                    User TempSP = _dbcontext.Users.Where(x => x.UserId == sr.ServiceProviderId).FirstOrDefault();
+                    var messages = new MimeMessage();
+                    messages.From.Add(new MailboxAddress("Helperland", "exm23391@gmail.com"));
+                    messages.To.Add(new MailboxAddress("Helperland", TempSP.Email));
+                    messages.Subject = "Regarding Service : " + sr.ServiceRequestId + " Rechedule";
+                    messages.Body = new TextPart("plain")
+                    {
+                        Text = "Service Request : " + sr.ServiceRequestId + " has been cancelled by customer. For following reason : "+comments
+                    };
+
+                    using (var client = new SmtpClient())
+                    {
+                        client.Connect("smtp.gmail.com", 587, false);
+                        client.Authenticate("exm23391@gmail.com", "darshan@1122");
+                        client.Send(messages);
+                        client.Disconnect(true);
+                    }
+                    return Json(new { Status = "success" });
+                }
+                else
+                {
+                    return Json(new { Status = "success" });
+                }
             }
         }
         [HttpPost]
@@ -502,6 +597,8 @@ namespace Sample.Controllers
             var changes = _dbcontext.SaveChanges();
             if (changes == 1)
             {
+                HttpContext.Session.SetString("UserFirstName", fname);
+                HttpContext.Session.SetString("UserLastName", lname);
                 return Json(new { Status = "success" });
             }
             else
@@ -534,6 +631,20 @@ namespace Sample.Controllers
                 return Json(new { Status = "error" });
             }
             
+        }
+        public JsonResult fetchServiceDetails(String serviceID)
+        {
+            var ServiceID = int.Parse(serviceID);
+            ServiceRequest serviceRequest = _dbcontext.ServiceRequests.Where(x => x.ServiceRequestId == ServiceID).FirstOrDefault();
+            serviceRequest.ServiceRequestaddress = _dbcontext.ServiceRequestAddresses.Where(x => x.ServiceRequestId == serviceRequest.ServiceRequestId).FirstOrDefault();
+            serviceRequest.User = _dbcontext.Users.Where(x => x.UserId == serviceRequest.UserId).FirstOrDefault();
+            List<ServiceRequestExtra> serviceRequestExtras = _dbcontext.ServiceRequestExtras.Where(x => x.ServiceRequestId == serviceRequest.ServiceRequestId).ToList();
+            for (var i = 0; i < serviceRequestExtras.Count; i++)
+            {
+                serviceRequestExtras[i].ServiceExtra = _dbcontext.ExtraServices.Where(x => x.ServiceExtraId == serviceRequestExtras[i].ServiceExtraId).FirstOrDefault();
+                serviceRequest.ServiceRequestExtras.Add(serviceRequestExtras[i]);
+            }
+            return Json(new { Status = "success", serviceData = serviceRequest });
         }
     }
 }

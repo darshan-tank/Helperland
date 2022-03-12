@@ -55,7 +55,16 @@
                 <a asp-controller="customerDashboard">My Dashboard</a>
             }
         </li>
-        <li>My Settings</li>
+        <li>
+            @if (@Context.Session.GetString("UserType") == "2")
+            {
+                <a asp-controller="spDashboard" asp-action="setting">My Settings</a>
+            }
+                @if (@Context.Session.GetString("UserType") == "3")
+                {
+                    <a asp-controller="customerDashboard" asp-action="setting">My Settings</a>
+                }
+            </li>
         <li><a asp-controller="index" asp-action="logout">Logout</a></li>
     </ul>
 </div>
@@ -248,6 +257,13 @@
                                         <option value="02:00 pm">02:00 PM</option>
                                         <option value="03:00 pm">03:00 PM</option>
                                         <option value="04:00 pm">04:00 PM</option>
+                                        <option value="05:00 pm">05:00 PM</option>
+                                        <option value="06:00 pm">06:00 PM</option>
+                                        <option value="07:00 pm">07:00 PM</option>
+                                        <option value="08:00 pm">08:00 PM</option>
+                                        <option value="09:00 pm">09:00 PM</option>
+                                        <option value="10:00 pm">10:00 PM</option>
+                                        <option value="11:00 pm">11:00 PM</option>
                                     </select>
                                 </div>
                                 <div>
@@ -360,7 +376,7 @@
                                 </div>
                                 <div class="flex-child">
                                     <label>Postal Code</label>
-                                    <input type="text" name="" id="pscode" placeholder="Postal Code">
+                                    <input type="text" name="" id="pscode" placeholder="Postal Code" disabled>
                                 </div>
                                 <div class="flex-child">
                                     <label>City</label>
@@ -390,15 +406,15 @@
                             <div class="invoice-address" id="newaddress">
                                 <div class="flex-child">
                                     <label>Street Name</label>
-                                    <input type="text" name="" placeholder="Street Name">
+                                    <input type="text" placeholder="Street Name">
                                 </div>
                                 <div class="flex-child">
                                     <label>House Number</label>
-                                    <input type="text" name="" placeholder="Street Name">
+                                    <input type="text" placeholder="Street Name">
                                 </div>
                                 <div class="flex-child">
                                     <label>Postal Code</label>
-                                    <input type="text" name="" placeholder="Street Name">
+                                    <input type="text" placeholder="Street Name">
                                 </div>
                                 <div class="flex-child">
                                     <label>City</label>

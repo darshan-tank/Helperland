@@ -94,5 +94,7 @@ namespace Sample.Models
         public virtual double Ratings { get; set; }
         [NotMapped]
         public virtual int totalCleanings { get; set; }
+        [NotMapped]
+        public virtual UserAddress UserAddressforUser { get; set; }
     }
 }

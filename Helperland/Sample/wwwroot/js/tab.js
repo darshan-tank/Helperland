@@ -157,6 +157,7 @@ function openplan() {
     }).done(function (response) {
         if (response.status == "success") {
             hideLoader();
+            $("#pscode").val($("#postalID").val());
             service.style.display = "none";
             plan.style.display = "block";
             plantab.classList.add("arrow-dwn");
@@ -277,8 +278,8 @@ function opendetails(email) {
         var extra;
         $('input[type=checkbox]:checked').each(function () { var id = $(this).attr("value"); extra = extra + id; });
         console.log("bed" + noOfBed + "/nbath" + noOfBath + "/ndate" + date + "/ntime" + time + "/nHour" + totalHrs + "/ncheckbox" + extra);
-        
 
+        
         $("#address-container-id").html("Loading Address...").load('/bookservice/getaddress');
         $("#FavoriteProContainer").html("Loading Favorite Providers...").load('/bookservice/getFavPros');
     }

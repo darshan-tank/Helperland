@@ -1,5 +1,38 @@
 ﻿@model IEnumerable<Sample.Models.ServiceRequest>
     <script src="~/js/currentService.js"></script>
+
+    <div class="ToastBack" id="displayCurrentServiceForCustomer">
+        <div class="ToastContainer" id="containerService">
+            <div class="toast-header">
+                <h3>Service Details</h3>
+                <a onclick="closeCurrentServiceForCustomer()">x</a>
+            </div>
+            <p id="dateTimeDisplayUS">07/03/2022 02:00 PM - 05:00 PM</p>
+            <p>Duration : <label id="durationDisplayUS">3</label> Hrs</p>
+            <hr>
+            <p>Service ID : <label id="serviceIdDisplayUS">3</label></p>
+            <p>
+                Extras :
+                <ul id="extraULUS">
+                </ul>
+            </p>
+            <p>Total Payment : <label id="paymentDisplayUS">3</label></p>
+            <hr>
+            <p>Customer Name : <label id="customerNameDisplayUS">xyz</label></p>
+            <p>Service Address : <label id="serviceAddressDisplayUS">xyz</label></p>
+            <hr>
+            <p>Comments</p>
+            <p id="commentsDisplayUS"></p>
+            <p id="petsDisplayUS">No pets</p>
+            <hr>
+            <div>
+                <button class="rate-button" onclick="reschedule()">Reschedule Service</button>
+                <button class="rate-button" onclick="cancelService()">Cancel</button>
+            </div>
+
+        </div>
+    </div>
+
     <div class="ToastBack-card Reschedule" id="reschedule">
         <div class="card-table-tr-toast">
             <div class="headerButton">
@@ -54,71 +87,81 @@
             <th onclick="sortTable(1,2,2)">Service Provider <img src="images/sort.png" alt=""></th>
             <th onclick="sortTable(2,2,2)">Payment <img src="images/sort.png" alt=""></th>
             <th onclick="sortTable(3,2,2)">Status <img src="images/sort.png" alt=""></th>
-            <th class="action" colspan="2">Rate sp</th>
+            <th class="action" colspan="2">Action</th>
         </tr>
         @foreach (var items in Model)
         {
-            <tr>
-                <td>
-                    @{
-                        var date = items.ServiceStartDate;
-                        var time = date.ToString("hh:mm tt");
-                        var d = date.ToString("dd/MM/yyyy");
-                    }
-                    <img class="img-table" src="images/calendar.png"> @d <br> @time
-                </td>
-                <td>
-                    @*<div class="tableflex">
-            <img class="prof-img" src="images/cap.png">
-            <div>
-                David <br>
-                <div class="rating">
-                    <i class="fas fa-star selected"></i>
-                    <i class="fas fa-star selected"></i>
-                    <i class="fas fa-star selected"></i>
-                    <i class="fas fa-star selected"></i>
-                    <i class="far fa-star"></i>
-                    <label class="number" id="number"></label>
-                </div>
-            </div>
-        </div>*@
-                    @if (items.ServiceProviderId != null)
-                    { 
-                        <div class="tableflex">
-                            <img class="prof-img" src="images/cap.png">
-                            <div>
-                                @items.ServiceProvider.FirstName @items.ServiceProvider.LastName<br>
-                                <div class="rating">
-                                    <div class="my-rating" id="@items.ServiceProviderId"></div><span id="ratingDisplay">@items.ServiceProvider.Ratings</span>
-                                </div>
+    <tr>
+            <td onclick="showServiceDetailsForC('@items.ServiceRequestId', '@DateTime.Now')">
+                @{
+                    var date = items.ServiceStartDate;
+                    var time = date.ToString("hh:mm tt");
+                    var d = date.ToString("dd/MM/yyyy");
+                }
+                <img class="img-table" src="images/calendar.png"> @d <br> @time
+            </td>
+            <td onclick="showServiceDetailsForC('@items.ServiceRequestId', '@DateTime.Now')">
+                @*<div class="tableflex">
+                    <img class="prof-img" src="images/cap.png">
+                    <div>
+                        David <br>
+                        <div class="rating">
+                            <i class="fas fa-star selected"></i>
+                            <i class="fas fa-star selected"></i>
+                            <i class="fas fa-star selected"></i>
+                            <i class="fas fa-star selected"></i>
+                            <i class="far fa-star"></i>
+                            <label class="number" id="number"></label>
+                        </div>
+                    </div>
+                </div>*@
+                @if (items.ServiceProviderId != null)
+                {
+                    <div class="tableflex">
+                        <img class="prof-img" src="images/cap.png">
+                        <div>
+                            @items.ServiceProvider.FirstName @items.ServiceProvider.LastName<br>
+                            @{
+                                var rating = 0.0;
+                                if (!Double.IsNaN(items.ServiceProvider.Ratings))
+                                {
+                                    rating = items.ServiceProvider.Ratings;
+                                }
+                            }
+                            <div class="rating">
+                                <div class="my-rating" id="@items.ServiceProviderId"></div><span id="ratingDisplay">@rating</span>
                             </div>
                         </div>
-                        @if (items.ServiceProviderId != null)
-                        {
-                            <script>
+                    </div>
+                    @if (items.ServiceProviderId != null)
+                    {
+                        <script>
 
-                            $("#@items.ServiceProviderId").starRating({
-                                            starSize: 25,
-                                        initialRating: @items.ServiceProvider.Ratings,
-                                        hoverColor: '#ffd800',
-                                        ratedColors:['ffd800', 'ffd800', 'ffd800', 'ffd800', 'ffd800'],
-                                        readOnly: true
-                                    });
-                            </script>
-                        }
+                                $("#@items.ServiceProviderId").starRating({
+                                                starSize: 25,
+                                            initialRating: @items.ServiceProvider.Ratings,
+                                            hoverColor: '#ffd800',
+                                            ratedColors:['ffd800', 'ffd800', 'ffd800', 'ffd800', 'ffd800'],
+                                            readOnly: true
+                                        });
+                        </script>
                     }
-                </td>
-                <td class="money">
-                    <i class="fas fa-dollar-sign"></i><b>@items.TotalCost</b>
-                </td>
-                @if (items.Status == 1)
-                {
-                    <td><span class="status new" id="status">New</span></td>
                 }
-
-                <td class="action"><button class="rate-button" onclick="reschedule('@items.ServiceRequestId')">Reschedule Service</button></td>
-                <td class="action"><button class="rate-button" onclick="cancelService('@items.ServiceRequestId')">Cancel</button></td>
-            </tr>
+            </td>
+            <td class="money" onclick="showServiceDetailsForC('@items.ServiceRequestId', '@DateTime.Now')">
+                <i class="fas fa-dollar-sign"></i><b>@items.TotalCost</b>
+            </td>
+            @if (items.Status == 1)
+            {
+                <td onclick="showServiceDetailsForC('@items.ServiceRequestId', '@DateTime.Now')"><span class="status new" id="status">New</span></td>
+            }
+            else
+            {
+                <td onclick="showServiceDetailsForC('@items.ServiceRequestId', '@DateTime.Now')"><span class="status new" id="status">Accepted</span></td>
+            }
+        <td class="action"><button class="rate-button" onclick="reschedule('@items.ServiceRequestId')">Reschedule Service</button></td>
+        <td class="action"><button class="rate-button" onclick="cancelService('@items.ServiceRequestId')">Cancel</button></td>
+    </tr>
         }
         <tr>
             <td colspan="5">

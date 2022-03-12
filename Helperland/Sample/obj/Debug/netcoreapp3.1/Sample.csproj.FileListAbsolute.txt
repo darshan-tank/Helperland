@@ -328,7 +328,13 @@ F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\price\Index.
 F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\spDashboard\BlockCustomer.cshtml.g.cs
+F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\spDashboard\dashboard.cshtml.g.cs
 F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\spDashboard\Index.cshtml.g.cs
+F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\spDashboard\MyRating.cshtml.g.cs
+F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\spDashboard\ServiceHistory.cshtml.g.cs
+F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\spDashboard\ServiceSchedule.cshtml.g.cs
+F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\spDashboard\setting.cshtml.g.cs
 F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\spDashboard\UpcomingService.cshtml.g.cs
 F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\spsignup\Index.cshtml.g.cs
 F:\Halperland\Helperland\Sample\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs

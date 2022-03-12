@@ -74,5 +74,9 @@ namespace Sample.Models
         public virtual ICollection<ServiceRequestAddress> ServiceRequestAddresses { get; set; }
         [InverseProperty(nameof(ServiceRequestExtra.ServiceRequest))]
         public virtual ICollection<ServiceRequestExtra> ServiceRequestExtras { get; set; }
+        [NotMapped]
+        public virtual ServiceRequestAddress ServiceRequestaddress { get; set; }
+        [NotMapped]
+        public virtual bool IsBlocked { get; set; }
     }
 }

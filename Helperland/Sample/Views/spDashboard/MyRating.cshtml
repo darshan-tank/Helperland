@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Sample.Models.Rating>
+<table class="table" id="Table">
+    <tr class="no-border">
+        <td colspan="6">
+            <div class="heading-table">
+                <h3>My Ratings</h3>
+            </div>
+        </td>
+    </tr>
+    @foreach (var items in Model)
+    {
+        <tr class="myRatingTR">
+            <td>
+                <div class="flex-container-rating">
+                    <div class="flex-container-item">
+                        <div class="flex-item">
+                            <p>@items.ServiceRequestId</p>
+                            <p>@items.RatingFromNavigation.FirstName @items.RatingFromNavigation.LastName</p>
+                        </div>
+                        <div class="flex-item">
+                            @{
+                                var date = items.ServiceRequest.ServiceStartDate;
+                                var time = date.ToString("hh:mm tt");
+                                var d = date.ToString("dd/MM/yyyy");
+                            }
+                            <div>
+                                <img class="img-table" src="images/calendar2.png"> @d
+                            </div>
+                            <div>
+                                <img class="img-table" src="images/layer-14.png"> @time
+                            </div>
+                        </div>
+
+                        <div class="flex-item">
+                            <p>Ratings</p>
+                            <div class="my-rating" id="@items.ServiceRequestId"></div>
+                            @if (items.Ratings >= 0 && items.Ratings <= 1)
+                            {
+                                <span>Very Bad</span>
+                            }
+                            else if (items.Ratings > 1 && items.Ratings <= 2)
+                            {
+                                <span>Bad</span>
+                            }
+                            else if (items.Ratings > 2 && items.Ratings <= 3)
+                            {
+                                <span>Average</span>
+                            }
+                            else if (items.Ratings > 3 && items.Ratings <= 4)
+                            {
+                                <span>Good</span>
+                            }
+                            else if (items.Ratings > 4 && items.Ratings <= 5)
+                            {
+                                <span>Very Good</span>
+                            }
+                        </div>
+                    </div>
+                    <hr>
+                    <div>
+                        <p>Customer Comments</p>
+                        @if(items.Comments == null)
+                        {
+                            <p>No comments given by customer.</p>
+                        } else
+                        {
+                            <p>@items.Comments</p>
+                        }
+                        
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <script>
+
+            $("#@items.ServiceRequestId").starRating({
+                    starSize: 25,
+                    initialRating: @items.Ratings,
+                    hoverColor: '#ffd800',
+                    ratedColors:['ffd800', 'ffd800', 'ffd800', 'ffd800', 'ffd800'],
+                    readOnly: true
+            });
+        </script>
+    }
+</table>

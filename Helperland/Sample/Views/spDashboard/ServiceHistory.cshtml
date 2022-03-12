@@ -1,0 +1,153 @@
+﻿@model IEnumerable<Sample.Models.ServiceRequest>
+    <script src="~/js/excelExport.js"></script>
+
+    <div class="ToastBack" id="displayServiceHistoryC">
+        <div class="ToastContainer" id="containerService">
+            <div class="toast-header">
+                <h3>Service Details</h3>
+                <a onclick="closeServiceHistory()">x</a>
+            </div>
+            <p id="dateTimeDisplayC">07/03/2022 02:00 PM - 05:00 PM</p>
+            <hr>
+            <p>Service ID : <label id="serviceIdDisplayC">3</label></p>
+
+            <hr>
+            <p>Customer Name : <label id="customerNameDisplayC">xyz</label></p>
+            <p>Service Address : <label id="serviceAddressDisplayC">xyz</label></p>
+            <hr>
+        </div>
+    </div>
+
+<table id="TableExcel" style="display:none;">
+    <tr>
+        <th>Service ID</th>
+        <th>Service Date</th>
+        <th>Customer Details</th>
+    </tr>
+    @foreach (var items in Model)
+    {
+        <tr>
+            <td>@items.ServiceRequestId</td>
+            @{
+                var date = items.ServiceStartDate;
+                var time = date.ToString("hh:mm tt");
+                var d = date.ToString("dd/MM/yyyy");
+            }
+        <td> @d - @time</td>
+        <td colspan="2">@items.User.FirstName @items.User.LastName <br> @items.ServiceRequestaddress.AddressLine1 @items.ServiceRequestaddress.AddressLine2,@items.ServiceRequestaddress.City @items.ServiceRequestaddress.PostalCode</td>
+        </tr>
+    }
+</table>
+
+<table class="table" id="Table">
+    <tr class="no-border">
+        <td colspan="6">
+            <div class="heading-table">
+                <h3>Service History</h3>
+                <button class="submit-button" onclick="exportTableToExcel('TableExcel','Service History')">Export Table Data To Excel File</button>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th onclick="sortTable(0,2,2)">Service ID <img src="~/images/sort.png" alt=""></th>
+        <th onclick="sortTable(1,2,2)">Service Date <img src="~/images/sort.png" alt=""></th>
+        <th colspan="2" onclick="sortTable(2,2,2)">Customer details <img src="~/images/sort.png" alt=""></th>
+    </tr>
+    @foreach (var items in Model)
+    {
+<tr>
+    <td onclick="openModelForServiceHistory('@items.ServiceRequestId')">@items.ServiceRequestId</td>
+    @{
+        var date = items.ServiceStartDate;
+        var time = date.ToString("hh:mm tt");
+        var d = date.ToString("dd/MM/yyyy");
+    }
+    <td onclick="openModelForServiceHistory('@items.ServiceRequestId')"><img class="img-table" src="~/images/calendar2.png"> @d <br> <img class="img-table" src="~/images/layer-14.png"> @time</td>
+    <td colspan="2" onclick="openModelForServiceHistory('@items.ServiceRequestId')">@items.User.FirstName @items.User.LastName <br><img src="~/images/layer-15.png"> @items.ServiceRequestaddress.AddressLine1 @items.ServiceRequestaddress.AddressLine2,@items.ServiceRequestaddress.City @items.ServiceRequestaddress.PostalCode</td>
+</tr>
+    }
+        
+        <tr>
+            <td colspan="6">
+                <div class="footer-table">
+                    <div class="left-side">
+                        <h3>Show </h3>
+                        <select>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                        <h3>entries</h3>
+                        <h3>Total Records :</h3><span id="count">55</span>
+                    </div>
+                    <div class="right-side">
+                        <i class="fas fa-step-backward"></i>
+                        <i class="fas fa-chevron-left"></i>
+                        <h3 class="page-active">1</h3>
+                        <h3>2</h3>
+                        <h3>3</h3>
+                        <h3>4</h3>
+                        <i class="fas fa-chevron-right"></i>
+                        <i class="fas fa-step-forward"></i>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+<table class="card">
+    <tr class="no-border">
+        <td colspan="6">
+            <div class="heading-table">
+                <h3>Service History</h3>
+            </div>
+        </td>
+    </tr>
+    @foreach (var items in Model)
+    {
+        <tr>
+            <td>
+                <div class="card-table-tr">
+                    <h4>@items.ServiceRequestId</h4>
+                    <hr>
+                    @{
+                        var date = items.ServiceStartDate;
+                        var time = date.ToString("hh:mm tt");
+                        var d = date.ToString("dd/MM/yyyy");
+                    }
+                    <p><img class="img-table" src="~/images/calendar2.png"> @d <img class="img-table" src="~/images/layer-14.png"> @time</p>
+                    <hr>
+                    <p>@items.User.FirstName @items.User.LastName <br><img src="~/images/layer-15.png"> @items.ServiceRequestaddress.AddressLine1 @items.ServiceRequestaddress.AddressLine2,@items.ServiceRequestaddress.City @items.ServiceRequestaddress.PostalCode</p>
+                </div>
+            </td>
+        </tr>
+    }
+        
+        <tr>
+            <td colspan="5">
+                <div class="footer-table">
+                    <div class="left-side">
+                        <h3>Show </h3>
+                        <select>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                        <h3>entries</h3>
+                        <h3>Total Records :</h3><span id="count">55</span>
+                    </div>
+                    <div class="right-side">
+                        <i class="fas fa-step-backward"></i>
+                        <i class="fas fa-chevron-left"></i>
+                        <h3 class="page-active">1</h3>
+                        <h3>2</h3>
+                        <h3>3</h3>
+                        <h3>4</h3>
+                        <i class="fas fa-chevron-right"></i>
+                        <i class="fas fa-step-forward"></i>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>

@@ -1,0 +1,147 @@
+﻿@model IEnumerable<Sample.Models.ServiceRequest>
+
+<div>
+    <div class="ToastBack-card" id="ToastBack1">
+        <tr>
+            <td>
+                <div class="card-table-tr-toast">
+                    <h4 id="serviceID">323436</h4>
+                    <hr>
+                    <p><img class="img-table" src="images/calendar2.png"> <span id="date"></span> <img class="img-table" src="images/layer-14.png"> <span id="time"></span></p>
+                    <hr>
+                    <p><span id="Username"></span><br><br><img src="images/layer-15.png"><span id="address"></span></p>
+                    <hr>
+                    <p id="serviceTime"></p>
+                    <p id="cost"></p>
+                    <hr>
+                    <p class="button-center"><button class="cancel-button" onclick="closeToast1()">Ok</button></p>
+                </div>
+            </td>
+        </tr>
+    </div>
+    <div id="calender"></div>
+</div>
+<div class="ToastBack">
+    <div class="ToastContainer">
+        <h3 id="ToastMessage1">Login Successful</h3>
+        <button onclick="closeToast1()">Ok</button>
+    </div>
+</div>
+
+
+
+@section Scripts{
+
+
+    <script>
+
+        function showMsg1() {
+            var back = document.getElementById("ToastBack1");
+            var cal = document.getElementById("calender");
+            back.style.height = cal.style.height;
+            back.style.width = cal.style.width;
+            back.style.display = "flex";
+        }
+        function closeToast1() {
+            var back = document.getElementById("ToastBack1");
+            back.style.display = "none";
+        }
+        $(document).ready(function () {
+            var events = [];
+            var addresses = [];
+
+            $.ajax({
+                url: '/spDashboard/GetEvents',
+                type: 'GET',
+                success: function (response) {
+                    console.log(response);
+
+                    var arrayofdata = response.data;
+                    for (let i = 0; i < arrayofdata.length; i++) {
+                        var date1 = new Date(arrayofdata[i].serviceStartDate);
+                        var month = date1.getUTCMonth() + 1; //months from 1-12
+                        var day = date1.getUTCDate();
+                        var year = date1.getUTCFullYear();
+                        var time = date1.toLocaleTimeString();
+
+
+
+                        var newdate = year + "-" + month + "-" + day;
+                        var usern = response.user.firstName + " " + response.user.lastName;
+                        events.push({
+                            title: "Service Request : " + arrayofdata[i].serviceRequestId,
+                            start: new Date(newdate),
+                            ServiceHours: arrayofdata[i].serviceHours,
+                            ExtraHours: arrayofdata[i].extraHours,
+                            TotalCost: arrayofdata[i].totalCost,
+                            ServiceRequestId: arrayofdata[i].serviceRequestId,
+                            timeForService: time,
+                            username: usern
+                        });
+                        GenerateCalender(events);
+                    }
+
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            });
+
+            function GenerateCalender(events) {
+                var calendarEl = document.getElementById('calender');
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    events: events,
+                    displayEventTime: false,
+                    eventClick: function (info) {
+                        var id = document.getElementById("serviceID");
+                        var ids = info.event.extendedProps.ServiceRequestId;
+                        var name = document.getElementById("Username");
+                        var fullName = info.event.extendedProps.username;
+                        name.textContent = fullName;
+                        var addressText;
+                        var formData = new FormData();
+                        formData.append("id",ids);
+                        $.ajax({
+                            type: 'POST',
+                            url: '/spDashboard/getAddresses',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                        }).done(function (response) {
+                            if (response.status == "success") {
+                                addressText = response.data.addressLine1 + ", " + response.data.addressLine2 + ", " + response.data.city + ", " + response.data.state;
+                                var UserAdd = document.getElementById("address");
+                                UserAdd.textContent = addressText;
+                            } else {
+                                alert("something went wrong");
+                            }
+                        });
+
+                        var date = document.getElementById("date");
+                        var time = document.getElementById("time");
+                        var totalHRS = document.getElementById("serviceTime");
+                        var cost = document.getElementById("cost");
+                        id.textContent ="Service ID : " + info.event.extendedProps.ServiceRequestId;
+                        var date1 = info.event.start;
+                        var month = date1.getUTCMonth() + 1; //months from 1-12
+                        var day = date1.getDate();
+                        var year = date1.getUTCFullYear();
+                        var newdate = year + "-" + month + "-" + day;
+                        date.textContent = newdate;
+                        time.textContent = info.event.extendedProps.timeForService;
+                        totalHRS.innerHTML = "Total service hours : " + (info.event.extendedProps.ServiceHours + info.event.extendedProps.ExtraHours) + " HRS";
+                        cost.innerHTML = "Total service cost : " + info.event.extendedProps.TotalCost;
+                        showMsg1();
+                        @*"Service ID : " + info.event.extendedProps.ServiceRequestId + "<br>Service Hours : " + info.event.extendedProps.ServiceHours + "<br>Extra Hours : " + info.event.extendedProps.ExtraHours + "<br>Cost : " + info.event.extendedProps.TotalCost*@
+                    },
+                    validRange: {
+                        start: new Date()
+                    }
+                })
+                calendar.render();
+            }
+
+
+        });
+    </script>
+}

@@ -1,44 +1,6 @@
 ﻿@model IEnumerable<Sample.Models.ServiceRequest>
     <script src="~/js/serviceHistory.js"></script>
-<div class="ToastBack-card Reschedule" id="reschedule">
-    <div class="card-table-tr-toast">
-        <div class="headerButton">
-            <h4>Reschedule Service</h4>
-            <button class="span-center" onclick="closeRescchedule()">x</button>
-        </div>
-        <hr>
-        <span id="Error"></span>
-        <div class="flex-box">
-            <div>
-                <div class="input-group-cal">
-                    <img src="images/calendar.png" alt=""><input type="date" name="" id="datePick">
-                </div>
-                <select name="number-of-bath" id="timeService">
-                    <option value="02:00 PM">02:00 PM</option>
-                    <option value="03:00 PM">03:00 PM</option>
-                    <option value="04:00 PM">04:00 PM</option>
-                </select>
-            </div>
-        </div>
-        <p class="button-center"><button class="cancel-button" onclick="reschedulePost()">Ok</button></p>
-    </div>
-</div>
-<div class="ToastBack-card Reschedule" id="cancelToast">
-    <div class="card-table-tr-toast">
-        <div class="headerButton">
-            <h4>Cancel Service Request</h4>
-            <button class="span-center" onclick="closeCancel()">x</button>
-        </div>
-        <hr>
-        <div class="flex-box">
-            <div>
-                <h3>Why you want to cancel the service request?</h3>
-                <textarea cols="30" rows="5" id="reason"></textarea>
-            </div>
-        </div>
-        <p class="button-center"><button class="cancel-button" onclick="cancelPost()">Ok</button></p>
-    </div>
-</div>
+    <script src="~/js/excelExport.js"></script>
 
 <div class="ToastBack-card Reschedule" id="rate">
     <div class="card-table-tr-toast">
@@ -77,60 +39,107 @@
     </div>
 </div>
 
+<table id="TableExcel" style="display:none;">
+    <tr>
+        <th>Service Request ID</th>
+        <th>Service Details</th>
+        <th>Service Provider</th>
+        <th>Payment</th>
+        <th>Status</th>
+        <th>Comments</th>
+    </tr>
+    @foreach (var items in Model)
+    {
+<tr>
+    <td>@items.ServiceRequestId</td>
+    <td>
+        @{
+            var date = items.ServiceStartDate;
+            var time = date.ToString("hh:mm tt");
+            var d = date.ToString("dd/MM/yyyy");
+        }
+        @d &nbsp; @time
+    </td>
+    <td>
+
+        @if (items.ServiceProviderId != null)
+        {
+
+            @items.ServiceProvider.FirstName @:&nbsp; @items.ServiceProvider.LastName<br> <span>Rating : </span>@items.ServiceProvider.Ratings
+        }
+    </td>
+    <td>
+        @items.TotalCost
+    </td>
+    @if (items.Status == 2)
+    {
+        <td>
+            Cancelled
+        </td>
+    }
+    else if (items.Status == 3)
+    {
+        <td>
+            Completed
+        </td>
+    }
+    @if (items.Comments != null)
+    {
+        <td>
+            @items.Comments
+        </td>
+    }
+</tr>
+
+    }
+</table>
+
 <table class="table" id="Table">
 
     <tr>
-        <td colspan="5">
+        <td colspan="6">
             <div class="heading-table">
                 <h2>Service History</h2>
                 @*<button class="submit-button" onclick="openBookServicePage()">Add New Service Request</button>*@
+                <button class="submit-button" onclick="exportTableToExcel('TableExcel','Service History')">Export Table Data To Excel File</button>
             </div>
         </td>
     </tr>
     <tr>
-        <th onclick="sortTable(0,2,2)">Service Details <img src="images/sort.png" alt=""></th>
-        <th onclick="sortTable(1,2,2)">Service Provider <img src="images/sort.png" alt=""></th>
-        <th onclick="sortTable(2,2,2)">Payment <img src="images/sort.png" alt=""></th>
-        <th onclick="sortTable(3,2,2)">Status <img src="images/sort.png" alt=""></th>
+        <th onclick="sortTable(0,2,2)">Service Request ID<img src="images/sort.png" alt=""></th>
+        <th onclick="sortTable(1,2,2)">Service Details <img src="images/sort.png" alt=""></th>
+        <th onclick="sortTable(2,2,2)">Service Provider <img src="images/sort.png" alt=""></th>
+        <th onclick="sortTable(3,2,2)">Payment <img src="images/sort.png" alt=""></th>
+        <th onclick="sortTable(4,2,2)">Status <img src="images/sort.png" alt=""></th>
         <th class="action">Rate sp</th>
     </tr>
     @foreach (var items in Model)
     {
-        <tr>
-            <td>
-                @{
-                    var date = items.ServiceStartDate;
-                    var time = date.ToString("hh:mm tt");
-                    var d = date.ToString("dd/MM/yyyy");
-                }
-                <img class="img-table" src="images/calendar.png"> @d <br> @time
-            </td>
-            <td>
-                @*<div class="tableflex">
-                        <img class="prof-img" src="images/cap.png">
-                        <div>
-                            David <br>
-                            <div class="rating">
-                                <i class="fas fa-star selected"></i>
-                                <i class="fas fa-star selected"></i>
-                                <i class="fas fa-star selected"></i>
-                                <i class="fas fa-star selected"></i>
-                                <i class="far fa-star"></i>
-                                <label class="number" id="number"></label>
-                            </div>
-                        </div>
-                    </div>*@
-                @if (items.ServiceProviderId != null)
-                {
-                    <div class="tableflex">
-                        <img class="prof-img" src="images/cap.png">
-                        <div>
-                            @items.ServiceProvider.FirstName @items.ServiceProvider.LastName<br>
-                        <div class="rating">
-                            <div class="my-rating" id="@items.ServiceRequestId"></div><span id="ratingDisplay">@items.ServiceProvider.Ratings</span>
-                             @if (items.ServiceProviderId != null)
-                             {
-                             <script>
+<tr>
+    <td>
+        @items.ServiceRequestId
+    </td>
+    <td>
+        @{
+            var date = items.ServiceStartDate;
+            var time = date.ToString("hh:mm tt");
+            var d = date.ToString("dd/MM/yyyy");
+        }
+        <img class="img-table" src="images/calendar.png"> @d <br> @time
+    </td>
+    <td>
+
+        @if (items.ServiceProviderId != null)
+        {
+            <div class="tableflex">
+                <img class="prof-img" src="images/cap.png">
+                <div>
+                    @items.ServiceProvider.FirstName @items.ServiceProvider.LastName<br>
+                    <div class="rating">
+                        <div class="my-rating" id="@items.ServiceRequestId"></div><span id="ratingDisplay">@items.ServiceProvider.Ratings</span>
+                        @if (items.ServiceProviderId != null)
+                        {
+                            <script>
 
                                 $("#@items.ServiceRequestId").starRating({
                                             starSize: 25,
@@ -139,34 +148,46 @@
                                         ratedColors:['ffd800', 'ffd800', 'ffd800', 'ffd800', 'ffd800'],
                                         readOnly: true
                                     });
-                             </script>
-                             }
-                        </div>
-                        </div>
+                            </script>
+                        }
                     </div>
-                }
-            </td>
-            <td class="money">
-                <i class="fas fa-dollar-sign"></i><b>@items.TotalCost</b>
-            </td>
-            @if (items.Status == 2)
-            {
-                <td>
-                    <div class="status cancled">
-                        <h3 id="status">Cancled</h3>
-                    </div>
-                </td>
-            }
-            @if (items.ServiceProviderId == null)
-            {
-                <td class="action"><button class="rate-button" disabled>Rate SP</button></td>
-            }
-            else
-            {
-                <td class="action"><button class="rate-button" onclick="rateSP('@items.ServiceProviderId', '@items.UserId', '@items.ServiceRequestId')">Rate SP</button></td>
-            }
+                </div>
+            </div>
+        }
+    </td>
+    <td class="money">
+        <i class="fas fa-dollar-sign"></i><b>@items.TotalCost</b>
+    </td>
+    @if (items.Status == 2)
+    {
+        <td>
+            <div class="status cancled">
+                <h3 id="status">Cancled</h3>
+            </div>
+        </td>
+    }
+    else if (items.Status == 3)
+    {
+        <td>
+            <div class="status cancled">
+                <h3 id="status">Completed</h3>
+            </div>
+        </td>
+    }
+    @if (items.ServiceProviderId == null)
+    {
+        <td class="action"><button class="rate-button" disabled>Rate SP</button></td>
+    }
+    else if (items.Status == 3)
+    {
+        <td class="action"><button class="rate-button" onclick="rateSP('@items.ServiceProviderId', '@items.UserId', '@items.ServiceRequestId')">Rate SP</button></td>
+    }
+    else
+    {
+        <td class="action"><button class="rate-button" disabled>Rate SP</button></td>
+    }
 
-        </tr>
+</tr>
         
     }
     <tr>
@@ -202,7 +223,7 @@
     <tr class="no-border">
         <td colspan="6">
             <div class="heading-table">
-                <h2>Current Service Requests</h2>
+                <h2>Service History</h2>
                 <button class="submit-button" onclick="openBookServicePage()">Add New Service Request</button>
             </div>
         </td>
@@ -253,6 +274,12 @@
                 <div class="status cancled">
                     <h3 id="status">Cancled</h3>
                 </div>
+            }
+            else if (items.Status == 3)
+            {
+            <div class="status cancled">
+                <h3 id="status">Completed</h3>
+            </div>
             }
             <hr>
             @if (items.ServiceProviderId == null)

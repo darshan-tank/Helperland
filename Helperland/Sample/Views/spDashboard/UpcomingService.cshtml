@@ -1,116 +1,129 @@
-﻿<table class="table" id="Table">
-    <tr class="no-border">
-        <td colspan="6">
-            <div class="heading-table">
-                <h3>Upcoming Service</h3>
+﻿@model IEnumerable<Sample.Models.ServiceRequest>
+
+    <div class="ToastBack" id="displayUpcomingServiceForSP">
+        <div class="ToastContainer" id="containerService">
+            <div class="toast-header">
+                <h3>Service Details</h3>
+                <a onclick="closeUpcomingServiceRequest()">x</a>
             </div>
-        </td>
-    </tr>
-    <tr>
-        <th onclick="sortTable(0,2,2)">Service ID <img src="images/sort.png" alt=""></th>
-        <th onclick="sortTable(1,2,2)">Service date <img src="images/sort.png" alt=""></th>
-        <th colspan="2" onclick="sortTable(2,2,2)">Customer details <img src="images/sort.png" alt=""></th>
-        <th onclick="sortTable(3,2,2)">Distance <img src="images/sort.png" alt=""></th>
-        <th class="action">Actions</th>
-    </tr>
-    <tr>
-        <td>323436</td>
-        <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
-        <td colspan="2">David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
-        <td>10 km</td>
-        <td class="action"><button class="cancel-button">Cancel</button></td>
-    </tr>
-    <tr>
-        <td>323434</td>
-        <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
-        <td colspan="2">Aavid Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
-        <td>10 km</td>
-        <td class="action"><button class="cancel-button">Cancel</button></td>
-    </tr>
-    <tr>
-        <td>323436</td>
-        <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
-        <td colspan="2">David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
-        <td>10 km</td>
-        <td class="action"><button class="cancel-button">Cancel</button></td>
-    </tr>
-    <tr>
-        <td>323436</td>
-        <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
-        <td colspan="2">David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
-        <td>10 km</td>
-        <td class="action"><button class="cancel-button">Cancel</button></td>
-    </tr>
-    <tr>
-        <td>323436</td>
-        <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
-        <td colspan="2">David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
-        <td>10 km</td>
-        <td class="action"><button class="cancel-button">Cancel</button></td>
-    </tr>
-    <tr>
-        <td>323436</td>
-        <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
-        <td colspan="2">David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
-        <td>10 km</td>
-        <td class="action"><button class="cancel-button">Cancel</button></td>
-    </tr>
-    <tr>
-        <td>323436</td>
-        <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
-        <td colspan="2">David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
-        <td>10 km</td>
-        <td class="action"><button class="cancel-button">Cancel</button></td>
-    </tr>
-    <tr>
-        <td>323436</td>
-        <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
-        <td colspan="2">David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
-        <td>11 km</td>
-        <td class="action"><button class="cancel-button">Cancel</button></td>
-    </tr>
-    <tr>
-        <td>323436</td>
-        <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
-        <td colspan="2">David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
-        <td>10 km</td>
-        <td class="action"><button class="cancel-button">Cancel</button></td>
-    </tr>
-    <tr>
-        <td>323436</td>
-        <td><img class="img-table" src="images/calendar2.png"> 09/04/2018 <br> <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</td>
-        <td colspan="2">David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</td>
-        <td>10 km</td>
-        <td class="action"><button class="cancel-button">Cancel</button></td>
-    </tr>
-    <tr>
-        <td colspan="6">
-            <div class="footer-table">
-                <div class="left-side">
-                    <h3>Show </h3>
-                    <select>
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                    </select>
-                    <h3>entries</h3>
-                    <h3>Total Records :</h3><span id="count">55</span>
-                </div>
-                <div class="right-side">
-                    <i class="fas fa-step-backward"></i>
-                    <i class="fas fa-chevron-left"></i>
-                    <h3 class="page-active">1</h3>
-                    <h3>2</h3>
-                    <h3>3</h3>
-                    <h3>4</h3>
-                    <i class="fas fa-chevron-right"></i>
-                    <i class="fas fa-step-forward"></i>
-                </div>
+            <p id="dateTimeDisplayUS">07/03/2022 02:00 PM - 05:00 PM</p>
+            <p>Duration : <label id="durationDisplayUS">3</label> Hrs</p>
+            <hr>
+            <p>Service ID : <label id="serviceIdDisplayUS">3</label></p>
+            <p>
+                Extras :
+                <ul id="extraULUS">
+                </ul>
+            </p>
+            <p>Total Payment : <label id="paymentDisplayUS">3</label></p>
+            <hr>
+            <p>Customer Name : <label id="customerNameDisplayUS">xyz</label></p>
+            <p>Service Address : <label id="serviceAddressDisplayUS">xyz</label></p>
+            <hr>
+            <p>Comments</p>
+            <p id="commentsDisplayUS"></p>
+            <p id="petsDisplayUS">No pets</p>
+            <hr>
+            <div>
+                <button class="cancel-button active-li" id="completeButton" onclick="CompleteServiceUS()" disabled>Complete</button>
+                <button class="cancel-button active-li" id="cancelButton" onclick="CancelServiceUS()" disabled>Cancel</button>
             </div>
-        </td>
-    </tr>
-</table>
+            
+        </div>
+    </div>
+
+    <table class="table" id="Table">
+        <tr class="no-border">
+            <td colspan="6">
+                <div class="heading-table">
+                    <h3>Upcoming Service</h3>
+                    <div><input type="checkbox" id="petsCheckbox" name="petsCheckbox" onclick="PetsToggel();" />  Include Pets at Home</div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th onclick="sortTable(0,2,2)">Service ID <img src="~/images/sort.png" alt=""></th>
+            <th onclick="sortTable(1,2,2)">Service date <img src="~/images/sort.png" alt=""></th>
+            <th colspan="2" onclick="sortTable(2,2,2)">Customer details <img src="~/images/sort.png" alt=""></th>
+            <th onclick="sortTable(3,2,2)">Payment <img src="~/images/sort.png" alt=""></th>
+            <th class="action">Actions</th>
+        </tr>
+        @foreach (var items in Model)
+        {
+            var date1 = items.ServiceStartDate;
+            DateTime finalDate = date1.AddHours(items.ServiceHours);
+            var extra1 = items.ExtraHours ?? 0.0;
+            finalDate = finalDate.AddHours(extra1);
+
+
+            if (finalDate < DateTime.Now)
+            {
+                <tr class="TR-Dashboard @items.HasPets">
+                    <td onclick="showServiceDetailsForUS('@items.ServiceRequestId','@DateTime.Now')">@items.ServiceRequestId</td>
+                    @{
+                        var date = items.ServiceStartDate;
+                        var time = date.ToString("hh:mm tt");
+                        DateTime endDate = date.AddHours(items.ServiceHours);
+                        var extra = items.ExtraHours ?? 0.0;
+                        endDate = endDate.AddHours(extra);
+                        var EndTime = endDate.ToString("hh:mm tt");
+                        var d = date.ToString("dd/MM/yyyy");
+                    }
+                    <td onclick="showServiceDetailsForUS('@items.ServiceRequestId','@DateTime.Now')"><img class="img-table" src="~/images/calendar2.png"> @d <br> <img class="img-table" src="~/images/layer-14.png"> @time - @EndTime</td>
+                    <td colspan="2" onclick="showServiceDetailsForUS('@items.ServiceRequestId','@DateTime.Now')">@items.User.FirstName @items.User.LastName <br><img src="~/images/layer-15.png"> @items.ServiceRequestaddress.AddressLine1 @items.ServiceRequestaddress.AddressLine2 , @items.ServiceRequestaddress.City @items.ServiceRequestaddress.PostalCode</td>
+                    <td onclick="showServiceDetailsForUS('@items.ServiceRequestId','@DateTime.Now')">@items.TotalCost</td>
+                    <td class="action"><button class="cancel-button active-li" onclick="CompleteService('@items.ServiceRequestId')">Complete</button></td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td class="TR-Dashboard @items.HasPets" onclick="showServiceDetailsForUS('@items.ServiceRequestId')">@items.ServiceRequestId</td>
+                    @{
+                        var date = items.ServiceStartDate;
+                        var time = date.ToString("hh:mm tt");
+                        DateTime endDate = date.AddHours(items.ServiceHours);
+                        var extra = items.ExtraHours ?? 0.0;
+                        endDate = endDate.AddHours(extra);
+                        var EndTime = endDate.ToString("hh:mm tt");
+                        var d = date.ToString("dd/MM/yyyy");
+                    }
+                    <td class="TR-Dashboard @items.HasPets" onclick="showServiceDetailsForUS('@items.ServiceRequestId')"><img class="img-table" src="~/images/calendar2.png"> @d <br> <img class="img-table" src="~/images/layer-14.png"> @time - @EndTime</td>
+                    <td colspan="2" class="TR-Dashboard @items.HasPets" onclick="showServiceDetailsForUS('@items.ServiceRequestId')">@items.User.FirstName @items.User.LastName <br><img src="~/images/layer-15.png"> @items.ServiceRequestaddress.AddressLine1 @items.ServiceRequestaddress.AddressLine2 , @items.ServiceRequestaddress.City @items.ServiceRequestaddress.PostalCode</td>
+                    <td class="TR-Dashboard @items.HasPets" onclick="showServiceDetailsForUS('@items.ServiceRequestId')">@items.TotalCost</td>
+                    <td class="action"><button class="cancel-button active-li" onclick="CancelService('@items.ServiceRequestId')">Cancel</button></td>
+                </tr>
+            }
+        }
+
+        <tr>
+            <td colspan="6">
+                <div class="footer-table">
+                    <div class="left-side">
+                        <h3>Show </h3>
+                        <select>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                        <h3>entries</h3>
+                        <h3>Total Records :</h3><span id="count">55</span>
+                    </div>
+                    <div class="right-side">
+                        <i class="fas fa-step-backward"></i>
+                        <i class="fas fa-chevron-left"></i>
+                        <h3 class="page-active">1</h3>
+                        <h3>2</h3>
+                        <h3>3</h3>
+                        <h3>4</h3>
+                        <i class="fas fa-chevron-right"></i>
+                        <i class="fas fa-step-forward"></i>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
 <table class="card">
     <tr class="no-border">
         <td colspan="6">
@@ -119,156 +132,68 @@
             </div>
         </td>
     </tr>
-    <tr>
-        <td>
-            <div class="card-table-tr">
-                <h4>323436</h4>
-                <hr>
-                <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
-                <hr>
-                <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
-                <hr>
-                <p>10 km</p>
-                <hr>
-                <p class="button-center"><button class="cancel-button">Cancel</button></p>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="card-table-tr">
-                <h4>323436</h4>
-                <hr>
-                <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
-                <hr>
-                <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
-                <hr>
-                <p>10 km</p>
-                <hr>
-                <p class="button-center"><button class="cancel-button">Cancel</button></p>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="card-table-tr">
-                <h4>323436</h4>
-                <hr>
-                <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
-                <hr>
-                <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
-                <hr>
-                <p>10 km</p>
-                <hr>
-                <p class="button-center"><button class="cancel-button">Cancel</button></p>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="card-table-tr">
-                <h4>323436</h4>
-                <hr>
-                <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
-                <hr>
-                <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
-                <hr>
-                <p>10 km</p>
-                <hr>
-                <p class="button-center"><button class="cancel-button">Cancel</button></p>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="card-table-tr">
-                <h4>323436</h4>
-                <hr>
-                <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
-                <hr>
-                <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
-                <hr>
-                <p>10 km</p>
-                <hr>
-                <p class="button-center"><button class="cancel-button">Cancel</button></p>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="card-table-tr">
-                <h4>323436</h4>
-                <hr>
-                <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
-                <hr>
-                <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
-                <hr>
-                <p>10 km</p>
-                <hr>
-                <p class="button-center"><button class="cancel-button">Cancel</button></p>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="card-table-tr">
-                <h4>323436</h4>
-                <hr>
-                <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
-                <hr>
-                <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
-                <hr>
-                <p>10 km</p>
-                <hr>
-                <p class="button-center"><button class="cancel-button">Cancel</button></p>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="card-table-tr">
-                <h4>323436</h4>
-                <hr>
-                <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
-                <hr>
-                <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
-                <hr>
-                <p>10 km</p>
-                <hr>
-                <p class="button-center"><button class="cancel-button">Cancel</button></p>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="card-table-tr">
-                <h4>323436</h4>
-                <hr>
-                <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
-                <hr>
-                <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
-                <hr>
-                <p>10 km</p>
-                <hr>
-                <p class="button-center"><button class="cancel-button">Cancel</button></p>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="card-table-tr">
-                <h4>323436</h4>
-                <hr>
-                <p><img class="img-table" src="images/calendar2.png"> 09/04/2018 <img class="img-table" src="images/layer-14.png"> 12:00 - 18:00</p>
-                <hr>
-                <p>David Bough <br><img src="images/layer-15.png"> Musterstrabe 5,12345 Bonn</p>
-                <hr>
-                <p>10 km</p>
-                <hr>
-                <p class="button-center"><button class="cancel-button">Cancel</button></p>
-            </div>
-        </td>
-    </tr>
+    @foreach (var items in Model)
+    {
+        var date1 = items.ServiceStartDate;
+        date1.AddHours(items.ServiceHours);
+        var extra1 = items.ExtraHours ?? 0.0;
+        date1.AddHours(extra1);
+
+        if (date1 < DateTime.Now)
+        {
+        <tr class="TR-Dashboard @items.HasPets">
+            <td>
+                <div class="card-table-tr">
+                    <h4>@items.ServiceRequestId</h4>
+                    @{
+                        var date = items.ServiceStartDate;
+                        var time = date.ToString("hh:mm tt");
+                        DateTime endDate = date.AddHours(items.ServiceHours);
+                        var extra = items.ExtraHours ?? 0.0;
+                        endDate = endDate.AddHours(extra);
+                        var EndTime = endDate.ToString("hh:mm tt");
+                        var d = date.ToString("dd/MM/yyyy");
+                    }
+                    <hr>
+                    <p><img class="img-table" src="~/images/calendar2.png"> @d <img class="img-table" src="~/images/layer-14.png"> @time - @EndTime</p>
+                    <hr>
+                    <p>@items.User.FirstName @items.User.LastName <br><img src="~/images/layer-15.png"> @items.ServiceRequestaddress.AddressLine1 @items.ServiceRequestaddress.AddressLine2 , @items.ServiceRequestaddress.City @items.ServiceRequestaddress.PostalCode</p>
+                    <hr>
+                    <p>@items.TotalCost</p>
+                    <hr>
+                    <p class="button-center"><button class="cancel-button active-li" onclick="CompleteService('@items.ServiceRequestId')">Complete</button></p>
+                </div>
+            </td>
+        </tr>
+        } else
+        {
+<tr class="TR-Dashboard @items.HasPets" onclick="showServiceDetailsForUS('@items.ServiceRequestId')">
+    <td>
+        <div class="card-table-tr">
+            <h4>@items.ServiceRequestId</h4>
+            @{
+                var date = items.ServiceStartDate;
+                var time = date.ToString("hh:mm tt");
+                DateTime endDate = date.AddHours(items.ServiceHours);
+                var extra = items.ExtraHours ?? 0.0;
+                endDate = endDate.AddHours(extra);
+                var EndTime = endDate.ToString("hh:mm tt");
+                var d = date.ToString("dd/MM/yyyy");
+            }
+            <hr>
+            <p><img class="img-table" src="~/images/calendar2.png"> @d <img class="img-table" src="~/images/layer-14.png"> @time - @EndTime</p>
+            <hr>
+            <p>@items.User.FirstName @items.User.LastName <br><img src="~/images/layer-15.png"> @items.ServiceRequestaddress.AddressLine1 @items.ServiceRequestaddress.AddressLine2 , @items.ServiceRequestaddress.City @items.ServiceRequestaddress.PostalCode</p>
+            <hr>
+            <p>@items.TotalCost</p>
+            <hr>
+            <p class="button-center"><button class="cancel-button active-li" onclick="CancelService('@items.ServiceRequestId')">Cancel</button></p>
+        </div>
+    </td>
+</tr>
+        }
+    }
+    
     <tr>
         <td colspan="5">
             <div class="footer-table">

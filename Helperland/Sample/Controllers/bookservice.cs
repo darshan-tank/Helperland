@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MimeKit;
 using Sample.Data;
 using Sample.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MailKit.Net.Smtp;
 
 namespace Sample.Controllers
 {
@@ -27,9 +29,11 @@ namespace Sample.Controllers
         [HttpPost]
         public JsonResult code(string code)
         {
-            int zipcode = _dbcontext.Zipcodes.Count(x => x.ZipcodeValue == code);
-            if (zipcode >= 1)
+            /*int zipcode = _dbcontext.Zipcodes.Count(x => x.ZipcodeValue == code);*/
+            var count = _dbcontext.Users.Count(x => (x.UserTypeId == 2) && (x.ZipCode == code));
+            if (count >= 1)
             {
+                HttpContext.Session.SetString("ServicePostalCode", code);
                 return Json(new { Status = "success" });
             } else
             {
@@ -128,6 +132,7 @@ namespace Sample.Controllers
             sr.UserId = userID;
             sr.ServiceId = 0;
             sr.ServiceStartDate = dateData;
+            sr.Status = status;
 
             UserAddress userAdd = _dbcontext.UserAddresses.Where(x => x.AddressId == addressData).FirstOrDefault();
 
@@ -135,6 +140,7 @@ namespace Sample.Controllers
             if (FavPro != null && FavPro != "undefined")
             {
                 sr.ServiceProviderId = int.Parse(FavPro);
+                sr.Status = 4;
             }
             sr.ServiceHourlyRate = 2034;
             sr.ServiceHours = totalHrsData;
@@ -144,7 +150,6 @@ namespace Sample.Controllers
             sr.TotalCost = totalAmountData;
             sr.Comments = commentsData;
             sr.HasPets = petBit;
-            sr.Status = status;
             sr.CreatedDate = DateTime.Now;
             sr.ModifiedDate = DateTime.Now;
             _dbcontext.ServiceRequests.Add(sr);
@@ -173,7 +178,7 @@ namespace Sample.Controllers
 
             
 
-            if(extraData.Count > 1)
+            if(extraData.Count >= 1)
             {
                 string[] strTemp = extraData[0].Split(new char[] { ',', }, StringSplitOptions.RemoveEmptyEntries);
                 System.Diagnostics.Debug.WriteLine(strTemp.Length);
@@ -193,6 +198,60 @@ namespace Sample.Controllers
 
             if(saveChange1 >= 1 && saveChange2 >= 1)
             {
+                HttpContext.Session.Remove("ServicePostalCode");
+
+                if(sr.ServiceProviderId == null)
+                {
+                    List<User> ServiceProviders = _dbcontext.Users.Where(x => (x.UserTypeId == 2) && (x.ZipCode == postalData)).ToList();
+                    for(var i = 0; i < ServiceProviders.Count; i++)
+                    {
+                        var count = _dbcontext.FavoriteAndBlockeds.Count(x => (x.UserId == userID) && (x.TargetUserId == ServiceProviders[i].UserId) && (x.IsBlocked == true));
+                        if(count >= 1)
+                        {
+                            
+                        } else
+                        {
+                            var message = new MimeMessage();
+                            message.From.Add(new MailboxAddress("Helperland", "exm23391@gmail.com"));
+                            message.To.Add(new MailboxAddress("Helperland", ServiceProviders[i].Email));
+                            message.Subject = "Notification : New Service request added.";
+                            message.Body = new TextPart("plain")
+                            {
+                                Text = "New service request added for " + postalData + " this postalcode. Service Id is : " + Id
+                            };
+
+                            using (var client = new SmtpClient())
+                            {
+                                client.Connect("smtp.gmail.com", 587, false);
+                                client.Authenticate("exm23391@gmail.com", "darshan@1122");
+                                client.Send(message);
+                                client.Disconnect(true);
+                            }
+                        }
+                    }
+                } else
+                {
+                    User SelectedServiceProvider = _dbcontext.Users.Where(x => (x.UserId == sr.ServiceProviderId) && (x.UserTypeId == 2)).FirstOrDefault();
+                    var message = new MimeMessage();
+                    message.From.Add(new MailboxAddress("Helperland", "exm23391@gmail.com"));
+                    message.To.Add(new MailboxAddress("Helperland", SelectedServiceProvider.Email));
+                    message.Subject = "Notification : New Service request added.";
+                    message.Body = new TextPart("plain")
+                    {
+                        Text = "New service request added for " + postalData + " this postalcode. Service Id is : " + Id
+                    };
+
+                    using (var client = new SmtpClient())
+                    {
+                        client.Connect("smtp.gmail.com", 587, false);
+                        client.Authenticate("exm23391@gmail.com", "darshan@1122");
+                        client.Send(message);
+                        client.Disconnect(true);
+                    }
+                }
+
+                
+
                 return Json(new { Status = "success"});
             } else
             {
@@ -201,11 +260,11 @@ namespace Sample.Controllers
         }
         public IActionResult getaddress()
         {
+            var ServicePostalCode = HttpContext.Session.GetString("ServicePostalCode");
             System.Threading.Thread.Sleep(2000);
             String email = HttpContext.Session.GetString("UserEmail");
             User newUser = _dbcontext.Users.Where(x=>x.Email == email).FirstOrDefault();
-            List<UserAddress> address = _dbcontext.UserAddresses.Where(x=>x.UserId == newUser.UserId).ToList();
-            System.Diagnostics.Debug.WriteLine(address);
+            List<UserAddress> address = _dbcontext.UserAddresses.Where(x=>(x.UserId == newUser.UserId) && (x.PostalCode == ServicePostalCode)).ToList();
             return View(address);
             
         }
@@ -214,7 +273,7 @@ namespace Sample.Controllers
             System.Threading.Thread.Sleep(2000);
             String email = HttpContext.Session.GetString("UserEmail");
             User newUser = _dbcontext.Users.Where(x => x.Email == email).FirstOrDefault();
-            List<FavoriteAndBlocked> FandB = _dbcontext.FavoriteAndBlockeds.Where(x => x.UserId == newUser.UserId).ToList();
+            List<FavoriteAndBlocked> FandB = _dbcontext.FavoriteAndBlockeds.Where(x => (x.UserId == newUser.UserId) && (x.IsFavorite == true) && (x.IsBlocked == false)).ToList();
             for (var i = 0; i < FandB.Count; i++)
             {
                 FandB[i].User = _dbcontext.Users.Where(x => x.UserId == FandB[i].UserId).FirstOrDefault();

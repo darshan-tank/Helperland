@@ -1,0 +1,649 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model Sample.Models.User
+<script>
+    window.addEventListener('load', (event) => {
+        var allLI = document.getElementsByClassName("li-item");
+        for (var i = 0; i < allLI.length; i++) {
+            allLI[i].classList.remove("active-li");
+        }
+    });
+
+    function openUpcomingService() {
+        $("#right-container").html("Loading Address...").load('/spDashboard/UpcomingService');
+        var allLI = document.getElementsByClassName("li-item");
+        for (var i = 0; i < allLI.length; i++) {
+            allLI[i].classList.remove("active-li");
+        }
+        document.getElementById("upcomingServiceLI").classList.add("active-li");
+        var allMenuLI = document.getElementsByName("menuLi");
+        for (var i = 0; i < allMenuLI.length; i++) {
+            allMenuLI[i].classList.remove("active-li-menu");
+        }
+        document.getElementById("UpcomingServiceLI").classList.add("active-li-menu");
+    }
+
+    function openNewServiceRequest() {
+        $("#right-container").html("Loading Address...").load('/spDashboard/dashboard');
+        var allLI = document.getElementsByClassName("li-item");
+        for (var i = 0; i < allLI.length; i++) {
+            allLI[i].classList.remove("active-li");
+        }
+        document.getElementById("dashboardLI").classList.add("active-li");
+        var allMenuLI = document.getElementsByName("menuLi");
+        for (var i = 0; i < allMenuLI.length; i++) {
+            allMenuLI[i].classList.remove("active-li-menu");
+        }
+        document.getElementById("DashboardLI").classList.add("active-li-menu");
+    }
+
+    function openServiceSchedule() {
+        $("#right-container").html("Loading...").load('/spDashboard/ServiceSchedule');
+        var allLI = document.getElementsByClassName("li-item");
+        for (var i = 0; i < allLI.length; i++) {
+            allLI[i].classList.remove("active-li");
+        }
+        var current = document.getElementById("ServiceScheduleLI");
+        current.classList.add("active-li");
+        var allMenuLI = document.getElementsByName("menuLi");
+        for (var i = 0; i < allMenuLI.length; i++) {
+            allMenuLI[i].classList.remove("active-li-menu");
+        }
+        var currentMenu = document.getElementById("serviceScheduleMenuLI");
+        currentMenu.classList.add("active-li-menu");
+    }
+
+    function openServiceScheduleHistory() {
+        $("#right-container").html("Loading...").load('/spDashboard/ServiceHistory');
+        var allLI = document.getElementsByClassName("li-item");
+        for (var i = 0; i < allLI.length; i++) {
+            allLI[i].classList.remove("active-li");
+        }
+        var current = document.getElementById("serviceHistoryLI");
+        current.classList.add("active-li");
+        var allMenuLI = document.getElementsByName("menuLi");
+        for (var i = 0; i < allMenuLI.length; i++) {
+            allMenuLI[i].classList.remove("active-li-menu");
+        }
+        var currentMenu = document.getElementById("ServiceHistoryLI");
+        currentMenu.classList.add("active-li-menu");
+    }
+
+    function openMyRatings() {
+        $("#right-container").html("Loading...").load('/spDashboard/MyRating');
+        var allLI = document.getElementsByClassName("li-item");
+        for (var i = 0; i < allLI.length; i++) {
+            allLI[i].classList.remove("active-li");
+        }
+        var current = document.getElementById("myRatingsLI");
+        current.classList.add("active-li");
+        var allMenuLI = document.getElementsByName("menuLi");
+        for (var i = 0; i < allMenuLI.length; i++) {
+            allMenuLI[i].classList.remove("active-li-menu");
+        }
+        var currentMenu = document.getElementById("MyRatingsLI");
+        currentMenu.classList.add("active-li-menu");
+    }
+
+    function openBlockCustomer() {
+        $("#right-container").html("Loading...").load('/spDashboard/BlockCustomer');
+        var allLI = document.getElementsByClassName("li-item");
+        for (var i = 0; i < allLI.length; i++) {
+            allLI[i].classList.remove("active-li");
+        }
+        var current = document.getElementById("blockCustomerLI");
+        current.classList.add("active-li");
+        var allMenuLI = document.getElementsByName("menuLi");
+        for (var i = 0; i < allMenuLI.length; i++) {
+            allMenuLI[i].classList.remove("active-li-menu");
+        }
+        var currentMenu = document.getElementById("BlockCustomerLI");
+        currentMenu.classList.add("active-li-menu");
+    }
+</script>
+<script src="~/js/sort.js"></script>
+
+<div id="home"></div>
+<div class="header-contain" id="header" style="background: rgba(39, 39, 39, .7);">
+    <a class="logo" asp-controller="index" asp-action="index">
+        <img src="~/images/logo.png">
+    </a>
+    <div class="toggle" onclick="openMenu()" aria-expanded="false" id="buttonMenu">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+
+    <div class="navbar" id="mynav" data-visible="false">
+        <ul id="header-nav">
+            <li class="hidden"><a name="menuLi" id="notificationMenuLI">Notification</a></li>
+            <li class="hidden"><a name="menuLi" id="accountMenuLI" asp-action="setting">Account</a></li>
+            <li class="hidden"><a name="menuLi" asp-controller="spDashboard" asp-action="index" id="dashboardMenuLI">Dashboard</a></li>
+            <li class="hidden"><a name="menuLi" asp-controller="spDashboard" asp-action="index" id="favoriteProsMenuLI">Favorite Pros</a></li>
+            <li class="hidden"><a name="menuLi" id="serviceScheduleMenuLI" asp-controller="spDashboard" asp-action="index">Service Schedule</a></li>
+            <li class="hidden"><a name="menuLi" asp-controller="spDashboard" asp-action="index" id="serviceHistoryMenuLI">Service History</a></li>
+            <li class="hidden"><a name="menuLi" id="invoiceMenuLI">Invoice</a></li>
+            <li class="hidden"><a asp-controller="index" asp-action="logout">Logout</a></li>
+            <li>
+                <hr>
+            </li>
+            <li><a asp-controller="price">Prices & Service</a></li>
+            <li><a href="#">Warranty</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a asp-controller="contact">Contact</a></li>
+            <a><i class="fa fa-bell"></i><span class="icon-button__badge">2</span></a>
+            <a onclick="openM()"><i class="far fa-user-circle"></i><i class="fas fa-angle-down"></i></a>
+            <!-- <li class="flag">
+                            <a href="#" class="flag-icon"><img src="~/images/flag.png">
+                                <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a>
+                        </li> -->
+
+        </ul>
+        <li class="media-li"><a href="#"><i class="fa fa-facebook ups-icn" aria-hidden="true"></i></a></li>
+        <li class="media-li"><a href="#"><i class="fa fa-instagram ups-icn" aria-hidden="true"></i></a></li>
+    </div>
+</div>
+
+<div class="header-title-background">
+    <h2>Welcome, <b>@Context.Session.GetString("UserFirstName") @Context.Session.GetString("UserLastName")!</b></h2>
+</div>
+
+<div class="openMenu" id="openMenu">
+    <ul>
+        <li>
+            <p>Welcome,</p>
+            <p><span>@Context.Session.GetString("UserFirstName") @Context.Session.GetString("UserLastName")</span></p>
+        </li>
+        <hr>
+        <li>
+            @if (@Context.Session.GetString("UserType") == "2")
+            {
+                <a asp-controller="spDashboard" asp-action="index">My Dashboard</a>
+            }
+            @if (@Context.Session.GetString("UserType") == "3")
+            {
+                <a asp-controller="customerDashboard" asp-action="index">My Dashboard</a>
+            }
+        </li>
+        <li>
+            @if (@Context.Session.GetString("UserType") == "2")
+            {
+                <a asp-controller="spDashboard" asp-action="setting">My Settings</a>
+            }
+            @if (@Context.Session.GetString("UserType") == "3")
+            {
+                <a asp-controller="customerDashboard" asp-action="setting">My Settings</a>
+            }
+        </li>
+        <li><a asp-controller="index" asp-action="logout">Logout</a></li>
+    </ul>
+</div>
+
+<div class="ToastBack-card Reschedule" id="AddAddressModel">
+    <div class="card-table-tr-toast" style="margin: 40px auto;">
+        <div class="addressBlock" id="newaddress" style="display: block;">
+            <div class="flex-child">
+                <label>Street Name</label>
+                <input type="text" id="streetName" placeholder="Street name">
+            </div>
+            <div class="flex-child">
+                <label>House Number</label>
+                <input type="text" id="houseNumber" placeholder="House number">
+            </div>
+            <div class="flex-child">
+                <label>Postal Code</label>
+                <input type="text" id="postalCode" placeholder="Postal code">
+            </div>
+            <div class="flex-child">
+                <label>City</label>
+                <select id="city">
+                    <option value="Troisdrof">Troisdrof</option>
+                </select>
+            </div>
+            <div class="flex-child">
+                <label>Phone Number</label>
+                <div class="number-container">
+                    <select id="">
+                        <option value="+49">+49</option>
+                        <option value="+49">+49</option>
+                        <option value="+49">+49</option>
+                    </select>
+                    <input placeholder="Phone Number" id="phoneNumber">
+                </div>
+            </div>
+            <div class="flex-child-1">
+                <button id="submit" onclick="addAddress()">Save</button>
+                <button id="cancel" onclick="removeAddressModel()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ToastBack-card Reschedule" id="UpdateAddressModel">
+    <div class="card-table-tr-toast" style="margin: 40px auto;">
+        <div class="addressBlock" id="newaddress" style="display: block;">
+            <div class="flex-child">
+                <label>Street Name</label>
+                <input type="text" id="streetNameUpdate" placeholder="Street Name">
+            </div>
+            <div class="flex-child">
+                <label>House Number</label>
+                <input type="text" id="houseNumberUpdate" placeholder="House number">
+            </div>
+            <div class="flex-child">
+                <label>Postal Code</label>
+                <input type="text" id="postalCodeUpdate" placeholder="Postal code">
+            </div>
+            <div class="flex-child">
+                <label>City</label>
+                <select id="citySelect">
+                    <option value="Troisdrof">Troisdrof</option>
+                </select>
+            </div>
+            <div class="flex-child">
+                <label>Phone Number</label>
+                <div class="number-container">
+                    <select id="">
+                        <option value="+49">+49</option>
+                        <option value="+49">+49</option>
+                        <option value="+49">+49</option>
+                    </select>
+                    <input placeholder="Phone Number" id="phoneNumberUpdate">
+                </div>
+            </div>
+            <div class="flex-child-1">
+                <button id="submit" onclick="submitUpdatedAddress()">Save</button>
+                <button id="cancel" onclick="closeEditModel()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section>
+    <div class="container m-tb">
+        <div class="flex">
+
+            <div class="left">
+                <ul class="nav-lists">
+                    <li class="li-item" id="dashboardLI"><a asp-controller="spDashboard" asp-action="index">Dashboard</a></li>
+                    <li class="li-item active-li" id="upcomingServiceLI"><a asp-controller="spDashboard" asp-action="index">Upcoming services</a></li>
+                    <li class="li-item" id="ServiceScheduleLI"><a asp-controller="spDashboard" asp-action="index">Service Schedule</a></li>
+                    <li class="li-item" id="serviceHistoryLI"><a asp-controller="spDashboard" asp-action="index">Service History</a></li>
+                    <li class="li-item" id="myRatingsLI"><a asp-controller="spDashboard" asp-action="index">My Ratings</a></li>
+                    <li class="li-item" id="blockCustomerLI"><a asp-controller="spDashboard" asp-action="index">Block Customer</a></li>
+                </ul>
+            </div>
+            <div class="right table-scroll" id="right-container">
+
+                <div class="flex-container-fav form-tab">
+                    <div class="flex-tab">
+                        <a id="MyDetails" class="tab-button tb-active" onclick="openMyDetails()">My Details</a>
+                        <a id="ChangePassword" class="tab-button" onclick="openMyChangePassword()">Change Password</a>
+                    </div>
+                    <div id="myDetailsTab">
+                        <form>
+                            <div class="basic-details-flex">
+                                <label>Basic Details</label>
+                                @{ 
+                                    var src = "~/images/avatar-car.png";
+                                    if(Model.UserProfilePicture == null)
+                                    {
+                                        src = "~/images/avatar-car.png";
+                                    } else
+                                    {
+                                        src = Model.UserProfilePicture;
+                                    }
+                                }
+                                <img src="@src" alt="No Found" id="AvatarChange">
+                            </div>
+                            <div class="flex-tab-form-container">
+                                <div class="container-form-input">
+                                    <label>First name</label>
+                                    <input type="text" id="firstName" value="@Model.FirstName">
+                                </div>
+                                <div class="container-form-input">
+                                    <label>Last name</label>
+                                    <input type="text" id="lastName" value="@Model.LastName">
+                                </div>
+                                <div class="container-form-input">
+                                    <label>Email</label>
+                                    <input type="text" id="email" value="@Model.Email" disabled>
+                                </div>
+                                <div class="container-form-input">
+                                    <label>Mobile Number</label>
+                                    <div class="input-wrapper">
+                                        <select name="code" class="code">
+                                            <option value="volvo">+49</option>
+                                            <option value="saab">+99</option>
+                                            <option value="mercedes">+14</option>
+                                        </select>
+                                        <input type="text" name="" pattern="[0-9]{10}" min="10" max="10" class="call" placeholder="Mobile number" id="mobileNumber" value="@Model.Mobile">
+                                    </div>
+                                </div>
+                                <div class="container-form-input">
+                                    <label>Date of Birth</label>
+                                    <input type="date" value="@Model.DateOfBirth" id="dateOfBirth">
+                                    <script>
+                                        var date = new Date("@Model.DateOfBirth");
+                                        var dd = String(date.getDate()).padStart(2, '0');
+                                        var mm = String(date.getMonth() + 1).padStart(2, '0');
+                                        var yyyy = date.getFullYear();
+                                        var date1 = yyyy + '-' + mm + '-' + dd;
+                                        document.getElementById("dateOfBirth").value = date1;
+                                    </script>
+                                </div>
+                                <div class="container-form-input">
+                                    <label>Nationality</label>
+                                    <select name="code" id="nationality">
+                                        <option value="1">English</option>
+                                        <option value="2">German</option>
+                                    </select>
+                                </div>
+                                <div class="container-form-input flex-dir-row">
+                                    Gender :
+                                    <div><input type="radio" name="gender" value="1" checked> Male</div>
+                                    <div><input type="radio" name="gender" value="2"> Female</div>
+                                    <div><input type="radio" name="gender" value="3"> Rather not to say</div>
+                                </div>
+                                <div class="container-form-input flex-dir-row w-100">
+                                    Select Avatar :
+                                    <div class="hide-Radio"><input type="radio" onchange="handleChange(this);" name="avatar" value="/images/avatar-car.png" id="av1" checked><label for="av1"><img src="~/images/avatar-car.png" alt=""></label></div>
+                                    <div class="hide-Radio"><input type="radio" onchange="handleChange(this);" name="avatar" value="/images/avatar-female.png" id="av2"><label for="av2"><img src="~/images/avatar-female.png" alt=""></label></div>
+                                    <div class="hide-Radio"><input type="radio" onchange="handleChange(this);" name="avatar" value="/images/avatar-hat.png" id="av3"><label for="av3"><img src="~/images/avatar-hat.png" alt=""></label></div>
+                                    <div class="hide-Radio"><input type="radio" onchange="handleChange(this);" name="avatar" value="/images/avatar-iron.png" id="av4"><label for="av4"><img src="~/images/avatar-iron.png" alt=""></label></div>
+                                    <div class="hide-Radio"><input type="radio" onchange="handleChange(this);" name="avatar" value="/images/avatar-male.png" id="av5"><label for="av5"><img src="~/images/avatar-male.png" alt=""></label></div>
+                                    <div class="hide-Radio"><input type="radio" onchange="handleChange(this);" name="avatar" value="/images/avatar-ship.png" id="av6"><label for="av6"><img src="~/images/avatar-ship.png" alt=""></label></div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="flex-tab-form-container">
+                                @{ 
+                                    var add1 = "";
+                                    var add2 = "";
+                                    var postal = "";
+
+                                    if (Model.UserAddressforUser == null)
+                                    {
+                                        add1 = "";
+                                        add2 = "";
+                                        postal = "";
+                                    } else
+                                    {
+                                        add1 = Model.UserAddressforUser.AddressLine1;
+                                        add2 = Model.UserAddressforUser.AddressLine2;
+                                        postal = Model.UserAddressforUser.PostalCode;
+                                    }
+                                }
+                                <div class="container-form-input">
+                                    <label>Street Name</label>
+                                    <input type="text" id="streetNameSP" placeholder="Street name" value="@add1" required>
+                                </div>
+                                <div class="container-form-input">
+                                    <label>House Number</label>
+                                    <input type="text" id="houseNumberSP" placeholder="House number" value="@add2" required>
+                                </div>
+                                <div class="container-form-input">
+                                    <label>Postal Code</label>
+                                    <input type="text" id="postalCodeSP" placeholder="Postal code" value="@postal" required>
+                                </div>
+                                <div class="container-form-input">
+                                    <label>City</label>
+                                    <select id="citySP">
+                                        <option value="Troisdrof">Troisdrof</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="submit-button-form" onclick="saveMyDetails()">Save</button>
+                        </form>
+                    </div>
+                    <div id="changePasswordTab" class="display-none">
+                        <div class="flex-tab-form-container flex-direction">
+                            <span id="errorConfirmPassword" class="text-danger-error"></span>
+                            <div class="container-form-input">
+                                <label>Old Password</label>
+                                <input type="password" id="oldPassword" required>
+                            </div>
+                            <div class="container-form-input">
+                                <label>New Password</label>
+                                <input type="password" id="Password" required>
+                            </div>
+                            <div class="container-form-input">
+                                <label>Confirm Password</label>
+                                <input type="password" id="confirmPassword" required>
+                            </div>
+                            <button class="submit-button-form" onclick="changePassword()">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-one">
+        <div class="container">
+            <div class="footer-before">
+                <a class="logo" asp-controller="index" asp-action="index">
+                    <img src="~/images/logo.png">
+                </a>
+                <div class="footer-navbar">
+                    <ul id="footer-nav">
+                        <li><a asp-controller="index" asp-action="index">home</a></li>
+                        <li><a asp-controller="about" asp-action="index">about</a></li>
+                        <li><a href="#">testimonial</a></li>
+                        <li><a asp-controller="faq" asp-action="index">faq</a></li>
+                        <li><a href="#">insurance policy</a></li>
+                        <li><a href="#">impressum</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <ul class="socail-media">
+                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <hr style="width:90%;text-align:center;border: 0.5px solid #424242;">
+        <div class="copright">
+            <div class="footer-copyright">
+                <h6 style="text-align: center;">©2018 Helperland. All rights reserved. Terms and Conditions | Privacy Policy</h6>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<script>
+            var acc = document.getElementsByClassName("accordion");
+            var i;
+
+            for (i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    var panel = this.nextElementSibling;
+                    if (panel.style.maxHeight) {
+                        panel.style.maxHeight = null;
+                    } else {
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                    }
+                });
+            }
+</script>
+
+<script>
+
+    function handleChange(srcimg) {
+        var img = document.getElementById("AvatarChange");
+        img.src = srcimg.value;
+    }
+
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+    @*document.getElementById("defaultOpen").click();*@
+
+    var navList = document.getElementById("nav-lists");
+
+    function Show() {
+        navList.classList.add("_Menus-show");
+    }
+
+    function Hide() {
+        navList.classList.remove("_Menus-show");
+    }
+</script>
+
+<script>
+            // $(document).ready(function() {
+            //     $(".toggle").click(function() {
+            //         $("#mynav").toggle();
+            //     });
+            // });
+
+            var addressID;
+
+            window.onscroll = function () {
+                myFunction()
+            };
+
+            var header = document.getElementById("header");
+            var sticky = "60";
+
+            function myFunction() {
+                console.log(window.pageYOffset);
+                if (window.pageYOffset > sticky) {
+                    header.classList.add("sticky");
+                } else {
+                    header.classList.remove("sticky");
+                }
+            }
+
+            function openMenu() {
+                var popupLi = document.querySelector(".navbar");
+                var menuButton = document.querySelector(".toggle");
+                // popupLi.classList.toggle("show-menu");
+                var visibility = popupLi.getAttribute("data-visible");
+                console.log(visibility);
+                if (visibility === "false") {
+                    popupLi.setAttribute("data-visible", true);
+                    menuButton.setAttribute("aria-expanded", true);
+                    var body = document.getElementById('home');
+                    body.classList.add("back");
+                } else if (visibility === "true") {
+                    popupLi.setAttribute("data-visible", false);
+                    menuButton.setAttribute("aria-expanded", false);
+                    var body = document.getElementById('home');
+                    body.classList.remove("back");
+                }
+            }
+
+            function openMyDetails() {
+                var tabButtons = document.getElementsByClassName("tab-button");
+                for (var i = 0; i < tabButtons.length; i++) {
+                    tabButtons[i].classList.remove("tb-active");
+                }
+                var current = document.getElementById("MyDetails");
+                current.classList.add("tb-active");
+                document.getElementById("myDetailsTab").style.setProperty('display', 'block', 'important');
+                document.getElementById("changePasswordTab").style.setProperty('display', 'none', 'important');
+            }
+            function openMyChangePassword() {
+                var tabButtons = document.getElementsByClassName("tab-button");
+                for (var i = 0; i < tabButtons.length; i++) {
+                    tabButtons[i].classList.remove("tb-active");
+                }
+                var current = document.getElementById("ChangePassword");
+                current.classList.add("tb-active");
+                document.getElementById("myDetailsTab").style.setProperty('display', 'none', 'important');
+                document.getElementById("changePasswordTab").style.setProperty('display', 'block', 'important');
+            }
+
+            function saveMyDetails() {
+                showLoader();
+                var formData = new FormData();
+                formData.append("fname", $("#firstName").val());
+                formData.append("lname", $("#lastName").val());
+                formData.append("number", $("#mobileNumber").val());
+                formData.append("dob", $("#dateOfBirth").val());
+                formData.append("nationality", $("#nationality").val());
+                formData.append("gender", $('input[name="gender"]:checked').val());
+                formData.append("avatar", $('input[name="avatar"]:checked').val());
+                formData.append("add1", $("#streetNameSP").val());
+                formData.append("add2", $("#houseNumberSP").val());
+                formData.append("postalCode", $("#postalCodeSP").val());
+                formData.append("city", $("#citySP").val());
+
+                if ($("#dateOfBirth").val() == "") {
+                    hideLoader();
+                    alert("DOB required");
+                } else {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/spDashboard/saveDetails',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        dataType: "json"
+                    }).done(function (response) {
+                        if (response.status == "success") {
+                            hideLoader();
+                            showMsg("User details are updated.");
+                            window.location.reload();
+                        } else {
+                            hideLoader();
+                            showMsg("Something went wrong.");
+                        }
+                    });
+                }
+            }
+
+            function changePassword() {
+                showLoader();
+                var formData = new FormData();
+                formData.append("oldpassword", $("#oldPassword").val());
+                formData.append("password", $("#Password").val());
+
+                if ($("#oldPassword").val() == $("#Password").val()) {
+                    hideLoader();
+                    document.getElementById("errorConfirmPassword").textContent = "Old password can not be same as new password.";
+                }else if ($("#Password").val() == $("#confirmPassword").val()) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/spDashboard/changePassword',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        dataType: "json"
+                    }).done(function (response) {
+                        if (response.status == "success") {
+                            hideLoader();
+                            showMsg("Password changed successfully Login again with updated password.");
+                            setTimeout(function () {
+                                window.location.href = "/index/logout";
+                                window.location.href = "/index/Login";
+                            }, 1000);
+                        } else if (response.status == "error") {
+                            hideLoader();
+                            document.getElementById("errorConfirmPassword").textContent = "Old password is incorrect.";
+                            openMyChangePassword();
+                        } else {
+                            hideLoader();
+                            showMsg("Something went wrong.");
+                        }
+                    });
+                } else {
+                    hideLoader();
+                    document.getElementById("errorConfirmPassword").textContent = "Password and Confirm Password are not same.";
+                }
+            }
+</script>
