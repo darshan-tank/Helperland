@@ -22,17 +22,17 @@
     <link href="~/css/main.css" rel="stylesheet" />
     <script src="~/js/main.js"></script>
 
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
     <link href="~/css/loader.css" rel="stylesheet" />
 
+    <script src="~/js/pager.js"></script>
+
     <script type="text/javascript" language="JavaScript">
         function showMsg(msg) {
             var back = document.getElementById("ToastBack");
-            console.log(back);
             back.style.display = "flex";
             var message = document.getElementById("ToastMessage");
             message.innerHTML = msg;
@@ -48,7 +48,6 @@
         }
 
         function closeToast() {
-            console.log("called");
             var back = document.getElementById("ToastBack");
             back.style.display = "none";
         }
@@ -56,7 +55,6 @@
 
     <script>
         function showLoader() {
-            console.log("function called");
             document.getElementById("loader_rounder").style.display = "flex";
         }
         function hideLoader() {
@@ -95,7 +93,16 @@
         }
     </style>
 
+    <script>
+        $("#select").change(function () {
+            let pag = new Pager('Table', $(this).val());
 
+            pag.init();
+            pag.showPageNav('pag', 'pageNavPosition');
+            pag.showPage(1);
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", false)
 </head>
 <body>
 
@@ -145,6 +152,6 @@
     </div>*@
 
     @RenderBody()
-    @RenderSection("Scripts", false)
+    
 </body>
 </html>

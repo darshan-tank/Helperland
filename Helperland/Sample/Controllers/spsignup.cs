@@ -29,7 +29,6 @@ namespace Sample.Controllers
             int count = _dbcontext.Users.Count(t => (t.Email == newSP.Email) && (t.UserTypeId == newSP.UserTypeId));
             if (count >= 1)
             {
-                System.Diagnostics.Debug.WriteLine("Exist");
                 ViewBag.Message = "Email already exist.";
                 return View();
             }
@@ -37,18 +36,16 @@ namespace Sample.Controllers
             {
                 if (newSP.Password == newSP.cPassword)
                 {
-                    System.Diagnostics.Debug.WriteLine("same");
+                    newSP.IsActive = false;
                     _dbcontext.Users.Add(newSP);
                     var changes = _dbcontext.SaveChanges();
                     if (changes >= 1)
                     {
-                        System.Diagnostics.Debug.WriteLine("done");
                         ViewBag.Message = "Registration successfull.";
                         return View();
                     }
                     else
                     {
-                        System.Diagnostics.Debug.WriteLine("not done");
                         ViewBag.Message = "Something went wrong";
                         return View();
                     }
@@ -56,7 +53,6 @@ namespace Sample.Controllers
                 }
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine("not match");
                     return View();
                 }
             }

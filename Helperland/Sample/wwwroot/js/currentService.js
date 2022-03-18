@@ -1,13 +1,14 @@
 ﻿var serviceRequestId;
 var serviceIDForDialogCurrentService;
 
-function reschedule(id) {
+function rescheduleOpen(id) {
+    console.log("function called");
     serviceRequestId = id;
     var popup = document.getElementById("reschedule");
     popup.style.display = "flex";
 }
 
-function cancelService(id) {
+function cancelServiceOpen(id) {
     serviceRequestId = id;
     var popup = document.getElementById("cancelToast");
     popup.style.display = "flex";
@@ -34,7 +35,6 @@ function reschedulePost() {
         contentType: false,
         dataType: "json"
     }).done(function (response) {
-        console.log(response);
         if (response.status == "success") {
             hideLoader();
             document.getElementById("displayCurrentServiceForCustomer").style.display = "none";
@@ -44,7 +44,6 @@ function reschedulePost() {
             serviceRequestId = "";
             $("#right-container").html("Loading...").load('/customerDashboard/CurrentService');
         } else if (response.status == "Conflict") {
-            console.log(response);
             hideLoader();
             document.getElementById("displayCurrentServiceForCustomer").style.display = "none";
             var popup = document.getElementById("reschedule");
@@ -160,6 +159,7 @@ function showServiceDetailsForC(id,date) {
 }
 
 function reschedule() {
+    console.log("fun called");
     serviceRequestId = serviceIDForDialogCurrentService;
     var popup = document.getElementById("reschedule");
     popup.style.display = "flex";

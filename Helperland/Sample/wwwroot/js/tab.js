@@ -25,7 +25,6 @@ document.getElementById('totalHRS').onchange = function () {
 };
 function updateTotal() {
     let basic = parseInt($('select#totalHRS option:selected').val());
-    console.log(basic);
     var checkboxs = document.querySelectorAll('.ch');
     var count = 0;
     for (var i = 0; i < checkboxs.length; i++) {
@@ -70,7 +69,6 @@ for (var i = 0; i < checkboxs.length; i++) {
     }
     }
     updateTotal();
-    console.log(values);
 }
 /*$(function () {
     $("#number-of-bed").change(function () {
@@ -121,7 +119,6 @@ function login() {
             processData: false,
             contentType: false,
         }).done(function (response) {
-            console.log(response+"11");
             if (response.status == "success") {
                 hideLoader();
                 var email = response.email;
@@ -180,15 +177,12 @@ function bookingDone() {
     var noOfBath = $('select#number-of-bath option:selected').val();
     var date = new Date($('#datePick').val());
     var time = document.getElementById('timeDisplay').innerText;
-    console.log(date);
     var dd = String(date.getDate()).padStart(2, '0');
     var mm = String(date.getMonth() + 1).padStart(2, '0');
     var yyyy = date.getFullYear();
     var date1 = mm + '/' + dd + '/' + yyyy + " " + time;
-    console.log(date1);
     var totalHrs = $('select#totalHRS option:selected').val();
     var totalHour = document.getElementById("totaltimeDisplay").innerText;
-    console.log(totalHour);
     var extraHour = totalHour - totalHrs;
     var extra=[];
 
@@ -255,8 +249,6 @@ function bookingDone() {
 }
 
 function opendetails(email) {
-    console.log("detail function");
-    console.log(email);
     if (email == null || email == "") {
         login();
     } else {
@@ -269,15 +261,13 @@ function opendetails(email) {
         plantab.removeAttribute('disabled');
 
         var noOfBed = $('select#number-of-bed option:selected').val();
-        console.log(noOfBed);
         var noOfBath = $('select#number-of-bath option:selected').val();
         var date = new Date($('#datePick').val());
-        console.log(date);
         var time = $('select#startTime option:selected').val();
         var totalHrs = $('select#totalHRS option:selected').val();
         var extra;
         $('input[type=checkbox]:checked').each(function () { var id = $(this).attr("value"); extra = extra + id; });
-        console.log("bed" + noOfBed + "/nbath" + noOfBath + "/ndate" + date + "/ntime" + time + "/nHour" + totalHrs + "/ncheckbox" + extra);
+        
 
         
         $("#address-container-id").html("Loading Address...").load('/bookservice/getaddress');
@@ -325,7 +315,6 @@ function opensetuptab() {
 }
 
 function openplantab() {
-    console.log("plan called");
     detailstab.disabled = "true";
     plantab.disabled = "true";
     detailstab.classList.remove("bookService-active");

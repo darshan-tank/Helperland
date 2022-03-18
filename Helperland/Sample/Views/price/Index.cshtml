@@ -48,6 +48,10 @@
         </li>
         <hr>
         <li>
+            @if (@Context.Session.GetString("UserType") == "1")
+            {
+                <a asp-controller="adminDashboard">My Dashboard</a>
+            }
             @if (@Context.Session.GetString("UserType") == "2")
             {
                 <a asp-controller="spDashboard">My Dashboard</a>
@@ -56,8 +60,21 @@
             {
                 <a asp-controller="customerDashboard">My Dashboard</a>
             }
+
         </li>
-        <li>My Settings</li>
+        @if (@Context.Session.GetString("UserType") != "1")
+        {
+            <li>
+                @if (@Context.Session.GetString("UserType") == "2")
+                {
+                    <a asp-controller="spDashboard" asp-action="setting">My Settings</a>
+                }
+                @if (@Context.Session.GetString("UserType") == "3")
+                {
+                    <a asp-controller="customerDashboard" asp-action="setting">My Settings</a>
+                }
+            </li>
+        }
         <li><a asp-controller="index" asp-action="logout">Logout</a></li>
     </ul>
 </div>
@@ -369,10 +386,8 @@
     function myFunction() {
         if (window.pageYOffset > sticky) {
             header.classList.add("sticky");
-            console.log("if");
         } else {
             header.classList.remove("sticky");
-            console.log("ifelse");
         }
     }
 
@@ -381,7 +396,6 @@
         var menuButton = document.querySelector(".toggle");
         // popupLi.classList.toggle("show-menu");
         var visibility = popupLi.getAttribute("data-visible");
-        console.log(visibility);
         if (visibility === "false") {
             popupLi.setAttribute("data-visible", true);
             menuButton.setAttribute("aria-expanded", true);

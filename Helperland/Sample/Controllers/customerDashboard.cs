@@ -143,7 +143,7 @@ namespace Sample.Controllers
             System.Threading.Thread.Sleep(2000);
             String email = HttpContext.Session.GetString("UserEmail");
             User newUser = _dbcontext.Users.Where(x => x.Email == email).FirstOrDefault();
-            List<UserAddress> address = _dbcontext.UserAddresses.Where(x => x.UserId == newUser.UserId).ToList();
+            List<UserAddress> address = _dbcontext.UserAddresses.Where(x => (x.UserId == newUser.UserId) && (x.IsDeleted == false)).ToList();
             return View(address);
         }
         public JsonResult GetEvents()
@@ -572,7 +572,8 @@ namespace Sample.Controllers
         public JsonResult deleteAddress(int addressID)
         {
             UserAddress userAddress = _dbcontext.UserAddresses.Where(x => x.AddressId == addressID).FirstOrDefault();
-            _dbcontext.Entry(userAddress).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            userAddress.IsDeleted = true;
+            _dbcontext.Entry(userAddress).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             var changes = _dbcontext.SaveChanges();
             if (changes == 1)
             {

@@ -1,11 +1,9 @@
 function changePic(x) {
-    console.log("case01");
 
     switch (x) {
         case 0:
             var stringsrc = document.picture0.src;
             var startingchar = stringsrc.substr(stringsrc.length - 5);
-            console.log(startingchar);
             if (startingchar === "3.png") {
                 document.picture0.src = "/images/3-green.png";
             } else {
@@ -15,7 +13,6 @@ function changePic(x) {
         case 1:
             var stringsrc = document.picture1.src;
             var startingchar = stringsrc.substr(stringsrc.length - 5);
-            console.log(startingchar);
             if (startingchar === "5.png") {
                 document.picture1.src = "/images/5-green.png";
             } else {
@@ -25,7 +22,6 @@ function changePic(x) {
         case 2:
             var stringsrc = document.picture2.src;
             var startingchar = stringsrc.substr(stringsrc.length - 5);
-            console.log(startingchar);
             if (startingchar === "4.png") {
                 document.picture2.src = "/images/4-green.png";
             } else {
@@ -35,7 +31,6 @@ function changePic(x) {
         case 3:
             var stringsrc = document.picture3.src;
             var startingchar = stringsrc.substr(stringsrc.length - 5);
-            console.log(startingchar);
             if (startingchar === "2.png") {
                 document.picture3.src = "/images/2-green.png";
             } else {
@@ -45,7 +40,6 @@ function changePic(x) {
         case 4:
             var stringsrc = document.picture4.src;
             var startingchar = stringsrc.substr(stringsrc.length - 5);
-            console.log(startingchar);
             if (startingchar === "1.png") {
                 document.picture4.src = "/images/1-green.png";
             } else {
@@ -53,10 +47,8 @@ function changePic(x) {
             }
             break;
         case 5:
-            console.log("case01");
             var stringsrc = document.img01.src;
             var startingchar = stringsrc.substr(stringsrc.length - 17);
-            console.log(startingchar);
             if (startingchar === "setup-service.png") {
                 document.img01.src = "/images/setup-service-white.png";
             } else {
@@ -64,10 +56,8 @@ function changePic(x) {
             }
             break;
         case 6:
-            console.log("case01");
             var stringsrc = document.img02.src;
             var startingchar = stringsrc.substr(stringsrc.length - 12);
-            console.log(startingchar);
             if (startingchar === "schedule.png") {
                 document.img02.src = "/images/schedule-white.png";
             } else {
@@ -75,10 +65,8 @@ function changePic(x) {
             }
             break;
         case 7:
-            console.log("case01");
             var stringsrc = document.img03.src;
             var startingchar = stringsrc.substr(stringsrc.length - 11);
-            console.log(startingchar);
             if (startingchar === "details.png") {
                 document.img03.src = "/images/details-white.png";
             } else {
@@ -86,10 +74,8 @@ function changePic(x) {
             }
             break;
         case 8:
-            console.log("case01");
             var stringsrc = document.img04.src;
             var startingchar = stringsrc.substr(stringsrc.length - 11);
-            console.log(startingchar);
             if (startingchar === "payment.png") {
                 document.img04.src = "/images/payment-white.png";
             } else {
@@ -100,7 +86,6 @@ function changePic(x) {
 }
 
 function add(value) {
-    console.log(value);
     if (value === "addbutton") {
         var button = document.getElementById('addaddress');
         var div = document.getElementById('newaddress');

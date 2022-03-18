@@ -23,7 +23,6 @@ namespace Sample.Controllers
         }
         public IActionResult Index()
         {
-            System.Diagnostics.Debug.WriteLine(HttpContext.Session.GetString("UserEmail"));
             return View();
         }
         [HttpPost]
@@ -115,8 +114,6 @@ namespace Sample.Controllers
             int addressData = address;
             bool petBit = false;
             List<ServiceRequest> newLi = _dbcontext.ServiceRequests.ToList();
-            int id = newLi.Last().ServiceRequestId;
-            System.Diagnostics.Debug.WriteLine(id);
             if (petsData == "true")
             {
                 petBit = true;
@@ -180,19 +177,20 @@ namespace Sample.Controllers
 
             if(extraData.Count >= 1)
             {
-                string[] strTemp = extraData[0].Split(new char[] { ',', }, StringSplitOptions.RemoveEmptyEntries);
-                System.Diagnostics.Debug.WriteLine(strTemp.Length);
-
-                for (var i = 0; i < strTemp.Length; i++)
+                if(extraData[0] != null)
                 {
-                    ExtraService serviceExtraIDObj = _dbcontext.ExtraServices.Where(x => x.ServiceExtraName == strTemp[i]).FirstOrDefault();
-                    var ServiceExtraID = serviceExtraIDObj.ServiceExtraId;
-                    System.Diagnostics.Debug.WriteLine(ServiceExtraID);
-                    ServiceRequestExtra srExtra = new ServiceRequestExtra();
-                    srExtra.ServiceRequestId = (Id);
-                    srExtra.ServiceExtraId = ServiceExtraID;
-                    _dbcontext.ServiceRequestExtras.Add(srExtra);
-                    _dbcontext.SaveChanges();
+                    string[] strTemp = extraData[0].Split(new char[] { ',', }, StringSplitOptions.RemoveEmptyEntries);
+
+                    for (var i = 0; i < strTemp.Length; i++)
+                    {
+                        ExtraService serviceExtraIDObj = _dbcontext.ExtraServices.Where(x => x.ServiceExtraName == strTemp[i]).FirstOrDefault();
+                        var ServiceExtraID = serviceExtraIDObj.ServiceExtraId;
+                        ServiceRequestExtra srExtra = new ServiceRequestExtra();
+                        srExtra.ServiceRequestId = (Id);
+                        srExtra.ServiceExtraId = ServiceExtraID;
+                        _dbcontext.ServiceRequestExtras.Add(srExtra);
+                        _dbcontext.SaveChanges();
+                    }
                 }
             }
 
@@ -264,7 +262,7 @@ namespace Sample.Controllers
             System.Threading.Thread.Sleep(2000);
             String email = HttpContext.Session.GetString("UserEmail");
             User newUser = _dbcontext.Users.Where(x=>x.Email == email).FirstOrDefault();
-            List<UserAddress> address = _dbcontext.UserAddresses.Where(x=>(x.UserId == newUser.UserId) && (x.PostalCode == ServicePostalCode)).ToList();
+            List<UserAddress> address = _dbcontext.UserAddresses.Where(x=>(x.UserId == newUser.UserId) && (x.PostalCode == ServicePostalCode) && (x.IsDeleted == false)).ToList();
             return View(address);
             
         }

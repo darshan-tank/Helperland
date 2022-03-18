@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <div class="first-field">
-                        <input type="password" asp-for="Password" id="pwd" class="form-inline" placeholder="Password" required>
+                        <input type="password" asp-for="Password" id="pwd" class="form-inline" placeholder="Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@@$!%*?&])[A-Za-z\d@@$!%*?&]{8,}$" title="•	Password must contain at least 1 capital letter, 1 small letter, 1 number and one special character. Password length must be in between 6 to 14 characters" required>
                         <span asp-validation-for="Password" class="text-danger-error"></span>
                         <input type="password" asp-for="cPassword" id="cpwd" class="form-inline" placeholder="Confirm Password" required>
                         <span asp-validation-for="cPassword" class="text-danger-error"></span>
@@ -157,10 +157,10 @@
     function myFunction() {
         if (window.pageYOffset > sticky) {
             header.classList.add("sticky");
-            console.log("if");
+            
         } else {
             header.classList.remove("sticky");
-            console.log("ifelse");
+            
         }
     }
 
@@ -169,7 +169,7 @@
         var menuButton = document.querySelector(".toggle");
         // popupLi.classList.toggle("show-menu");
         var visibility = popupLi.getAttribute("data-visible");
-        console.log(visibility);
+        
         if (visibility === "false") {
             popupLi.setAttribute("data-visible", true);
             menuButton.setAttribute("aria-expanded", true);

@@ -153,25 +153,33 @@
         </li>
         <hr>
         <li>
+            @if (@Context.Session.GetString("UserType") == "1")
+            {
+                <a asp-controller="adminDashboard">My Dashboard</a>
+            }
             @if (@Context.Session.GetString("UserType") == "2")
             {
-                <a asp-controller="spDashboard" asp-action="index">My Dashboard</a>
+                <a asp-controller="spDashboard">My Dashboard</a>
             }
             @if (@Context.Session.GetString("UserType") == "3")
             {
-                <a asp-controller="customerDashboard" asp-action="index">My Dashboard</a>
+                <a asp-controller="customerDashboard">My Dashboard</a>
             }
+
         </li>
-        <li>
-            @if (@Context.Session.GetString("UserType") == "2")
-            {
-                <a asp-controller="spDashboard" asp-action="setting">My Settings</a>
-            }
-            @if (@Context.Session.GetString("UserType") == "3")
-            {
-                <a asp-controller="customerDashboard" asp-action="setting">My Settings</a>
-            }
-        </li>
+        @if (@Context.Session.GetString("UserType") != "1")
+        {
+            <li>
+                @if (@Context.Session.GetString("UserType") == "2")
+                {
+                    <a asp-controller="spDashboard" asp-action="setting">My Settings</a>
+                }
+                @if (@Context.Session.GetString("UserType") == "3")
+                {
+                    <a asp-controller="customerDashboard" asp-action="setting">My Settings</a>
+                }
+            </li>
+        }
         <li><a asp-controller="index" asp-action="logout">Logout</a></li>
     </ul>
 </div>
@@ -402,7 +410,7 @@
                             </div>
                             <div class="container-form-input">
                                 <label>New Password</label>
-                                <input type="password" id="Password" required>
+                                <input type="password" id="Password" placeholder="Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@@$!%*?&])[A-Za-z\d@@$!%*?&]{8,}$" title="•	Password must contain at least 1 capital letter, 1 small letter, 1 number and one special character. Password length must be in between 6 to 14 characters"  required>
                             </div>
                             <div class="container-form-input">
                                 <label>Confirm Password</label>
@@ -520,7 +528,6 @@
             var sticky = "60";
 
             function myFunction() {
-                console.log(window.pageYOffset);
                 if (window.pageYOffset > sticky) {
                     header.classList.add("sticky");
                 } else {
@@ -533,7 +540,6 @@
                 var menuButton = document.querySelector(".toggle");
                 // popupLi.classList.toggle("show-menu");
                 var visibility = popupLi.getAttribute("data-visible");
-                console.log(visibility);
                 if (visibility === "false") {
                     popupLi.setAttribute("data-visible", true);
                     menuButton.setAttribute("aria-expanded", true);
@@ -598,7 +604,7 @@
                         if (response.status == "success") {
                             hideLoader();
                             showMsg("User details are updated.");
-                            window.location.reload();
+                            window.location.href = "spDashboard/setting";
                         } else {
                             hideLoader();
                             showMsg("Something went wrong.");

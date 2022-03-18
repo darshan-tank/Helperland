@@ -1,10 +1,15 @@
 ﻿@model IEnumerable<Sample.Models.FavoriteAndBlocked>
 
 <div class="flex-container-fav">
-
+    @if (!Model.Any())
+    {
+        <div>
+            You do not have any Service Providers right now.
+        </div>
+    }
     @foreach (var items in Model)
     {
-    <script>
+        <script>
         $("#PreRated").starRating({
             starSize: 25,
             initialRating: @items.TargetUser.Ratings,
@@ -38,9 +43,9 @@
             }
         });
 
-    </script>
+        </script>
         <div class="flex-card-fav">
-            <img src="~/images/avatar.png" alt="">
+            <img src="@items.TargetUser.UserProfilePicture" alt="">
             <span>@items.TargetUser.FirstName  @items.TargetUser.LastName</span>
             <div class="my-rating" id="PreRated"></div><span id="ratingDisplay">@items.TargetUser.Ratings</span>
             <div style="display:flex;">
@@ -51,8 +56,8 @@
         </div>
     }
 
-<script>
-        function removeFromFav(ProID,CustID) {
+    <script>
+        function removeFromFav(ProID, CustID) {
             showLoader();
             var formDataforRemove = new FormData();
             formDataforRemove.append("providerID", ProID);
@@ -77,7 +82,7 @@
             });
         }
 
-    function blockProvider(ProID, CustID) {
+        function blockProvider(ProID, CustID) {
             showLoader();
             var formDataforRemove = new FormData();
             formDataforRemove.append("providerID", ProID);
@@ -103,7 +108,7 @@
             });
         }
 
-    function unblockProvider(ProID, CustID) {
+        function unblockProvider(ProID, CustID) {
             showLoader();
             var formDataforRemove = new FormData();
             formDataforRemove.append("providerID", ProID);
@@ -128,5 +133,5 @@
                 }
             });
         }
-</script>
+    </script>
 </div>

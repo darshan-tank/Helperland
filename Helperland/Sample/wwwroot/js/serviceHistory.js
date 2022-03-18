@@ -29,7 +29,6 @@ function rateSP(Providerid,CustomerID,ServiceRequestID) {
             var favButton = document.getElementById("unfavoriteButton");
             favButton.style.display = "block";
         } else {
-            console.log(document.getElementById("favoriteButton"));
             var favButton = document.getElementById("favoriteButton");
             favButton.style.display = "block";
         }
@@ -47,7 +46,6 @@ function rateSP(Providerid,CustomerID,ServiceRequestID) {
         dataType: "json"
     }).done(function (response) {
         if (response.status == "success") {
-            console.log(response);
             var rating = response.ratingObject;
             var user = response.user;
             var NameDisplay = document.getElementById("ServiceProviderName");
@@ -67,10 +65,8 @@ function rateSP(Providerid,CustomerID,ServiceRequestID) {
             }
             
         } else {
-            console.log(response);
             var user = response.user;
             var NameDisplay = document.getElementById("ServiceProviderName");
-            console.log(user.firstName + " " + user.lastName);
             NameDisplay.textContent = user.firstName + " " + user.lastName;
             readyRating(response.finalrate, 0, 0, 0, "false");
             var ratingDisplay = document.getElementById("ratingDisplay");
@@ -97,7 +93,6 @@ function readyRating(finalRate,r1,r2,r3,state) {
 
         if (state == "true") {
 
-            console.log("true");
 
             $("#r1").starRating({
                 starSize: 25,
@@ -126,7 +121,6 @@ function readyRating(finalRate,r1,r2,r3,state) {
                 readOnly: true
             });
         } else {
-            console.log("false");
         $("#r1").starRating({
             starSize: 25,
             initialRating: 0,
@@ -165,12 +159,6 @@ function readyRating(finalRate,r1,r2,r3,state) {
 
 function submitRating() {
     showLoader();
-    console.log(serviceProviderID);
-    console.log(customerID);
-    console.log(rating1);
-    console.log(rating2);
-    console.log(rating3);
-    console.log($('#feedback').val());
     var formDataforName = new FormData();
     formDataforName.append("providerID", serviceProviderID);
     formDataforName.append("customerID", customerID);

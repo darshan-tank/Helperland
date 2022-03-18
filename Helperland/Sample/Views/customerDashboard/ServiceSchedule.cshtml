@@ -19,6 +19,7 @@
             </td>
         </tr>
     </div>
+    <div id="EmptyMsg"></div>
     <div id="calender"></div>
 </div>
 <div class="ToastBack">
@@ -54,7 +55,9 @@
                 url: '/customerDashboard/GetEvents',
                 type: 'GET',
                 success: function (response) {
-
+                    if (response.data.length == 0) {
+                        document.getElementById("EmptyMsg").innerHTML = "No service are available.";
+                    }
 
                     var arrayofdata = response.data;
                     for (let i = 0; i < arrayofdata.length; i++) {

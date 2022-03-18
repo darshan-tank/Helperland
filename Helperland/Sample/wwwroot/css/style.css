@@ -96,6 +96,7 @@ button[disabled] {
     align-items: center;
     box-shadow: 0 5px 15px rgb(0 0 0 / 50%);
     display: none;
+    overflow-x:scroll;
 }
 
 .ToastBack {
@@ -2282,11 +2283,9 @@ tr {
 }
 
 .prof-img {
-    border: 1px solid;
     border-radius: 50%;
     padding: 5px;
-    width: 37px;
-    height: 37px;
+    width: 65px;
     margin-right: 8px;
 }
 
@@ -2348,6 +2347,7 @@ b {
 
 .footer-table .left-side {
     display: flex;
+    align-items:center;
     /* width: 40%; */
 }
 
@@ -2615,6 +2615,7 @@ tr {
 .m-tb {
     margin-top: 10px;
     margin-bottom: 20px;
+    min-height: 40vh;
 }
 
 .flex-right-table td i {
@@ -3644,4 +3645,31 @@ tr.TR-Dashboard.True{
     color: white;
     border-radius: 25px;
     width: 10%;
+}
+
+.pager-nav {
+    margin: 16px 0;
+}
+
+    .pager-nav span {
+        display: inline-block;
+        padding: 4px 8px;
+        margin: 1px;
+        cursor: pointer;
+        font-size: 14px;
+        background-color: #FFFFFF;
+        border: 1px solid #e1e1e1;
+        border-radius: 3px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    }
+
+        .pager-nav span:hover,
+        .pager-nav .pg-selected {
+            background-color: #f9f9f9;
+            border: 1px solid #CCCCCC;
+        }
+
+.display-block ul li button {
+    background: white;
+    padding: 7px;
 }

@@ -43,7 +43,11 @@ namespace Sample.Controllers
         }
         public IActionResult logout()
         {
+            HttpContext.Session.Remove("UserFirstName");
+            HttpContext.Session.Remove("UserLastName");
+            HttpContext.Session.Remove("UserType");
             HttpContext.Session.Remove("UserEmail");
+            HttpContext.Session.Remove("UserID");
             TempData["Message"] = "You have successfully logged out.";
             return RedirectToAction("index");
         }
@@ -59,15 +63,23 @@ namespace Sample.Controllers
             if(count >= 1)
             {
                 User newUser = _dbcontext.Users.Where(t => (t.Email == newSP.Email) && (t.Password == newSP.Password)).FirstOrDefault();
-                String fname = newUser.FirstName;
-                String lname = newUser.LastName;
-                HttpContext.Session.SetString("UserFirstName", fname);
-                HttpContext.Session.SetString("UserLastName", lname);
-                HttpContext.Session.SetString("UserType", newUser.UserTypeId.ToString());
-                HttpContext.Session.SetString("UserEmail", newSP.Email);
-                HttpContext.Session.SetString("UserID", newUser.UserId.ToString());
-                TempData["Message"] = "Login successfull.";
-                return RedirectToAction("index");
+                if (newUser.IsActive)
+                {
+                    String fname = newUser.FirstName;
+                    String lname = newUser.LastName;
+                    HttpContext.Session.SetString("UserFirstName", fname);
+                    HttpContext.Session.SetString("UserLastName", lname);
+                    HttpContext.Session.SetString("UserType", newUser.UserTypeId.ToString());
+                    HttpContext.Session.SetString("UserEmail", newSP.Email);
+                    HttpContext.Session.SetString("UserID", newUser.UserId.ToString());
+                    TempData["Message"] = "Login successfull.";
+                    return RedirectToAction("index");
+                } else
+                {
+                    ViewBag.Message = "Account is deactivate, Please try again when it's activated.";
+                    return View();
+                }
+                
             } else
             {
                 ViewBag.Message = "Email or password are incorrect";

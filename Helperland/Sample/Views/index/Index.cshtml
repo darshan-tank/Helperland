@@ -16,7 +16,6 @@
         container.style.display = "none!important";
     }
     function openMsg(msg) {
-        console.log("Function Called");
         var container = document.getElementById("popupMessage");
         container.style.display = "flex!important";
         var text = document.getElementById("msgPopup");
@@ -37,14 +36,20 @@
 
                 <div class="navbar" id="mynav" data-visible="false">
                     <ul id="header-nav">
-                        <li><a asp-controller="bookservice" class="Button">Book a Cleaner</a></li>
+                        @if (@Context.Session.GetString("UserEmail") == null)
+                        {
+                            <li><a asp-controller="bookservice" class="Button">Book a Cleaner</a></li>
+                        }
+                        @if (@Context.Session.GetString("UserType") == "3")
+                        {
+                            <li><a asp-controller="bookservice" class="Button">Book a Cleaner</a></li>
+                        }
                         <li><a asp-controller="price">Prices</a></li>
                         <li><a href="#">Our Guarantee</a></li>
                         <li><a href="#">Blog</a></li>
                         <li><a asp-controller="contact">Contact us</a></li>
                         @if (@Context.Session.GetString("UserEmail") == null)
                         {
-
                             <li><a asp-action="Login" class="Button">Login</a></li>
                             <li><a asp-controller="spsignup" class="Button">Become a helper</a></li>
                         }
@@ -54,12 +59,12 @@
                             <a onclick="openM()"><i class="far fa-user-circle"></i><i class="fas fa-angle-down"></i></a>
                         }
 
-                                <!-- <li class="flag">
-                <a href="#" class="flag-icon"><img src="images/flag.png">
-                    <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a>
-            </li> -->
+                        <!-- <li class="flag">
+        <a href="#" class="flag-icon"><img src="images/flag.png">
+            <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a>
+    </li> -->
 
-                        </ul>
+                    </ul>
                     <li class="media-li"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                     <li class="media-li"><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                 </div>
@@ -74,6 +79,10 @@
             </li>
             <hr>
             <li>
+                @if (@Context.Session.GetString("UserType") == "1")
+                {
+                    <a asp-controller="adminDashboard">My Dashboard</a>
+                }
                 @if (@Context.Session.GetString("UserType") == "2")
                 {
                     <a asp-controller="spDashboard">My Dashboard</a>
@@ -82,17 +91,21 @@
                 {
                     <a asp-controller="customerDashboard">My Dashboard</a>
                 }
+
             </li>
-            <li>
-                @if (@Context.Session.GetString("UserType") == "2")
-                {
-                <a asp-controller="spDashboard" asp-action="setting">My Settings</a>
-                }
-                @if (@Context.Session.GetString("UserType") == "3")
-                {
-                <a asp-controller="customerDashboard" asp-action="setting">My Settings</a>
-                }
-            </li>
+            @if (@Context.Session.GetString("UserType") != "1")
+            {
+                <li>
+                    @if (@Context.Session.GetString("UserType") == "2")
+                    {
+                        <a asp-controller="spDashboard" asp-action="setting">My Settings</a>
+                    }
+                    @if (@Context.Session.GetString("UserType") == "3")
+                    {
+                        <a asp-controller="customerDashboard" asp-action="setting">My Settings</a>
+                    }
+                </li>
+            }
             <li><a asp-action="logout">Logout</a></li>
         </ul>
     </div>
@@ -120,7 +133,22 @@
                     </ul>
                 </div>
                 <div class="banner-btn">
-                    <a asp-controller="bookservice">Let's Book a Cleaner</a>
+                    @if (@Context.Session.GetString("UserType") == null)
+                    {
+                        <a asp-controller="bookservice">Let's Book a Cleaner</a>
+                    }
+                    @if (@Context.Session.GetString("UserType") == "3")
+                    {
+                        <a asp-controller="bookservice">Let's Book a Cleaner</a>
+                    }
+                    @if (@Context.Session.GetString("UserType") == "1")
+                    {
+                        <a asp-controller="adminDashboard">Go to Dashboard</a>
+                    }
+                    @if (@Context.Session.GetString("UserType") == "2")
+                    {
+                        <a asp-controller="spDashboard">Go to Dashboard</a>
+                    }
                 </div>
 
                 <div class="images-sec">
@@ -467,11 +495,9 @@
         if (window.pageYOffset > sticky) {
             header.classList.add("sticky");
             buttontop.classList.add("back-to-top");
-            console.log("if");
         } else {
             header.classList.remove("sticky");
             buttontop.classList.remove("back-to-top");
-            console.log("ifelse");
         }
     }
 
@@ -480,7 +506,6 @@
         var menuButton = document.querySelector(".toggle");
         // popupLi.classList.toggle("show-menu");
         var visibility = popupLi.getAttribute("data-visible");
-        console.log(visibility);
         if (visibility === "false") {
             popupLi.setAttribute("data-visible", true);
             menuButton.setAttribute("aria-expanded", true);

@@ -164,7 +164,6 @@ function showServiceDetails(id) {
     }).done(function (response) {
         if (response.status == "success") {
             hideLoader();
-            console.log(response);
             document.getElementById("displayNewServiceForSP").style.display = "flex";
             document.getElementById("containerService").style.alignItems = "flex-start";
             var date1 = new Date(response.serviceData.serviceStartDate);

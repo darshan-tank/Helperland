@@ -7,6 +7,14 @@
             </div>
         </td>
     </tr>
+    @if (!Model.Any())
+    {
+        <tr>
+            <td colspan="6">
+                No Ratings are given.
+            </td>
+        </tr>
+    }
     @foreach (var items in Model)
     {
         <tr class="myRatingTR">

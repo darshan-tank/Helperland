@@ -62,7 +62,7 @@
                 }
                 <td onclick="showServiceDetails('@items.ServiceRequestId')"><img class="img-table" src="~/images/calendar2.png"> @d <br> <img class="img-table" src="~/images/layer-14.png"> @time - @EndTime</td>
                 <td colspan="2" onclick="showServiceDetails('@items.ServiceRequestId')">@items.User.FirstName @items.User.LastName <br><img src="~/images/layer-15.png"> @items.ServiceRequestaddress.AddressLine1 @items.ServiceRequestaddress.AddressLine2 , @items.ServiceRequestaddress.City @items.ServiceRequestaddress.PostalCode</td>
-                <td onclick="showServiceDetails('@items.ServiceRequestId')">items.TotalCost</td>
+                <td onclick="showServiceDetails('@items.ServiceRequestId')">@items.TotalCost</td>
                 <td class="action"><button class="cancel-button active-li" onclick="acceptService('@items.ServiceRequestId')">Accept</button></td>
             </tr>
         }
@@ -73,24 +73,25 @@
             <div class="footer-table">
                 <div class="left-side">
                     <h3>Show </h3>
-                    <select>
+                    <select id="select">
                         <option value="5">5</option>
                         <option value="10">10</option>
                         <option value="15">15</option>
                         <option value="20">20</option>
                     </select>
-                    <h3>entries</h3>
-                    <h3>Total Records :</h3><span id="count">55</span>
+                    <h3>entries : @Model.Count()</h3>
+
                 </div>
                 <div class="right-side">
-                    <i class="fas fa-step-backward"></i>
-                    <i class="fas fa-chevron-left"></i>
-                    <h3 class="page-active">1</h3>
-                    <h3>2</h3>
-                    <h3>3</h3>
-                    <h3>4</h3>
-                    <i class="fas fa-chevron-right"></i>
-                    <i class="fas fa-step-forward"></i>
+                    <div id="pageNavPosition" class="pager-nav"></div>
+
+                    <script>
+                        let pag = new Pager('Table', 5);
+
+                        pag.init();
+                        pag.showPageNav('pag', 'pageNavPosition');
+                        pag.showPage(1);
+                    </script>
                 </div>
             </div>
         </td>
@@ -135,31 +136,5 @@
             </tr>
         }
     }
-    <tr>
-        <td colspan="5">
-            <div class="footer-table">
-                <div class="left-side">
-                    <h3>Show </h3>
-                    <select>
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                    </select>
-                    <h3>entries</h3>
-                    <h3>Total Records :</h3><span id="count">55</span>
-                </div>
-                <div class="right-side">
-                    <i class="fas fa-step-backward"></i>
-                    <i class="fas fa-chevron-left"></i>
-                    <h3 class="page-active">1</h3>
-                    <h3>2</h3>
-                    <h3>3</h3>
-                    <h3>4</h3>
-                    <i class="fas fa-chevron-right"></i>
-                    <i class="fas fa-step-forward"></i>
-                </div>
-            </div>
-        </td>
-    </tr>
+    
 </table>

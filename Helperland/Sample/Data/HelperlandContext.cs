@@ -28,6 +28,7 @@ namespace Sample.Data
         public virtual DbSet<ServiceRequestAddress> ServiceRequestAddresses { get; set; }
         public virtual DbSet<ServiceRequestExtra> ServiceRequestExtras { get; set; }
         public virtual DbSet<ServiceSetting> ServiceSettings { get; set; }
+        public virtual DbSet<ServiceStatus> ServiceStatuses { get; set; }
         public virtual DbSet<State> States { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserAddress> UserAddresses { get; set; }
@@ -140,6 +141,12 @@ namespace Sample.Data
                     .HasForeignKey(d => d.ServiceRequestId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServiceRequestExtra_ServiceRequest");
+            });
+
+            modelBuilder.Entity<ServiceStatus>(entity =>
+            {
+                entity.HasKey(e => e.StatusId)
+                    .HasName("PK__ServiceS__C8EE206368B7A205");
             });
 
             modelBuilder.Entity<UserAddress>(entity =>

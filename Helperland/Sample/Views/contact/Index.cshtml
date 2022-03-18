@@ -2,6 +2,13 @@
     ViewData["Title"] = "Contact Us";
 }
 @using Microsoft.AspNetCore.Http;
+@if (!String.IsNullOrEmpty(@ViewBag.Message))
+{
+    <script>
+        hideLoader();
+       showMsg("@ViewBag.Message");
+    </script>
+}
 <div id="home"></div>
 <div class="header-contain" id="header" style="background: rgba(39, 39, 39, .7);">
     <a class="logo" asp-controller="index">
@@ -48,6 +55,10 @@
         </li>
         <hr>
         <li>
+            @if (@Context.Session.GetString("UserType") == "1")
+            {
+                <a asp-controller="adminDashboard">My Dashboard</a>
+            }
             @if (@Context.Session.GetString("UserType") == "2")
             {
                 <a asp-controller="spDashboard">My Dashboard</a>
@@ -56,8 +67,21 @@
             {
                 <a asp-controller="customerDashboard">My Dashboard</a>
             }
+
         </li>
-        <li>My Settings</li>
+        @if (@Context.Session.GetString("UserType") != "1")
+        {
+            <li>
+                @if (@Context.Session.GetString("UserType") == "2")
+                {
+                    <a asp-controller="spDashboard" asp-action="setting">My Settings</a>
+                }
+                @if (@Context.Session.GetString("UserType") == "3")
+                {
+                    <a asp-controller="customerDashboard" asp-action="setting">My Settings</a>
+                }
+            </li>
+        }
         <li><a asp-controller="index" asp-action="logout">Logout</a></li>
     </ul>
 </div>
@@ -91,10 +115,10 @@
         <div class="contact-form">
             <h3 class="sub-title"> get in touch with us</h3>
             <div class="login-form">
-                <form>
+                <form asp-action="submitQuery">
                     <div class="first-field">
-                        <input type="text" id="fname" class="form-inline" placeholder="First name">
-                        <input type="text" id="lname" class="form-inline" placeholder="Last name">
+                        <input type="text" id="fname" class="form-inline" placeholder="First name" name="fname">
+                        <input type="text" id="lname" class="form-inline" placeholder="Last name" name="lname">
                     </div>
                     <div class="second-field">
                         <div class="input-wrapper">
@@ -103,7 +127,7 @@
                                 <option value="saab">+99</option>
                                 <option value="mercedes">+14</option>
                             </select>
-                            <input type="text" name="" pattern="[0-9]{10}" min="10" max="10" class="call" placeholder="Mobile number">
+                            <input type="text" name="phone" pattern="[0-9]{10}" min="10" max="10" class="call" placeholder="Mobile number">
                         </div>
                         <div class="input-wrapper">
                             <input type="email" name="email" class="email" placeholder="Email address">
@@ -111,10 +135,13 @@
                     </div>
                     <div class="full-width">
                         <select name="subject" id="subject" class="full-line">
-                            <option value="subject">Subject</option>
+                            <option value="General">General</option>
+                            <option value="Inquiry">Inquiry</option>
+                            <option value="Renewal">Renewal</option>
+                            <option value="Revocation">Revocation</option>
 
                         </select>
-                        <textarea placeholder="Message" rows="4" cols="10" class="full-line"></textarea>
+                        <textarea placeholder="Message" rows="4" cols="10" class="full-line" name="message"></textarea>
                     </div>
                     <input type="submit" value="Submit" class="submit-button">
                 </form>
@@ -206,10 +233,8 @@
     function myFunction() {
         if (window.pageYOffset > sticky) {
             header.classList.add("sticky");
-            console.log("if");
         } else {
             header.classList.remove("sticky");
-            console.log("ifelse");
         }
     }
 
@@ -218,7 +243,6 @@
         var menuButton = document.querySelector(".toggle");
         // popupLi.classList.toggle("show-menu");
         var visibility = popupLi.getAttribute("data-visible");
-        console.log(visibility);
         if (visibility === "false") {
             popupLi.setAttribute("data-visible", true);
             menuButton.setAttribute("aria-expanded", true);

@@ -481,10 +481,8 @@
         function myFunction() {
             if (window.pageYOffset > sticky) {
                 header.classList.add("sticky");
-                console.log("if");
             } else {
                 header.classList.remove("sticky");
-                console.log("ifelse");
             }
         }
 
@@ -493,7 +491,6 @@
             var menuButton = document.querySelector(".toggle");
             // popupLi.classList.toggle("show-menu");
             var visibility = popupLi.getAttribute("data-visible");
-            console.log(visibility);
             if (visibility === "false") {
                 popupLi.setAttribute("data-visible", true);
                 menuButton.setAttribute("aria-expanded", true);

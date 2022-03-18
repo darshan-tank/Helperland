@@ -1,6 +1,12 @@
 ﻿@model IEnumerable<Sample.Models.ServiceRequest>
 
 <div class="flex-container-fav">
+    @if (!Model.Any())
+    {
+            <div>
+                You do not have any customers right now.
+            </div>
+    }
     @foreach (var items in Model)
     {
         <script>

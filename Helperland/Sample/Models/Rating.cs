@@ -16,8 +16,8 @@ namespace Sample.Models
         public int ServiceRequestId { get; set; }
         public int RatingFrom { get; set; }
         public int RatingTo { get; set; }
-        [Column(TypeName = "decimal(2, 1)")]
-        public decimal Ratings { get; set; }
+        [Column(TypeName = "decimal(4, 2)")]
+        public decimal? Ratings { get; set; }
         [StringLength(2000)]
         public string Comments { get; set; }
         [Column(TypeName = "datetime")]

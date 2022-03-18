@@ -11,7 +11,6 @@ function sortTable(n, start, end) {
         rows = table.rows;
         for (i = start; i < (rows.length - end); i++) {
 
-            console.log(rows.length - end);
 
             shouldSwitch = false;
 

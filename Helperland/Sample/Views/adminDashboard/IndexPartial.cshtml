@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Sample.Models.ServiceRequest>
+@foreach (var items in Model)
+{
+    <tr>
+        <td>@items.ServiceRequestId</td>
+        @{
+            var date = items.ServiceStartDate;
+            var time = date.ToString("hh:mm tt");
+            DateTime endDate = date.AddHours(items.ServiceHours);
+            var extra = items.ExtraHours ?? 0.0;
+            endDate = endDate.AddHours(extra);
+            var EndTime = endDate.ToString("hh:mm tt");
+            var d = date.ToString("dd/MM/yyyy");
+        }
+        <td><img class="img-table" src="images/calendar2.png"> @d <br> <img class="img-table" src="images/layer-14.png"> @time - @EndTime</td>
+        <td>
+            @items.User.FirstName @items.User.LastName <br><img src="~/images/layer-15.png">
+            @if (items.ServiceRequestaddress != null)
+            {
+
+                <span>@items.ServiceRequestaddress.AddressLine1 @items.ServiceRequestaddress.AddressLine2 , @items.ServiceRequestaddress.City @items.ServiceRequestaddress.PostalCode</span>
+
+            }
+        </td>
+        <td>
+            @if (items.ServiceProviderId == null)
+            {
+
+            }
+            else
+            {
+                @items.ServiceProvider.FirstName @items.ServiceProvider.LastName
+            }
+        </td>
+        <td>@items.TotalCost</td>
+        <td>@items.Discount</td>
+        <td>
+            @if (items.Status == 1)
+            {
+                <span class="status new" id="status">New</span>
+            }
+            @if (items.Status == 2)
+            {
+                <span class="status new" id="status">Cancelled</span>
+            }
+            @if (items.Status == 3)
+            {
+                <span class="status new" id="status">Completed</span>
+            }
+            @if (items.Status == 4)
+            {
+                <span class="status new" id="status">Accepted</span>
+            }
+        </td>
+        <td class="action">
+            @if (items.Status == 1)
+            {
+                <i class="fas fa-ellipsis-v btn-option" id="button"></i>
+                <br>
+                <div class="action-options" id="dialoug">
+                    <ul>
+                        <li>Edit & Reschedule</li>
+                        <li>Refund</li>
+                        <li>Cancel</li>
+                        <li>Change SP</li>
+                        <li>Escalate</li>
+                        <li>History Log</li>
+                        <li>Download Invoice</li>
+                    </ul>
+                </div>
+            }
+        </td>
+    </tr>
+}

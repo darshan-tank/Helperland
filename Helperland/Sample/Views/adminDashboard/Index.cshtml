@@ -1,0 +1,492 @@
+﻿@model IEnumerable<Sample.Models.ServiceRequest>
+@using Microsoft.AspNetCore.Http;
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Service Requests</title>
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
+    <script src="js/sort.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/pager.js"></script>
+    <script src="~/js/admin.js"></script>
+    <script>
+        function myfunction() {
+            var popup = document.getElementById("dialoug");
+            popup.classList.toggle("show");
+        }
+
+        function menuOpen() {
+            var popupLi = document.getElementById("liList");
+            popupLi.classList.toggle("show");
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <div class="ToastBack-card Reschedule" id="Reschedule">
+        <div class="card-table-tr-toast" style="margin: 40px auto;">
+            <h2>Service Reschedule</h2>
+            <br>
+            <div class="addressBlock">
+                <div class="flex-child">
+                    <label>Date</label>
+                    <input type="date" id="date">
+                </div>
+                <div class="flex-child">
+                    <label>Time</label>
+                    <select name="number-of-bath" id="timeService">
+                        <option value="02:00 PM">02:00 PM</option>
+                        <option value="03:00 PM">03:00 PM</option>
+                        <option value="04:00 PM">04:00 PM</option>
+                    </select>
+                </div>
+            </div><br>
+            <div class="addressBlock" id="newaddress" style="display: block;">
+                <h3>Service Address</h3><br>
+                <div class="flex-child">
+                    <label>Street Name</label>
+                    <input type="text" id="streetName" placeholder="Street name">
+                </div>
+                <div class="flex-child">
+                    <label>House Number</label>
+                    <input type="text" id="houseNumber" placeholder="House number">
+                </div>
+                <div class="flex-child">
+                    <label>Postal Code</label>
+                    <input type="text" id="postalCode" placeholder="Postal code">
+                </div>
+                <div class="flex-child">
+                    <label>City</label>
+                    <select id="city">
+                        <option value="Troisdrof">Troisdrof</option>
+                    </select>
+                </div>
+                <div class="flex-child">
+                    <label>Phone Number</label>
+                    <div class="number-container">
+                        <select id="">
+                            <option value="+49">+49</option>
+                            <option value="+49">+49</option>
+                            <option value="+49">+49</option>
+                        </select>
+                        <input placeholder="Phone Number" id="phoneNumber">
+                    </div>
+                </div>
+                <div class="flex-child-1">
+                    <button id="submit" onclick="EditNReschedule()">Save</button>
+                    <button id="cancel" onclick="removeModel()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="home"></div>
+    <div class="header-contain" id="header" style="background: #1FB6FF;">
+        <a class="logo" asp-controller="adminDashboard" asp-action="index">
+            <h2 class="admin-title">helperland</h2>
+        </a>
+        <div class="toggle" onclick="openMenu()" aria-expanded="false" id="buttonMenu">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </div>
+
+        <div class="navbar" id="mynav" data-visible="false">
+            <ul id="header-nav">
+                <li class="hidden li-active"><a asp-controller="adminDashboard" asp-action="index">Service Requests</a></li>
+                <li class="hidden"><a asp-controller="adminDashboard" asp-action="userManagment">User Managment</a></li>
+                <!-- <li class="flag">
+                                <a href="#" class="flag-icon"><img src="images/flag.png">
+                                    <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a>
+                            </li> -->
+                <li class="margin-auto">
+                    <img src="~/images/admin-user.png" alt="">
+                    <p class="hidden">Profile</p>
+                </li>
+                <li class="margin-auto">
+                    <p>@Context.Session.GetString("UserFirstName") @Context.Session.GetString("UserLastName")</p>
+                </li>
+                <li class="margin-auto">
+                    <a asp-controller="index" asp-action="logout"><img src="~/images/logout.png" alt=""></a>
+                    <a class="hidden" asp-controller="index" asp-action="logout">Logout</a>
+                </li>
+            </ul>
+            <li class="media-li"><a href="#"><i class="fa fa-facebook ups-icn" aria-hidden="true"></i></a></li>
+            <li class="media-li"><a href="#"><i class="fa fa-instagram ups-icn" aria-hidden="true"></i></a></li>
+        </div>
+    </div>
+    <section>
+        <div class="container-fluid">
+            <div class="flex" style="min-height:91vh">
+                <div class="toggle-li-menu" onclick="menuOpen()">
+                    <h4><i class="fa fa-bars" aria-hidden="true"></i>Menu</h4>
+                </div>
+                <div class="flex-left">
+                    <ul>
+                        <div id="liList">
+                            <li class="li-active"><a asp-controller="adminDashboard" asp-action="index">Service Requests</a></li>
+                            <li><a asp-controller="adminDashboard" asp-action="userManagment">User Managment</a></li>
+                        </div>
+                </ul>
+            </div>
+            <div class="flex-right">
+
+                <div class="container">
+                    <div class="flex-right-container">
+                        <div class="flex-right-head">
+                            <h2>Service Requests</h2>
+                        </div>
+                        <div class="flex-right-search">
+                            <form asp-controller="adminDashboard" asp-action="searchedServices">
+                                <input type="text" placeholder="Service ID" id="ServiceID" name="ServiceID">
+                                <input type="text" placeholder="Postal Code" id="postalCode" name="postalCode">
+                                <select id="Customernames" name="CustomerName">
+                                    <option value="">Select Customer</option>
+                                </select>
+                                <select id="Provdernames" name="ProviderName">
+                                    <option value="">Select Service Provider</option>
+                                </select>
+                                <select id="status" name="Status">
+                                    <option value="">Select Status</option>
+                                    <option value="1">New</option>
+                                    <option value="4">Accepted</option>
+                                    <option value="3">Completed</option>
+                                    <option value="2">Cancelled</option>
+                                </select>
+                                <input placeholder="from date" class="back-date" type="date" id="fromdate" name="fromdate">
+                                <input placeholder="to date" class="back-date" type="date" id="todate" name="todate">
+                                <button>Search</button>
+                                <button>Clear</button>
+                            </form>
+                        </div>
+                        <div class="flex-right-table">
+                            <table class="table" id="Table">
+                                <tr>
+                                    <th onclick="sortTable(0,1,2)">Service Id <img src="~/images/sort.png" alt=""></th>
+                                    <th onclick="sortTable(1,1,2)">Service Date <img src="~/images/sort.png" alt=""></th>
+                                    <th onclick="sortTable(2,1,2)">Customer Details <img src="~/images/sort.png" alt=""></th>
+                                    <th onclick="sortTable(3,1,2)">Service Provider <img src="~/images/sort.png" alt=""></th>
+                                    <th onclick="sortTable(4,1,2)">Net Amount <img src="~/images/sort.png" alt=""></th>
+                                    <th onclick="sortTable(5,1,2)">Discount <img src="~/images/sort.png" alt=""></th>
+                                    <th onclick="sortTable(6,1,2)">Status <img src="~/images/sort.png" alt=""></th>
+                                    <th class="action">Actions</th>
+                                </tr>
+                                <div id="UpdatedDiv">
+                                    @foreach (var items in Model)
+                                    {
+                                    <tr>
+                                        <td>@items.ServiceRequestId</td>
+                                        @{
+                                            var date = items.ServiceStartDate;
+                                            var time = date.ToString("hh:mm tt");
+                                            DateTime endDate = date.AddHours(items.ServiceHours);
+                                            var extra = items.ExtraHours ?? 0.0;
+                                            endDate = endDate.AddHours(extra);
+                                            var EndTime = endDate.ToString("hh:mm tt");
+                                            var d = date.ToString("dd/MM/yyyy");
+                                        }
+                                        <td><img class="img-table" src="~/images/calendar2.png"> @d <br> <img class="img-table" src="~/images/layer-14.png"> @time - @EndTime</td>
+                                        <td>
+                                            @items.User.FirstName @items.User.LastName <br><img src="~/images/layer-15.png">
+                                            @if (items.ServiceRequestaddress != null)
+                                            {
+
+                                                <span>@items.ServiceRequestaddress.AddressLine1 @items.ServiceRequestaddress.AddressLine2 , @items.ServiceRequestaddress.City @items.ServiceRequestaddress.PostalCode</span>
+
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (items.ServiceProviderId == null)
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                @items.ServiceProvider.FirstName @items.ServiceProvider.LastName
+                                            }
+                                        </td>
+                                        <td>@items.TotalCost</td>
+                                        <td>@items.Discount</td>
+                                        <td>
+                                            @if (items.Status == 1)
+                                            {
+                                                <span class="status new" id="status">New</span>
+                                            }
+                                            @if (items.Status == 2)
+                                            {
+                                                <span class="status new" id="status">Cancelled</span>
+                                            }
+                                            @if (items.Status == 3)
+                                            {
+                                                <span class="status new" id="status">Completed</span>
+                                            }
+                                            @if (items.Status == 4)
+                                            {
+                                                <span class="status new" id="status">Accepted</span>
+                                            }
+                                        </td>
+                                        <td class="action">
+                                            @if (items.Status == 1 || items.Status == 4)
+                                            {
+                                                <i class="fas fa-ellipsis-v btn-option" id="button"></i>
+                                                <br>
+                                                <div class="action-options" id="dialoug">
+                                                    <ul>
+                                                        <li><button onclick="openModel('@items.ServiceRequestId')">Edit & Reschedule</button></li>
+                                                        <li><button onclick="cancelService('@items.ServiceRequestId')">Cancel</button></li>
+                                                    </ul>
+                                                </div>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </div>
+                            </table>
+                            <div class="footer-table">
+                                <div class="left-side">
+                                    <h3>Show </h3>
+                                    <select id="select">
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                        <option value="20">20</option>
+                                    </select>
+                                    <h3>entries : @Model.Count()</h3>
+
+                                </div>
+                                <div class="right-side">
+                                    <div id="pageNavPosition" class="pager-nav"></div>
+
+                                    <script>
+                                        let pag = new Pager('Table', 5);
+
+                                        pag.init();
+                                        pag.showPageNav('pag', 'pageNavPosition');
+                                        pag.showPage(1);
+                                    </script>
+                                </div>
+                            </div>
+                            <table class="card">
+                                <tr class="no-border">
+                                    <td colspan="6">
+                                        <div class="heading-table">
+                                            <h3>Service Requests</h3>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                @foreach (var items in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="card-table-tr">
+                                                <h4>@items.ServiceRequestId</h4>
+                                                <hr>
+                                                @{
+                                                    var date = items.ServiceStartDate;
+                                                    var time = date.ToString("hh:mm tt");
+                                                    DateTime endDate = date.AddHours(items.ServiceHours);
+                                                    var extra = items.ExtraHours ?? 0.0;
+                                                    endDate = endDate.AddHours(extra);
+                                                    var EndTime = endDate.ToString("hh:mm tt");
+                                                    var d = date.ToString("dd/MM/yyyy");
+                                                }
+                                                <p><img class="img-table" src="~/images/calendar2.png"> @d <img class="img-table" src="~/images/layer-14.png"> @time - @EndTime</p>
+                                                <hr>
+                                                <p>@items.User.FirstName @items.User.LastName <br><img src="~/images/layer-15.png"> @items.ServiceRequestaddress.AddressLine1 @items.ServiceRequestaddress.AddressLine2 , @items.ServiceRequestaddress.City @items.ServiceRequestaddress.PostalCode</p>
+                                                <hr>
+                                                <div class="tableflex">
+                                                    @if (items.ServiceProviderId == null)
+                                                    {
+
+                                                    }
+                                                    else
+                                                    {
+                                                        @items.ServiceProvider.FirstName @items.ServiceProvider.LastName
+                                                    }
+                                                </div>
+                                                <hr>
+                                                <div class="status new">
+                                                    @if (items.Status == 1)
+                                                    {
+                                                        <span class="status new" id="status">New</span>
+                                                    }
+                                                    @if (items.Status == 2)
+                                                    {
+                                                        <span class="status new" id="status">Cancelled</span>
+                                                    }
+                                                    @if (items.Status == 3)
+                                                    {
+                                                        <span class="status new" id="status">Completed</span>
+                                                    }
+                                                    @if (items.Status == 4)
+                                                    {
+                                                        <span class="status new" id="status">Accepted</span>
+                                                    }
+                                                </div>
+                                                <hr>
+                                                <p class="button-center">
+                                                    @if (items.Status == 1)
+                                                    {
+                                                        <i class="fas fa-ellipsis-v btn-option" id="button"></i>
+                                                        <br>
+                                                        <div class="action-options" id="dialoug">
+                                                            <ul>
+                                                                <li>Edit & Reschedule</li>
+                                                                <li>Refund</li>
+                                                                <li>Cancel</li>
+                                                                <li>Change SP</li>
+                                                                <li>Escalate</li>
+                                                                <li>History Log</li>
+                                                                <li>Download Invoice</li>
+                                                            </ul>
+                                                        </div>
+                                                    }
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+                        </div>
+                    </div>
+                    <h5>©2018 Helperland. All rights reserved.</h5>
+                </div>
+            </div>
+            </div>
+            </div>
+        </section>
+
+
+        <script>
+            var acc = document.getElementsByClassName("accordion");
+            var i;
+
+            for (i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    var panel = this.nextElementSibling;
+                    if (panel.style.maxHeight) {
+                        panel.style.maxHeight = null;
+                    } else {
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                    }
+                });
+            }
+        </script>
+
+        <script>
+            function openCity(evt, cityName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+            document.getElementById("defaultOpen").click();
+
+            var navList = document.getElementById("nav-lists");
+
+            function Show() {
+                navList.classList.add("_Menus-show");
+            }
+
+            function Hide() {
+                navList.classList.remove("_Menus-show");
+            }
+        </script>
+
+        <script>
+            // $(document).ready(function() {
+            //     $(".toggle").click(function() {
+            //         $("#mynav").toggle();
+            //     });
+            // });
+
+            window.onscroll = function () {
+                myFunction()
+            };
+
+            var header = document.getElementById("header");
+            var sticky = "150";
+
+            function myFunction() {
+                if (window.pageYOffset > sticky) {
+                    header.classList.add("sticky");
+                    console.log("if");
+                } else {
+                    header.classList.remove("sticky");
+                    console.log("ifelse");
+                }
+            }
+
+            function openMenu() {
+                var popupLi = document.querySelector(".navbar");
+                var menuButton = document.querySelector(".toggle");
+                // popupLi.classList.toggle("show-menu");
+                var visibility = popupLi.getAttribute("data-visible");
+                console.log(visibility);
+                if (visibility === "false") {
+                    popupLi.setAttribute("data-visible", true);
+                    menuButton.setAttribute("aria-expanded", true);
+                    var body = document.getElementById('home');
+                    body.classList.add("back");
+                } else if (visibility === "true") {
+                    popupLi.setAttribute("data-visible", false);
+                    menuButton.setAttribute("aria-expanded", false);
+                    var body = document.getElementById('home');
+                    body.classList.remove("back");
+                }
+            }
+
+
+            const btn_options = document.querySelectorAll('.btn-option');
+            const action_options = document.querySelectorAll('.action-options');
+
+
+
+            const hideShowActionOptions = (e, index) => {
+
+                const style = window.getComputedStyle(action_options[index]);
+                if (style.display === 'none') {
+                    action_options[index].classList.replace("action-options", "display-block");
+
+                } else {
+                    action_options[index].classList.replace("display-block", "action-options");
+                }
+                e.stopPropagation();
+            }
+
+            btn_options.forEach((btn_option, index) => {
+
+
+                btn_option.addEventListener('click', (e) => hideShowActionOptions(e, index));
+            });
+
+            $("#select").change(function () {
+                let pag = new Pager('Table', $(this).val());
+
+                pag.init();
+                pag.showPageNav('pag', 'pageNavPosition');
+                pag.showPage(1);
+            });
+        </script>
+    </body>
+
+</html>

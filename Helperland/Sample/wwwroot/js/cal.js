@@ -1,4 +1,4 @@
-console.log("function called calender");
+
 var dt = new Date();
 dt.setDate(1);
 var day = dt.getDay();
@@ -36,7 +36,7 @@ for (x = day; x > 0; x--) {
     cells += "<div class='prev_date'>" + (prevDate - x +
         1) + "</div>";
 }
-console.log(day);
+
 
 /*@foreach(var items in Model) {
     console.log(items)
@@ -54,7 +54,6 @@ document.getElementsByClassName("days")[0].innerHTML =
 
 
 function renderDate() {
-    console.log("function called calender");
     dt.setDate(1);
     var day = dt.getDay();
     var today = new Date();
@@ -91,7 +90,6 @@ function renderDate() {
         cells += "<div class='prev_date'>" + (prevDate - x +
             1) + "</div>";
     }
-    console.log(day);
     for (i = 1; i <= endDate; i++) {
         if (i == today.getDate() && dt.getMonth() ==
             today.getMonth()) cells += "<div class='today'>" + i + "<span>T</span></div>";

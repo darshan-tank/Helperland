@@ -1,97 +1,99 @@
 ﻿@model IEnumerable<Sample.Models.ServiceRequest>
+
+@section Scripts{
     <script src="~/js/currentService.js"></script>
+}
+<div class="ToastBack" id="displayCurrentServiceForCustomer">
+    <div class="ToastContainer" id="containerService">
+        <div class="toast-header">
+            <h3>Service Details</h3>
+            <a onclick="closeCurrentServiceForCustomer()">x</a>
+        </div>
+        <p id="dateTimeDisplayUS">07/03/2022 02:00 PM - 05:00 PM</p>
+        <p>Duration : <label id="durationDisplayUS">3</label> Hrs</p>
+        <hr>
+        <p>Service ID : <label id="serviceIdDisplayUS">3</label></p>
+        <p>
+            Extras :
+            <ul id="extraULUS">
+            </ul>
+        </p>
+        <p>Total Payment : <label id="paymentDisplayUS">3</label></p>
+        <hr>
+        <p>Customer Name : <label id="customerNameDisplayUS">xyz</label></p>
+        <p>Service Address : <label id="serviceAddressDisplayUS">xyz</label></p>
+        <hr>
+        <p>Comments</p>
+        <p id="commentsDisplayUS"></p>
+        <p id="petsDisplayUS">No pets</p>
+        <hr>
+        <div>
+            <button class="rate-button" onclick="reschedule()">Reschedule Service</button>
+            <button class="rate-button" onclick="cancelService()">Cancel</button>
+        </div>
 
-    <div class="ToastBack" id="displayCurrentServiceForCustomer">
-        <div class="ToastContainer" id="containerService">
-            <div class="toast-header">
-                <h3>Service Details</h3>
-                <a onclick="closeCurrentServiceForCustomer()">x</a>
-            </div>
-            <p id="dateTimeDisplayUS">07/03/2022 02:00 PM - 05:00 PM</p>
-            <p>Duration : <label id="durationDisplayUS">3</label> Hrs</p>
-            <hr>
-            <p>Service ID : <label id="serviceIdDisplayUS">3</label></p>
-            <p>
-                Extras :
-                <ul id="extraULUS">
-                </ul>
-            </p>
-            <p>Total Payment : <label id="paymentDisplayUS">3</label></p>
-            <hr>
-            <p>Customer Name : <label id="customerNameDisplayUS">xyz</label></p>
-            <p>Service Address : <label id="serviceAddressDisplayUS">xyz</label></p>
-            <hr>
-            <p>Comments</p>
-            <p id="commentsDisplayUS"></p>
-            <p id="petsDisplayUS">No pets</p>
-            <hr>
+    </div>
+</div>
+
+<div class="ToastBack-card Reschedule" id="reschedule">
+    <div class="card-table-tr-toast">
+        <div class="headerButton">
+            <h4>Reschedule Service</h4>
+            <button class="span-center" onclick="closeRescchedule()">x</button>
+        </div>
+        <hr>
+        <span id="Error"></span>
+        <div class="flex-box">
             <div>
-                <button class="rate-button" onclick="reschedule()">Reschedule Service</button>
-                <button class="rate-button" onclick="cancelService()">Cancel</button>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="ToastBack-card Reschedule" id="reschedule">
-        <div class="card-table-tr-toast">
-            <div class="headerButton">
-                <h4>Reschedule Service</h4>
-                <button class="span-center" onclick="closeRescchedule()">x</button>
-            </div>
-            <hr>
-            <span id="Error"></span>
-            <div class="flex-box">
-                <div>
-                    <div class="input-group-cal">
-                        <img src="images/calendar.png" alt=""><input type="date" name="" id="datePick">
-                    </div>
-                    <select name="number-of-bath" id="timeService">
-                        <option value="02:00 PM">02:00 PM</option>
-                        <option value="03:00 PM">03:00 PM</option>
-                        <option value="04:00 PM">04:00 PM</option>
-                    </select>
+                <div class="input-group-cal">
+                    <img src="images/calendar.png" alt=""><input type="date" name="" id="datePick">
                 </div>
+                <select name="number-of-bath" id="timeService">
+                    <option value="02:00 PM">02:00 PM</option>
+                    <option value="03:00 PM">03:00 PM</option>
+                    <option value="04:00 PM">04:00 PM</option>
+                </select>
             </div>
-            <p class="button-center"><button class="cancel-button" onclick="reschedulePost()">Ok</button></p>
         </div>
+        <p class="button-center"><button class="cancel-button" onclick="reschedulePost()">Ok</button></p>
     </div>
-    <div class="ToastBack-card Reschedule" id="cancelToast">
-        <div class="card-table-tr-toast">
-            <div class="headerButton">
-                <h4>Cancel Service Request</h4>
-                <button class="span-center" onclick="closeCancel()">x</button>
-            </div>
-            <hr>
-            <div class="flex-box">
-                <div>
-                    <h3>Why you want to cancel the service request?</h3>
-                    <textarea cols="30" rows="5" id="reason"></textarea>
-                </div>
-            </div>
-            <p class="button-center"><button class="cancel-button" onclick="cancelPost()">Ok</button></p>
+</div>
+<div class="ToastBack-card Reschedule" id="cancelToast">
+    <div class="card-table-tr-toast">
+        <div class="headerButton">
+            <h4>Cancel Service Request</h4>
+            <button class="span-center" onclick="closeCancel()">x</button>
         </div>
+        <hr>
+        <div class="flex-box">
+            <div>
+                <h3>Why you want to cancel the service request?</h3>
+                <textarea cols="30" rows="5" id="reason"></textarea>
+            </div>
+        </div>
+        <p class="button-center"><button class="cancel-button" onclick="cancelPost()">Ok</button></p>
     </div>
-    <table class="table" id="Table">
+</div>
+<table class="table" id="Table">
 
-        <tr>
-            <td colspan="6">
-                <div class="heading-table">
-                    <h2>Current Service Requests</h2>
-                    <button class="submit-button" onclick="openBookServicePage()">Add New Service Request</button>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <th onclick="sortTable(0,2,2)">Service Details <img src="images/sort.png" alt=""></th>
-            <th onclick="sortTable(1,2,2)">Service Provider <img src="images/sort.png" alt=""></th>
-            <th onclick="sortTable(2,2,2)">Payment <img src="images/sort.png" alt=""></th>
-            <th onclick="sortTable(3,2,2)">Status <img src="images/sort.png" alt=""></th>
-            <th class="action" colspan="2">Action</th>
-        </tr>
-        @foreach (var items in Model)
-        {
     <tr>
+        <td colspan="6">
+            <div class="heading-table">
+                <h2>Current Service Requests</h2>
+                <button class="submit-button" onclick="openBookServicePage()">Add New Service Request</button>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th onclick="sortTable(0,2,2)">Service Details <img src="images/sort.png" alt=""></th>
+        <th onclick="sortTable(1,2,2)">Service Provider <img src="images/sort.png" alt=""></th>
+        <th onclick="sortTable(2,2,2)">Payment <img src="images/sort.png" alt=""></th>
+        <th onclick="sortTable(3,2,2)">Status <img src="images/sort.png" alt=""></th>
+        <th class="action" colspan="2">Action</th>
+    </tr>
+    @foreach (var items in Model)
+    {
+        <tr>
             <td onclick="showServiceDetailsForC('@items.ServiceRequestId', '@DateTime.Now')">
                 @{
                     var date = items.ServiceStartDate;
@@ -102,23 +104,23 @@
             </td>
             <td onclick="showServiceDetailsForC('@items.ServiceRequestId', '@DateTime.Now')">
                 @*<div class="tableflex">
-                    <img class="prof-img" src="images/cap.png">
-                    <div>
-                        David <br>
-                        <div class="rating">
-                            <i class="fas fa-star selected"></i>
-                            <i class="fas fa-star selected"></i>
-                            <i class="fas fa-star selected"></i>
-                            <i class="fas fa-star selected"></i>
-                            <i class="far fa-star"></i>
-                            <label class="number" id="number"></label>
+                        <img class="prof-img" src="images/cap.png">
+                        <div>
+                            David <br>
+                            <div class="rating">
+                                <i class="fas fa-star selected"></i>
+                                <i class="fas fa-star selected"></i>
+                                <i class="fas fa-star selected"></i>
+                                <i class="fas fa-star selected"></i>
+                                <i class="far fa-star"></i>
+                                <label class="number" id="number"></label>
+                            </div>
                         </div>
-                    </div>
-                </div>*@
+                    </div>*@
                 @if (items.ServiceProviderId != null)
                 {
                     <div class="tableflex">
-                        <img class="prof-img" src="images/cap.png">
+                        <img class="prof-img" src="@items.ServiceProvider.UserProfilePicture">
                         <div>
                             @items.ServiceProvider.FirstName @items.ServiceProvider.LastName<br>
                             @{
@@ -159,38 +161,39 @@
             {
                 <td onclick="showServiceDetailsForC('@items.ServiceRequestId', '@DateTime.Now')"><span class="status new" id="status">Accepted</span></td>
             }
-        <td class="action"><button class="rate-button" onclick="reschedule('@items.ServiceRequestId')">Reschedule Service</button></td>
-        <td class="action"><button class="rate-button" onclick="cancelService('@items.ServiceRequestId')">Cancel</button></td>
-    </tr>
-        }
-        <tr>
-            <td colspan="5">
-                <div class="footer-table">
-                    <div class="left-side">
-                        <h3>Show </h3>
-                        <select>
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="15">15</option>
-                            <option value="20">20</option>
-                        </select>
-                        <h3>entries</h3>
-                        <h3>Total Records :</h3><span id="count">55</span>
-                    </div>
-                    <div class="right-side">
-                        <i class="fas fa-step-backward"></i>
-                        <i class="fas fa-chevron-left"></i>
-                        <h3 class="page-active">1</h3>
-                        <h3>2</h3>
-                        <h3>3</h3>
-                        <h3>4</h3>
-                        <i class="fas fa-chevron-right"></i>
-                        <i class="fas fa-step-forward"></i>
-                    </div>
-                </div>
-            </td>
+            <td class="action"><button class="rate-button" onclick="rescheduleOpen('@items.ServiceRequestId')">Reschedule Service</button></td>
+            <td class="action"><button class="rate-button" onclick="cancelServiceOpen('@items.ServiceRequestId')">Cancel</button></td>
         </tr>
-    </table>
+    }
+    <tr>
+        <td colspan="5">
+            <div class="footer-table">
+                <div class="left-side">
+                    <h3>Show </h3>
+                    <select id="select">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+                    <h3>entries : @Model.Count()</h3>
+
+                </div>
+                <div class="right-side">
+                    <div id="pageNavPosition" class="pager-nav"></div>
+
+                    <script>
+                        let pag = new Pager('Table', 5);
+
+                        pag.init();
+                        pag.showPageNav('pag', 'pageNavPosition');
+                        pag.showPage(1);
+                    </script>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
 
 <table class="card">
     <tr class="no-border">
@@ -203,30 +206,30 @@
     </tr>
     @foreach (var items in Model)
     {
-<tr>
-    <td>
-        @{
-            var date = items.ServiceStartDate;
-            var time = date.ToString("hh:mm tt");
-            var d = date.ToString("dd/MM/yyyy");
-        }
-        <div class="card-table-tr">
-            <p><img class="img-table" src="images/calendar2.png"> @d <img class="img-table" src="images/layer-14.png"> @time</p>
-            <hr>
-            <div class="tableflex">
-                @if (items.ServiceProviderId != null)
-                {
-                    var idString = items.ServiceRequestId + "Mobile";
-                    <img class="prof-img" src="images/cap.png">
-                    <div>
-                        @items.ServiceProvider.FirstName @items.ServiceProvider.LastName <br>
-                        <div class="rating">
-                            <div class="my-rating" id="@idString"></div><span id="ratingDisplay">@items.ServiceProvider.Ratings</span>
-                        </div>
-                    </div>
-                    @if (items.ServiceProviderId != null)
-                    {
-                        <script>
+        <tr>
+            <td>
+                @{
+                    var date = items.ServiceStartDate;
+                    var time = date.ToString("hh:mm tt");
+                    var d = date.ToString("dd/MM/yyyy");
+                }
+                <div class="card-table-tr">
+                    <p><img class="img-table" src="images/calendar2.png"> @d <img class="img-table" src="images/layer-14.png"> @time</p>
+                    <hr>
+                    <div class="tableflex">
+                        @if (items.ServiceProviderId != null)
+                        {
+                            var idString = items.ServiceRequestId + "Mobile";
+                            <img class="prof-img" src="@items.ServiceProvider.UserProfilePicture">
+                            <div>
+                                @items.ServiceProvider.FirstName @items.ServiceProvider.LastName <br>
+                                <div class="rating">
+                                    <div class="my-rating" id="@idString"></div><span id="ratingDisplay">@items.ServiceProvider.Ratings</span>
+                                </div>
+                            </div>
+                            @if (items.ServiceProviderId != null)
+                            {
+                                <script>
 
                             $("#@idString").starRating({
                                             starSize: 25,
@@ -235,49 +238,24 @@
                                         ratedColors:['ffd800', 'ffd800', 'ffd800', 'ffd800', 'ffd800'],
                                         readOnly: true
                                     });
-                        </script>
+                                </script>
+                            }
+                        }
+                    </div>
+                    <hr>
+                    <i class="fas fa-dollar-sign"></i><b>@items.TotalCost</b>
+                    <hr>
+                    @if (items.Status == 1)
+                    {
+                        <p><span class="status new" id="status">New</span></p>
                     }
-                }
-            </div>
-            <hr>
-            <i class="fas fa-dollar-sign"></i><b>@items.TotalCost</b>
-            <hr>
-            @if (items.Status == 1)
-            {
-                <p><span class="status new" id="status">New</span></p>
-            }
-            <hr>
-            <button class="rate-button" onclick="reschedule('@items.ServiceRequestId')">Reschedule Service</button>
-            <button class="rate-button" onclick="cancelService('@items.ServiceRequestId')">Cancel</button>
-    </div>
-    </td>
-</tr>
+                    <hr>
+                    <button class="rate-button" onclick="reschedule('@items.ServiceRequestId')">Reschedule Service</button>
+                    <button class="rate-button" onclick="cancelService('@items.ServiceRequestId')">Cancel</button>
+                </div>
+            </td>
+        </tr>
     }
-    <tr>
-        <td colspan="5">
-            <div class="footer-table">
-                <div class="left-side">
-                    <h3>Show </h3>
-                    <select>
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                    </select>
-                    <h3>entries</h3>
-                    <h3>Total Records :</h3><span id="count">55</span>
-                </div>
-                <div class="right-side">
-                    <i class="fas fa-step-backward"></i>
-                    <i class="fas fa-chevron-left"></i>
-                    <h3 class="page-active">1</h3>
-                    <h3>2</h3>
-                    <h3>3</h3>
-                    <h3>4</h3>
-                    <i class="fas fa-chevron-right"></i>
-                    <i class="fas fa-step-forward"></i>
-                </div>
-            </div>
-        </td>
-    </tr>
+
 </table>
+
