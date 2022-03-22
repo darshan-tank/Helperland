@@ -21,7 +21,7 @@
             @if (@Context.Session.GetString("UserEmail") == null)
             {
 
-                <li><a asp-action="Login" class="Button">Login</a></li>
+                <li><a asp-controller="" asp-action="Login" class="Button">Login</a></li>
                 <li><a asp-controller="spsignup" class="Button">Become a helper</a></li>
             }
             else

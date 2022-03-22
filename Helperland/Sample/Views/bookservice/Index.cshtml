@@ -1,4 +1,7 @@
-﻿@using Microsoft.AspNetCore.Http;
+﻿@{
+    ViewData["Title"] = "Book Service";
+}
+@using Microsoft.AspNetCore.Http;
 @model Sample.Models.User
 <div id="home"></div>
 <div class="header-contain" id="header" style="background: rgba(39, 39, 39, .7);">
@@ -101,17 +104,17 @@
     <div class="modal-content" style="width: 30%;">
         <span class="close2" id="close2">&times;</span>
         <h2 style="margin-bottom: 15px;">Login to your account</h2>
-            <span class="text-danger-error" id="formerror"></span>
-            <div class="flex-login" id="flex-login">
-                <input type="email" asp-for="Email" placeholder="Email" id="email">
-                <span class="text-danger-error" id="emailerror"></span>
-                <input type="password" asp-for="Password" placeholder="Password" id="password">
-                <span class="text-danger-error" id="passworderror"></span>
-                <div><input type="checkbox" name="Remember me">Remember me</div>
-                <input type="submit" value="Login" class="submit-button" onclick="login()">
-                <a asp-controller="index" asp-action="forget">Forget Password?</a>
-                <div>Don't have an account?<a asp-controller="index" asp-action="registration">Create an account</a></div>
-            </div>
+        <span class="text-danger-error" id="formerror"></span>
+        <div class="flex-login" id="flex-login">
+            <input type="email" asp-for="Email" placeholder="Email" id="email">
+            <span class="text-danger-error" id="emailerror"></span>
+            <input type="password" asp-for="Password" placeholder="Password" id="password">
+            <span class="text-danger-error" id="passworderror"></span>
+            <div><input type="checkbox" name="Remember me">Remember me</div>
+            <input type="submit" value="Login" class="submit-button" onclick="login()">
+            <a asp-controller="index" asp-action="forget">Forget Password?</a>
+            <div>Don't have an account?<a asp-controller="index" asp-action="registration">Create an account</a></div>
+        </div>
     </div>
 
 </div>
@@ -506,14 +509,12 @@
                                 <div class="flex-left-text">
                                     <p>Basic</p>
                                     <ul id="extralist">
-                                        
                                     </ul>
-                                    
+
                                 </div>
                                 <div class="flex-right-text">
                                     <p><span id="basicTime">3</span> Hrs</p>
                                     <ul id="extralistMin">
-                                        
                                     </ul>
                                 </div>
                             </div>

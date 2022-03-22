@@ -1,4 +1,7 @@
-﻿@model Sample.Models.User
+﻿@{
+    ViewData["Title"] = "Become Helper";
+}
+@model Sample.Models.User
 @using Microsoft.AspNetCore.Http;
 @if (!String.IsNullOrEmpty(@ViewBag.Message))
 {
@@ -269,10 +272,10 @@
     function myFunction() {
         if (window.pageYOffset > sticky) {
             header.classList.add("sticky");
-            
+
         } else {
             header.classList.remove("sticky");
-            
+
         }
     }
 
@@ -281,7 +284,7 @@
         var menuButton = document.querySelector(".toggle");
         // popupLi.classList.toggle("show-menu");
         var visibility = popupLi.getAttribute("data-visible");
-        
+
         if (visibility === "false") {
             popupLi.setAttribute("data-visible", true);
             menuButton.setAttribute("aria-expanded", true);

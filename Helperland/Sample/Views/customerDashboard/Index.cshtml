@@ -1,4 +1,7 @@
-﻿@using Microsoft.AspNetCore.Http;
+﻿@{
+    ViewData["Title"] = "Customer Dashboard";
+}
+@using Microsoft.AspNetCore.Http;
 
 <script src="~/js/customerJS.js"></script>
 <script src="~/js/sort.js"></script>
@@ -96,7 +99,7 @@
                     <li class="li-item" id="ServiceScheduleLI"><a onclick="openServiceSchedule()">Service Schedule</a></li>
                     <li class="li-item" id="FavoriteProsLI"><a onclick="openFavoritePro()">Favorite Pros</a></li>
                     @*<li class="li-item" id="InvoicesLI"><a>Invoices</a></li>
-                    <li class="li-item" id="NotificationsLI"><a>Notifications</a></li>*@
+                        <li class="li-item" id="NotificationsLI"><a>Notifications</a></li>*@
                 </ul>
             </div>
             <div class="right table-scroll" id="right-container">

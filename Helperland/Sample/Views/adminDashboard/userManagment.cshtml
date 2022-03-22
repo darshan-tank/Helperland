@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Sample.Models.User>
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+@model IEnumerable<Sample.Models.User>
 @using Microsoft.AspNetCore.Http;
 <!DOCTYPE html>
 <html>
@@ -192,8 +195,8 @@
                                             var date = items.CreatedDate;
                                             var d = date.ToString("dd/MM/yyyy");
                                         }
-                                        @{ 
-                                            var roles ="";
+                                        @{
+                                            var roles = "";
                                             if (items.UserTypeId == 2)
                                             {
                                                 roles = "Provider";
@@ -219,20 +222,20 @@
                                             }
                                         </td>
                                         <td class="action">
-                                                <i class="fas fa-ellipsis-v btn-option" id="button"></i>
-                                                <br>
-                                                <div class="action-options" id="dialoug">
-                                                    <ul>
-                                                        @if (items.IsActive == true)
-                                                        {
-                                                            <li><button onclick="deactivateUser('@items.UserId')">Deactivate</button></li>
-                                                        }
-                                                        @if (items.IsActive == false)
-                                                        {
-                                                            <li><button onclick="activateUser('@items.UserId')">Activate</button></li>
-                                                        }
-                                                    </ul>
-                                                </div>
+                                            <i class="fas fa-ellipsis-v btn-option" id="button"></i>
+                                            <br>
+                                            <div class="action-options" id="dialoug">
+                                                <ul>
+                                                    @if (items.IsActive == true)
+                                                    {
+                                                        <li><button onclick="deactivateUser('@items.UserId')">Deactivate</button></li>
+                                                    }
+                                                    @if (items.IsActive == false)
+                                                    {
+                                                        <li><button onclick="activateUser('@items.UserId')">Activate</button></li>
+                                                    }
+                                                </ul>
+                                            </div>
                                         </td>
                                     </tr>
                                 }

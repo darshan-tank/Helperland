@@ -1,4 +1,7 @@
-﻿@using Microsoft.AspNetCore.Http;
+﻿@{
+    ViewData["Title"] = "Customer Setting";
+}
+@using Microsoft.AspNetCore.Http;
 @model Sample.Models.User
 
 <script>
@@ -165,236 +168,236 @@
 
 <div class="ToastBack-card Reschedule" id="AddAddressModel">
     <div class="card-table-tr-toast" style="margin: 40px auto;">
-                <div class="addressBlock" id="newaddress" style="display: block;">
-                    <div class="flex-child">
-                        <label>Street Name</label>
-                        <input type="text" id="streetName" placeholder="Street name">
-                    </div>
-                    <div class="flex-child">
-                        <label>House Number</label>
-                        <input type="text" id="houseNumber" placeholder="House number">
-                    </div>
-                    <div class="flex-child">
-                        <label>Postal Code</label>
-                        <input type="text" id="postalCode" placeholder="Postal code">
-                    </div>
-                    <div class="flex-child">
-                        <label>City</label>
-                        <select id="city">
-                            <option value="Troisdrof">Troisdrof</option>
-                        </select>
-                    </div>
-                    <div class="flex-child">
-                        <label>Phone Number</label>
-                        <div class="number-container">
-                            <select id="">
-                                <option value="+49">+49</option>
-                                <option value="+49">+49</option>
-                                <option value="+49">+49</option>
-                            </select>
-                            <input placeholder="Phone Number" id="phoneNumber">
-                        </div>
-                    </div>
-                    <div class="flex-child-1">
-                        <button id="submit" onclick="addAddress()">Save</button>
-                        <button id="cancel" onclick="removeAddressModel()">Cancel</button>
-                    </div>
+        <div class="addressBlock" id="newaddress" style="display: block;">
+            <div class="flex-child">
+                <label>Street Name</label>
+                <input type="text" id="streetName" placeholder="Street name">
+            </div>
+            <div class="flex-child">
+                <label>House Number</label>
+                <input type="text" id="houseNumber" placeholder="House number">
+            </div>
+            <div class="flex-child">
+                <label>Postal Code</label>
+                <input type="text" id="postalCode" placeholder="Postal code">
+            </div>
+            <div class="flex-child">
+                <label>City</label>
+                <select id="city">
+                    <option value="Troisdrof">Troisdrof</option>
+                </select>
+            </div>
+            <div class="flex-child">
+                <label>Phone Number</label>
+                <div class="number-container">
+                    <select id="">
+                        <option value="+49">+49</option>
+                        <option value="+49">+49</option>
+                        <option value="+49">+49</option>
+                    </select>
+                    <input placeholder="Phone Number" id="phoneNumber">
                 </div>
             </div>
-        </div>
-
-        <div class="ToastBack-card Reschedule" id="UpdateAddressModel">
-            <div class="card-table-tr-toast" style="margin: 40px auto;">
-                <div class="addressBlock" id="newaddress" style="display: block;">
-                    <div class="flex-child">
-                        <label>Street Name</label>
-                        <input type="text" id="streetNameUpdate" placeholder="Street Name">
-                    </div>
-                    <div class="flex-child">
-                        <label>House Number</label>
-                        <input type="text" id="houseNumberUpdate" placeholder="House number">
-                    </div>
-                    <div class="flex-child">
-                        <label>Postal Code</label>
-                        <input type="text" id="postalCodeUpdate" placeholder="Postal code">
-                    </div>
-                    <div class="flex-child">
-                        <label>City</label>
-                        <select id="citySelect">
-                            <option value="Troisdrof">Troisdrof</option>
-                        </select>
-                    </div>
-                    <div class="flex-child">
-                        <label>Phone Number</label>
-                        <div class="number-container">
-                            <select id="">
-                                <option value="+49">+49</option>
-                                <option value="+49">+49</option>
-                                <option value="+49">+49</option>
-                            </select>
-                            <input placeholder="Phone Number" id="phoneNumberUpdate">
-                        </div>
-                    </div>
-                    <div class="flex-child-1">
-                        <button id="submit" onclick="submitUpdatedAddress()">Save</button>
-                        <button id="cancel" onclick="closeEditModel()">Cancel</button>
-                    </div>
-                </div>
+            <div class="flex-child-1">
+                <button id="submit" onclick="addAddress()">Save</button>
+                <button id="cancel" onclick="removeAddressModel()">Cancel</button>
             </div>
         </div>
+    </div>
+</div>
 
-        <section>
-            <div class="container m-tb">
-                <div class="flex">
+<div class="ToastBack-card Reschedule" id="UpdateAddressModel">
+    <div class="card-table-tr-toast" style="margin: 40px auto;">
+        <div class="addressBlock" id="newaddress" style="display: block;">
+            <div class="flex-child">
+                <label>Street Name</label>
+                <input type="text" id="streetNameUpdate" placeholder="Street Name">
+            </div>
+            <div class="flex-child">
+                <label>House Number</label>
+                <input type="text" id="houseNumberUpdate" placeholder="House number">
+            </div>
+            <div class="flex-child">
+                <label>Postal Code</label>
+                <input type="text" id="postalCodeUpdate" placeholder="Postal code">
+            </div>
+            <div class="flex-child">
+                <label>City</label>
+                <select id="citySelect">
+                    <option value="Troisdrof">Troisdrof</option>
+                </select>
+            </div>
+            <div class="flex-child">
+                <label>Phone Number</label>
+                <div class="number-container">
+                    <select id="">
+                        <option value="+49">+49</option>
+                        <option value="+49">+49</option>
+                        <option value="+49">+49</option>
+                    </select>
+                    <input placeholder="Phone Number" id="phoneNumberUpdate">
+                </div>
+            </div>
+            <div class="flex-child-1">
+                <button id="submit" onclick="submitUpdatedAddress()">Save</button>
+                <button id="cancel" onclick="closeEditModel()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-                    <div class="left">
-                        <ul class="nav-lists">
-                            <li class="li-item" id="dashboardLI"><a asp-controller="customerDashboard" asp-action="index">Dashboard</a></li>
-                            <li class="li-item active-li" id="ServiceHistoryLI"><a asp-controller="customerDashboard" asp-action="index">Service History</a></li>
-                            <li class="li-item" id="ServiceScheduleLI"><a asp-controller="customerDashboard" asp-action="index">Service Schedule</a></li>
-                            <li class="li-item" id="FavoriteProsLI"><a asp-controller="customerDashboard" asp-action="index">Favorite Pros</a></li>
-                            <li class="li-item" id="InvoicesLI"><a asp-controller="customerDashboard" asp-action="index">Invoices</a></li>
-                            <li class="li-item" id="NotificationsLI"><a asp-controller="customerDashboard" asp-action="index"> Notifications</a></li>
-                        </ul>
+<section>
+    <div class="container m-tb">
+        <div class="flex">
+
+            <div class="left">
+                <ul class="nav-lists">
+                    <li class="li-item" id="dashboardLI"><a asp-controller="customerDashboard" asp-action="index">Dashboard</a></li>
+                    <li class="li-item active-li" id="ServiceHistoryLI"><a asp-controller="customerDashboard" asp-action="index">Service History</a></li>
+                    <li class="li-item" id="ServiceScheduleLI"><a asp-controller="customerDashboard" asp-action="index">Service Schedule</a></li>
+                    <li class="li-item" id="FavoriteProsLI"><a asp-controller="customerDashboard" asp-action="index">Favorite Pros</a></li>
+                    <li class="li-item" id="InvoicesLI"><a asp-controller="customerDashboard" asp-action="index">Invoices</a></li>
+                    <li class="li-item" id="NotificationsLI"><a asp-controller="customerDashboard" asp-action="index"> Notifications</a></li>
+                </ul>
+            </div>
+            <div class="right table-scroll" id="right-container">
+
+                <div class="flex-container-fav form-tab">
+                    <div class="flex-tab">
+                        <a id="MyDetails" class="tab-button tb-active" onclick="openMyDetails()">My Details</a>
+                        <a id="MyAddress" class="tab-button" onclick="openMyAddress()">My Addresses</a>
+                        <a id="ChangePassword" class="tab-button" onclick="openMyChangePassword()">Change Password</a>
                     </div>
-                    <div class="right table-scroll" id="right-container">
-
-                        <div class="flex-container-fav form-tab">
-                            <div class="flex-tab">
-                                <a id="MyDetails" class="tab-button tb-active" onclick="openMyDetails()">My Details</a>
-                                <a id="MyAddress" class="tab-button" onclick="openMyAddress()">My Addresses</a>
-                                <a id="ChangePassword" class="tab-button" onclick="openMyChangePassword()">Change Password</a>
+                    <div id="myDetailsTab">
+                        <div class="flex-tab-form-container">
+                            <div class="container-form-input">
+                                <label>First name</label>
+                                <input type="text" id="firstName" value="@Model.FirstName">
                             </div>
-                            <div id="myDetailsTab">
-                                <div class="flex-tab-form-container">
-                                    <div class="container-form-input">
-                                        <label>First name</label>
-                                        <input type="text" id="firstName" value="@Model.FirstName">
-                                    </div>
-                                    <div class="container-form-input">
-                                        <label>Last name</label>
-                                        <input type="text" id="lastName" value="@Model.LastName">
-                                    </div>
-                                    <div class="container-form-input">
-                                        <label>Email</label>
-                                        <input type="text" id="email" value="@Model.Email" disabled>
-                                    </div>
-                                    <div class="container-form-input">
-                                        <label>Mobile Number</label>
-                                        <div class="input-wrapper">
-                                            <select name="code" class="code">
-                                                <option value="volvo">+49</option>
-                                                <option value="saab">+99</option>
-                                                <option value="mercedes">+14</option>
-                                            </select>
-                                            <input type="text" name="" pattern="[0-9]{10}" min="10" max="10" class="call" placeholder="Mobile number" id="mobileNumber" value="@Model.Mobile">
-                                        </div>
-                                    </div>
-                                    <div class="container-form-input">
-                                        <label>Date of Birth</label>
-                                        <input type="date" value="@Model.DateOfBirth" id="dateOfBirth">
-                                        <script>
+                            <div class="container-form-input">
+                                <label>Last name</label>
+                                <input type="text" id="lastName" value="@Model.LastName">
+                            </div>
+                            <div class="container-form-input">
+                                <label>Email</label>
+                                <input type="text" id="email" value="@Model.Email" disabled>
+                            </div>
+                            <div class="container-form-input">
+                                <label>Mobile Number</label>
+                                <div class="input-wrapper">
+                                    <select name="code" class="code">
+                                        <option value="volvo">+49</option>
+                                        <option value="saab">+99</option>
+                                        <option value="mercedes">+14</option>
+                                    </select>
+                                    <input type="text" name="" pattern="[0-9]{10}" min="10" max="10" class="call" placeholder="Mobile number" id="mobileNumber" value="@Model.Mobile">
+                                </div>
+                            </div>
+                            <div class="container-form-input">
+                                <label>Date of Birth</label>
+                                <input type="date" value="@Model.DateOfBirth" id="dateOfBirth">
+                                <script>
                                             var date = new Date("@Model.DateOfBirth");
                                             var dd = String(date.getDate()).padStart(2, '0');
                                             var mm = String(date.getMonth() + 1).padStart(2, '0');
                                             var yyyy = date.getFullYear();
                                             var date1 = yyyy + '-' + mm + '-' + dd;
                                             document.getElementById("dateOfBirth").value = date1;
-                                        </script>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="flex-tab-form-container">
-                                    <div class="container-form-input">
-                                        <label>My Preferred Language</label>
-                                        <select name="code" id="language">
-                                            <option value="1">English</option>
-                                            <option value="2">German</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <button class="submit-button-form" onclick="saveMyDetails()">Save</button>
+                                </script>
                             </div>
-                            <div id="myAddressTab" class="display-none">
+                        </div>
+                        <hr>
+                        <div class="flex-tab-form-container">
+                            <div class="container-form-input">
+                                <label>My Preferred Language</label>
+                                <select name="code" id="language">
+                                    <option value="1">English</option>
+                                    <option value="2">German</option>
+                                </select>
                             </div>
-                            <div id="changePasswordTab" class="display-none">
-                                <div class="flex-tab-form-container flex-direction">
-                                    <span id="errorConfirmPassword" class="text-danger-error"></span>
-                                    <div class="container-form-input">
-                                        <label>Old Password</label>
-                                        <input type="password" id="oldPassword" required>
-                                    </div>
-                                    <div class="container-form-input">
-                                        <label>New Password</label>
-                                        <input type="password" id="Password" placeholder="Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@@$!%*?&])[A-Za-z\d@@$!%*?&]{8,}$" title="•	Password must contain at least 1 capital letter, 1 small letter, 1 number and one special character. Password length must be in between 6 to 14 characters"  required>
-                                    </div>
-                                    <div class="container-form-input">
-                                        <label>Confirm Password</label>
-                                        <input type="password" id="confirmPassword" required>
-                                    </div>
-                                    <button class="submit-button-form" onclick="changePassword()">Save</button>
-                                </div>
+                        </div>
+                        <button class="submit-button-form" onclick="saveMyDetails()">Save</button>
+                    </div>
+                    <div id="myAddressTab" class="display-none">
+                    </div>
+                    <div id="changePasswordTab" class="display-none">
+                        <div class="flex-tab-form-container flex-direction">
+                            <span id="errorConfirmPassword" class="text-danger-error"></span>
+                            <div class="container-form-input">
+                                <label>Old Password</label>
+                                <input type="password" id="oldPassword" required>
                             </div>
+                            <div class="container-form-input">
+                                <label>New Password</label>
+                                <input type="password" id="Password" placeholder="Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@@$!%*?&])[A-Za-z\d@@$!%*?&]{8,}$" title="•	Password must contain at least 1 capital letter, 1 small letter, 1 number and one special character. Password length must be in between 6 to 14 characters" required>
+                            </div>
+                            <div class="container-form-input">
+                                <label>Confirm Password</label>
+                                <input type="password" id="confirmPassword" required>
+                            </div>
+                            <button class="submit-button-form" onclick="changePassword()">Save</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
-        <footer class="footer">
-            <div class="footer-one">
-                <div class="container">
-                    <div class="footer-before">
-                        <a class="logo" asp-controller="index" asp-action="index">
-                            <img src="~/images/logo.png">
-                        </a>
-                        <div class="footer-navbar">
-                            <ul id="footer-nav">
-                                <li><a asp-controller="index" asp-action="index">home</a></li>
-                                <li><a asp-controller="about" asp-action="index">about</a></li>
-                                <li><a href="#">testimonial</a></li>
-                                <li><a asp-controller="faq" asp-action="index">faq</a></li>
-                                <li><a href="#">insurance policy</a></li>
-                                <li><a href="#">impressum</a></li>
-                            </ul>
-                        </div>
-                        <div class="footer-social">
-                            <ul class="socail-media">
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-
+<footer class="footer">
+    <div class="footer-one">
+        <div class="container">
+            <div class="footer-before">
+                <a class="logo" asp-controller="index" asp-action="index">
+                    <img src="~/images/logo.png">
+                </a>
+                <div class="footer-navbar">
+                    <ul id="footer-nav">
+                        <li><a asp-controller="index" asp-action="index">home</a></li>
+                        <li><a asp-controller="about" asp-action="index">about</a></li>
+                        <li><a href="#">testimonial</a></li>
+                        <li><a asp-controller="faq" asp-action="index">faq</a></li>
+                        <li><a href="#">insurance policy</a></li>
+                        <li><a href="#">impressum</a></li>
+                    </ul>
                 </div>
-                <hr style="width:90%;text-align:center;border: 0.5px solid #424242;">
-                <div class="copright">
-                    <div class="footer-copyright">
-                        <h6 style="text-align: center;">©2018 Helperland. All rights reserved. Terms and Conditions | Privacy Policy</h6>
-                    </div>
+                <div class="footer-social">
+                    <ul class="socail-media">
+                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                    </ul>
                 </div>
             </div>
 
-        </footer>
+        </div>
+        <hr style="width:90%;text-align:center;border: 0.5px solid #424242;">
+        <div class="copright">
+            <div class="footer-copyright">
+                <h6 style="text-align: center;">©2018 Helperland. All rights reserved. Terms and Conditions | Privacy Policy</h6>
+            </div>
+        </div>
+    </div>
 
-        <script>
-            var acc = document.getElementsByClassName("accordion");
-            var i;
+</footer>
 
-            for (i = 0; i < acc.length; i++) {
-                acc[i].addEventListener("click", function () {
-                    this.classList.toggle("active");
-                    var panel = this.nextElementSibling;
-                    if (panel.style.maxHeight) {
-                        panel.style.maxHeight = null;
-                    } else {
-                        panel.style.maxHeight = panel.scrollHeight + "px";
-                    }
-                });
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
             }
-        </script>
+        });
+    }
+</script>
 
-        <script>
+<script>
     function openCity(evt, cityName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
@@ -419,279 +422,279 @@
     function Hide() {
         navList.classList.remove("_Menus-show");
     }
-        </script>
+</script>
 
-        <script>
-            // $(document).ready(function() {
-            //     $(".toggle").click(function() {
-            //         $("#mynav").toggle();
-            //     });
-            // });
+<script>
+    // $(document).ready(function() {
+    //     $(".toggle").click(function() {
+    //         $("#mynav").toggle();
+    //     });
+    // });
 
-            var addressID;
+    var addressID;
 
-            window.onscroll = function () {
-                myFunction()
-            };
+    window.onscroll = function () {
+        myFunction()
+    };
 
-            var header = document.getElementById("header");
-            var sticky = "60";
+    var header = document.getElementById("header");
+    var sticky = "60";
 
-            function myFunction() {
-                if (window.pageYOffset > sticky) {
-                    header.classList.add("sticky");
-                } else {
-                    header.classList.remove("sticky");
-                }
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    }
+
+    function openMenu() {
+        var popupLi = document.querySelector(".navbar");
+        var menuButton = document.querySelector(".toggle");
+        // popupLi.classList.toggle("show-menu");
+        var visibility = popupLi.getAttribute("data-visible");
+        if (visibility === "false") {
+            popupLi.setAttribute("data-visible", true);
+            menuButton.setAttribute("aria-expanded", true);
+            var body = document.getElementById('home');
+            body.classList.add("back");
+        } else if (visibility === "true") {
+            popupLi.setAttribute("data-visible", false);
+            menuButton.setAttribute("aria-expanded", false);
+            var body = document.getElementById('home');
+            body.classList.remove("back");
+        }
+    }
+
+    function openMyDetails() {
+        var tabButtons = document.getElementsByClassName("tab-button");
+        for (var i = 0; i < tabButtons.length; i++) {
+            tabButtons[i].classList.remove("tb-active");
+        }
+        var current = document.getElementById("MyDetails");
+        current.classList.add("tb-active");
+        document.getElementById("myDetailsTab").style.setProperty('display', 'block', 'important');
+        document.getElementById("myAddressTab").style.setProperty('display', 'none', 'important');
+        document.getElementById("changePasswordTab").style.setProperty('display', 'none', 'important');
+    }
+    function openMyAddress() {
+        var tabButtons = document.getElementsByClassName("tab-button");
+        for (var i = 0; i < tabButtons.length; i++) {
+            tabButtons[i].classList.remove("tb-active");
+        }
+        var current = document.getElementById("MyAddress");
+        current.classList.add("tb-active");
+        document.getElementById("myDetailsTab").style.setProperty('display', 'none', 'important');
+        document.getElementById("myAddressTab").style.setProperty('display', 'block', 'important');
+        document.getElementById("changePasswordTab").style.setProperty('display', 'none', 'important');
+        $("#myAddressTab").html("Loading...").load('/customerDashboard/getaddress');
+    }
+    function openMyChangePassword() {
+        var tabButtons = document.getElementsByClassName("tab-button");
+        for (var i = 0; i < tabButtons.length; i++) {
+            tabButtons[i].classList.remove("tb-active");
+        }
+        var current = document.getElementById("ChangePassword");
+        current.classList.add("tb-active");
+        document.getElementById("myDetailsTab").style.setProperty('display', 'none', 'important');
+        document.getElementById("myAddressTab").style.setProperty('display', 'none', 'important');
+        document.getElementById("changePasswordTab").style.setProperty('display', 'block', 'important');
+    }
+
+    function openEditAddress(id) {
+        addressID = id;
+        document.getElementById("UpdateAddressModel").style.setProperty('display', 'block', 'important');
+        var streetname = document.getElementById("streetNameUpdate");
+        var housenumber = document.getElementById("houseNumberUpdate");
+        var postalcode = document.getElementById("postalCodeUpdate");
+        var phonenumber = document.getElementById("phoneNumberUpdate");
+
+        var formData = new FormData();
+        formData.append("addressID", addressID);
+
+        $.ajax({
+            type: 'POST',
+            url: '/customerDashboard/fetchAddress',
+            data: formData,
+            processData: false,
+            contentType: false,
+        }).done(function (response) {
+            if (response.status == "success") {
+                var addressobj = response.addressObject;
+                streetname.value = addressobj.addressLine1;
+                housenumber.value = addressobj.addressLine2;
+                postalcode.value = addressobj.postalCode;
+                phonenumber.value = addressobj.mobile;
+            } else {
+                showMsg("Something went wrong.");
             }
+        });
+    }
 
-            function openMenu() {
-                var popupLi = document.querySelector(".navbar");
-                var menuButton = document.querySelector(".toggle");
-                // popupLi.classList.toggle("show-menu");
-                var visibility = popupLi.getAttribute("data-visible");
-                if (visibility === "false") {
-                    popupLi.setAttribute("data-visible", true);
-                    menuButton.setAttribute("aria-expanded", true);
-                    var body = document.getElementById('home');
-                    body.classList.add("back");
-                } else if (visibility === "true") {
-                    popupLi.setAttribute("data-visible", false);
-                    menuButton.setAttribute("aria-expanded", false);
-                    var body = document.getElementById('home');
-                    body.classList.remove("back");
-                }
-            }
+    function closeEditModel() {
+        document.getElementById("UpdateAddressModel").style.setProperty('display', 'none', 'important');
+    }
 
-            function openMyDetails() {
-                var tabButtons = document.getElementsByClassName("tab-button");
-                for (var i = 0; i < tabButtons.length; i++) {
-                    tabButtons[i].classList.remove("tb-active");
-                }
-                var current = document.getElementById("MyDetails");
-                current.classList.add("tb-active");
-                document.getElementById("myDetailsTab").style.setProperty('display', 'block', 'important');
-                document.getElementById("myAddressTab").style.setProperty('display', 'none', 'important');
-                document.getElementById("changePasswordTab").style.setProperty('display', 'none', 'important');
-            }
-            function openMyAddress() {
-                var tabButtons = document.getElementsByClassName("tab-button");
-                for (var i = 0; i < tabButtons.length; i++) {
-                    tabButtons[i].classList.remove("tb-active");
-                }
-                var current = document.getElementById("MyAddress");
-                current.classList.add("tb-active");
-                document.getElementById("myDetailsTab").style.setProperty('display', 'none', 'important');
-                document.getElementById("myAddressTab").style.setProperty('display', 'block', 'important');
-                document.getElementById("changePasswordTab").style.setProperty('display', 'none', 'important');
-                $("#myAddressTab").html("Loading...").load('/customerDashboard/getaddress');
-            }
-            function openMyChangePassword() {
-                var tabButtons = document.getElementsByClassName("tab-button");
-                for (var i = 0; i < tabButtons.length; i++) {
-                    tabButtons[i].classList.remove("tb-active");
-                }
-                var current = document.getElementById("ChangePassword");
-                current.classList.add("tb-active");
-                document.getElementById("myDetailsTab").style.setProperty('display', 'none', 'important');
-                document.getElementById("myAddressTab").style.setProperty('display', 'none', 'important');
-                document.getElementById("changePasswordTab").style.setProperty('display', 'block', 'important');
-            }
+    function submitUpdatedAddress() {
+        showLoader();
+        var formData = new FormData();
+        formData.append("addressID", addressID);
+        formData.append("streetName", $("#streetNameUpdate").val());
+        formData.append("houseNumber", $("#houseNumberUpdate").val());
+        formData.append("postalCode", $("#postalCodeUpdate").val());
+        formData.append("phoneNumber", $("#phoneNumberUpdate").val());
 
-            function openEditAddress(id) {
-                addressID = id;
-                document.getElementById("UpdateAddressModel").style.setProperty('display', 'block', 'important');
-                var streetname = document.getElementById("streetNameUpdate");
-                var housenumber = document.getElementById("houseNumberUpdate");
-                var postalcode = document.getElementById("postalCodeUpdate");
-                var phonenumber = document.getElementById("phoneNumberUpdate");
-
-                var formData = new FormData();
-                formData.append("addressID", addressID);
-
-                $.ajax({
-                    type: 'POST',
-                    url: '/customerDashboard/fetchAddress',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                }).done(function (response) {
-                    if (response.status == "success") {
-                        var addressobj = response.addressObject;
-                        streetname.value = addressobj.addressLine1;
-                        housenumber.value = addressobj.addressLine2;
-                        postalcode.value = addressobj.postalCode;
-                        phonenumber.value = addressobj.mobile;
-                    } else {
-                        showMsg("Something went wrong.");
-                    }
-                });
-            }
-
-            function closeEditModel() {
+        $.ajax({
+            type: 'POST',
+            url: '/customerDashboard/updateAddress',
+            data: formData,
+            processData: false,
+            contentType: false,
+        }).done(function (response) {
+            if (response.status == "success") {
+                hideLoader();
+                showMsg("Address updated.");
                 document.getElementById("UpdateAddressModel").style.setProperty('display', 'none', 'important');
+                openMyAddress();
+            } else {
+                hideLoader();
+                showMsg("Something went wrong.");
             }
+        });
+    }
 
-            function submitUpdatedAddress() {
-                showLoader();
-                var formData = new FormData();
-                formData.append("addressID", addressID);
-                formData.append("streetName", $("#streetNameUpdate").val());
-                formData.append("houseNumber", $("#houseNumberUpdate").val());
-                formData.append("postalCode", $("#postalCodeUpdate").val());
-                formData.append("phoneNumber", $("#phoneNumberUpdate").val());
+    function openAddAddress() {
+        document.getElementById("AddAddressModel").style.setProperty('display', 'block', 'important');
+    }
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/customerDashboard/updateAddress',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                }).done(function (response) {
-                    if (response.status == "success") {
-                        hideLoader();
-                        showMsg("Address updated.");
-                        document.getElementById("UpdateAddressModel").style.setProperty('display', 'none', 'important');
-                        openMyAddress();
-                    } else {
-                        hideLoader();
-                        showMsg("Something went wrong.");
-                    }
-                });
-            }
+    function addAddress() {
+        showLoader();
+        var formData = new FormData();
+        formData.append("add1", $("#streetName").val());
+        formData.append("add2", $("#houseNumber").val());
+        formData.append("pscode", $("#postalCode").val());
+        formData.append("city", $("#city").val());
+        formData.append("number", $("#phoneNumber").val());
 
-            function openAddAddress() {
-                document.getElementById("AddAddressModel").style.setProperty('display', 'block', 'important');
-            }
-
-            function addAddress() {
-                showLoader();
-                var formData = new FormData();
-                formData.append("add1", $("#streetName").val());
-                formData.append("add2", $("#houseNumber").val());
-                formData.append("pscode", $("#postalCode").val());
-                formData.append("city", $("#city").val());
-                formData.append("number", $("#phoneNumber").val());
-
-                $.ajax({
-                    type: 'POST',
-                    url: '/customerDashboard/addaddress',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    dataType: "json"
-                }).done(function (response) {
-                    if (response.status == "success") {
-                        hideLoader();
-                        showMsg("Address Added.");
-                        document.getElementById("AddAddressModel").style.setProperty('display', 'none', 'important');
-                        openMyAddress();
-                    } else {
-                        hideLoader();
-                        showMsg("Something went wrong.");
-                    }
-                });
-            }
-
-            function removeAddressModel() {
+        $.ajax({
+            type: 'POST',
+            url: '/customerDashboard/addaddress',
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: "json"
+        }).done(function (response) {
+            if (response.status == "success") {
+                hideLoader();
+                showMsg("Address Added.");
                 document.getElementById("AddAddressModel").style.setProperty('display', 'none', 'important');
+                openMyAddress();
+            } else {
+                hideLoader();
+                showMsg("Something went wrong.");
             }
+        });
+    }
 
-            function deleteAddress(id) {
-                showLoader();
-                addressID = id;
+    function removeAddressModel() {
+        document.getElementById("AddAddressModel").style.setProperty('display', 'none', 'important');
+    }
 
-                var formData = new FormData();
-                formData.append("addressID", addressID);
+    function deleteAddress(id) {
+        showLoader();
+        addressID = id;
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/customerDashboard/deleteAddress',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                }).done(function (response) {
-                    if (response.status == "success") {
-                        hideLoader();
-                        showMsg("Address removed.");
-                        openMyAddress();
-                    } else {
-                        hideLoader();
-                        showMsg("Something went wrong.");
-                    }
-                });
+        var formData = new FormData();
+        formData.append("addressID", addressID);
+
+        $.ajax({
+            type: 'POST',
+            url: '/customerDashboard/deleteAddress',
+            data: formData,
+            processData: false,
+            contentType: false,
+        }).done(function (response) {
+            if (response.status == "success") {
+                hideLoader();
+                showMsg("Address removed.");
+                openMyAddress();
+            } else {
+                hideLoader();
+                showMsg("Something went wrong.");
             }
+        });
+    }
 
-            function saveMyDetails() {
-                showLoader();
-                var formData = new FormData();
-                formData.append("fname", $("#firstName").val());
-                formData.append("lname", $("#lastName").val());
-                formData.append("number", $("#mobileNumber").val());
-                formData.append("dob", $("#dateOfBirth").val());
-                formData.append("language", $("#language").val());
+    function saveMyDetails() {
+        showLoader();
+        var formData = new FormData();
+        formData.append("fname", $("#firstName").val());
+        formData.append("lname", $("#lastName").val());
+        formData.append("number", $("#mobileNumber").val());
+        formData.append("dob", $("#dateOfBirth").val());
+        formData.append("language", $("#language").val());
 
-                if ($("#dateOfBirth").val() == "") {
+        if ($("#dateOfBirth").val() == "") {
+            hideLoader();
+            alert("DOB required");
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: '/customerDashboard/saveDetails',
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: "json"
+            }).done(function (response) {
+                if (response.status == "success") {
                     hideLoader();
-                    alert("DOB required");
-                } else {
-                    $.ajax({
-                        type: 'POST',
-                        url: '/customerDashboard/saveDetails',
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        dataType: "json"
-                    }).done(function (response) {
-                        if (response.status == "success") {
-                            hideLoader();
-                            showMsg("User details are updated.");
-                            openMyDetails();
-                        } else {
-                            hideLoader();
-                            showMsg("Something went wrong.");
-                        }
-                    });
-                }
-            }
-
-            function changePassword() {
-                showLoader();
-                var formData = new FormData();
-                formData.append("oldpassword", $("#oldPassword").val());
-                formData.append("password", $("#Password").val());
-
-                if ($("#oldPassword").val() == $("#Password").val()) {
-                    hideLoader();
-                    document.getElementById("errorConfirmPassword").textContent = "Old password can not be same as new password.";
-                }else if ($("#Password").val() == $("#confirmPassword").val()) {
-                    $.ajax({
-                        type: 'POST',
-                        url: '/customerDashboard/changePassword',
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        dataType: "json"
-                    }).done(function (response) {
-                        if (response.status == "success") {
-                            hideLoader();
-                            showMsg("Password changed successfully Login again with updated password.");
-                            setTimeout(function () {
-                                window.location.href = "/index/logout";
-                                window.location.href = "/index/Login";
-                            }, 1000);
-                        } else if (response.status == "error") {
-                            hideLoader();
-                            document.getElementById("errorConfirmPassword").textContent = "Old password is incorrect.";
-                            openMyChangePassword();
-                        } else {
-                            hideLoader();
-                            showMsg("Something went wrong.");
-                        }
-                    });
+                    showMsg("User details are updated.");
+                    openMyDetails();
                 } else {
                     hideLoader();
-                    document.getElementById("errorConfirmPassword").textContent = "Password and Confirm Password are not same.";
+                    showMsg("Something went wrong.");
                 }
-            }
-        </script>
+            });
+        }
+    }
+
+    function changePassword() {
+        showLoader();
+        var formData = new FormData();
+        formData.append("oldpassword", $("#oldPassword").val());
+        formData.append("password", $("#Password").val());
+
+        if ($("#oldPassword").val() == $("#Password").val()) {
+            hideLoader();
+            document.getElementById("errorConfirmPassword").textContent = "Old password can not be same as new password.";
+        } else if ($("#Password").val() == $("#confirmPassword").val()) {
+            $.ajax({
+                type: 'POST',
+                url: '/customerDashboard/changePassword',
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: "json"
+            }).done(function (response) {
+                if (response.status == "success") {
+                    hideLoader();
+                    showMsg("Password changed successfully Login again with updated password.");
+                    setTimeout(function () {
+                        window.location.href = "/index/logout";
+                        window.location.href = "/index/Login";
+                    }, 1000);
+                } else if (response.status == "error") {
+                    hideLoader();
+                    document.getElementById("errorConfirmPassword").textContent = "Old password is incorrect.";
+                    openMyChangePassword();
+                } else {
+                    hideLoader();
+                    showMsg("Something went wrong.");
+                }
+            });
+        } else {
+            hideLoader();
+            document.getElementById("errorConfirmPassword").textContent = "Password and Confirm Password are not same.";
+        }
+    }
+</script>

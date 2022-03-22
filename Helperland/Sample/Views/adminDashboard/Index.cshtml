@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Sample.Models.ServiceRequest>
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+@model IEnumerable<Sample.Models.ServiceRequest>
 @using Microsoft.AspNetCore.Http;
 <!DOCTYPE html>
 <html>
@@ -133,9 +136,9 @@
                 <div class="flex-left">
                     <ul>
                         <div id="liList">
-                            <li class="li-active"><a asp-controller="adminDashboard" asp-action="index">Service Requests</a></li>
-                            <li><a asp-controller="adminDashboard" asp-action="userManagment">User Managment</a></li>
-                        </div>
+                        <li class="li-active"><a asp-controller="adminDashboard" asp-action="index">Service Requests</a></li>
+                        <li><a asp-controller="adminDashboard" asp-action="userManagment">User Managment</a></li>
+                </div>
                 </ul>
             </div>
             <div class="flex-right">

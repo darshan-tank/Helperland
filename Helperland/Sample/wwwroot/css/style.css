@@ -717,11 +717,12 @@ div#mynav {
 /*header banner start*/
 
 .header-back {
-    background-image: url('../images/group-35.png');
+    background-image: url('../images/banner-bg.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 
 .header-back-bcmpro {
     background-image: url('../images/become-a-pro-banner.png');
@@ -751,7 +752,16 @@ h2.page-title {
 .lorem-text h2 {
     color: #fff;
 }
+h3.page-subtitle {
+    font-size: 25px;
+    font-family: Roboto;
+    margin-bottom: 20px;
+    color: '';
+}
 
+.lorem-text h3 {
+    color: #fff;
+}
 .fa-check:before {
     content: "\f00c";
     padding-right: 5px;
